@@ -1,7 +1,12 @@
 import 'dart:io';
 import 'package:best_flutter_ui_templates/app_theme.dart';
+import 'package:best_flutter_ui_templates/custom_drawer/home_drawer.dart';
+import 'package:best_flutter_ui_templates/mag/magazine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'introduction_animation/introduction_animation_screen.dart';
+import 'mag/NFTView.dart';
+import 'mag/mag_home.dart';
 import 'navigation_home_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -26,14 +31,16 @@ class MyApp extends StatelessWidget {
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
     return MaterialApp(
-      title: 'Flutter UI',
+      title: '须弥谷',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      home: NavigationHomeScreen(),
+      // home: NFTView(),
+      home:MagHome(),
+     // home: NavigationHomeScreen(),
     );
   }
 }

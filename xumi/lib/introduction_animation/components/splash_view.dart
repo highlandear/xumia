@@ -35,7 +35,7 @@ class _SplashViewState extends State<SplashView> {
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
+           Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text(
                 "Clearhead",
@@ -49,6 +49,7 @@ class _SplashViewState extends State<SplashView> {
                 textAlign: TextAlign.center,
               ),
             ),
+
             SizedBox(
               height: 48,
             ),
