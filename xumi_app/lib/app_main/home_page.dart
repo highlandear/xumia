@@ -1,16 +1,18 @@
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../demo/nftdata.dart';
+import '../data/nftdata.dart';
 import 'NFTView.dart';
-
+import 'package:dio/dio.dart';
 class HomePage extends StatelessWidget {
 
  // StreamController<int> stream = new StreamController.broadcast();
   PageController pageController = new PageController(keepPage: false);
+
   @override
   Widget build(BuildContext context) {
     /*
@@ -34,13 +36,14 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
   Widget getScrollView() {
     return Container(
       child: PageView.builder(
         controller: pageController,
         itemCount: NFTData.nlist.length,
        // reverse: false,
-        // physics: PageScrollPhysics(),
+         physics: PageScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           print('##################');
           print(index);

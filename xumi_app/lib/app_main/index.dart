@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'cart_page.dart';
-import 'home_page.dart';
+import 'package:xumi_app/utils/request_data.dart';
+import '../data/nftdata.dart';
+import 'bag.dart';
+import 'mag_page.dart';
 import 'member_page.dart';
 
 
@@ -20,18 +23,26 @@ class _IndexpageState extends State<Indexpage> {
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.book),label: "杂志"),
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.bag),label: "收藏"),
   ];
-  final List taBodies=[MemberPage(),HomePage(),CatePage()];
+  final List taBodies=[MemberPage(),MagzinePage(),BagPage()];
 
   int currentIndex=1;
   var currentPage;
 
   @override
   void initState() {
-    // TODO: implement initState
     currentPage=taBodies[currentIndex];
     super.initState();
+    loadMainPage();
   }
 
+  void loadMainPage() {
+    RequestData('http://10.0.0.6:8080/logon.do').request().then((value) => {
+      print(value),
+      NFTData.nlist = (jsonDecode(value) as List<dynamic>)
+          .map((e) => NFTData.fromJson((e as Map<String, dynamic>)))
+          .toList()
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

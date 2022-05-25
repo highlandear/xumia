@@ -1,13 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-
-import '../demo/nftdata.dart';
+import '../data/nftdata.dart';
 
 class NFTView extends StatefulWidget {
-
-  NFTView({Key? key, required this.index})  : super(key: key);
+  NFTView({Key? key, required this.index}) : super(key: key);
   int index;
+ // List<NFTData> nlist = NFTData.nlist;
   @override
   State<StatefulWidget> createState() {
     return NFTViewState();
@@ -15,44 +12,15 @@ class NFTView extends StatefulWidget {
 }
 
 class NFTViewState extends State<NFTView> {
-  ScrollController scroController = new ScrollController();
-  late Timer timer;
-  void startTimer() {
-    int time = 3000;
-    timer = Timer.periodic(new Duration(milliseconds: time), (timer) {
-      if (scroController.positions.isNotEmpty == false) {
-        print('界面被销毁');
-        return;
-      }
-      double maxScrollExtent = scroController.position.maxScrollExtent;
-      if (maxScrollExtent > 0) {
-        scroController.animateTo(maxScrollExtent,
-            duration: new Duration(milliseconds: (time * 0.5).toInt()),
-            curve: Curves.linear);
-        Future.delayed(Duration(milliseconds: (time * 0.5).toInt()), () {
-          if (scroController.positions.isNotEmpty == true) {
-            scroController.animateTo(0,
-                duration: new Duration(milliseconds: (time * 0.5).toInt()),
-                curve: Curves.linear);
-          }
-        });
-      } else {
-     //   print('不需要移动');
-        timer.cancel();
-      }
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    this.startTimer();
   }
 
   @override
   void dispose() {
-    this.scroController.dispose();
-    this.timer.cancel();
+    //  this.scroController.dispose();
+    //  this.timer.cancel();
     super.dispose();
   }
 
@@ -61,8 +29,43 @@ class NFTViewState extends State<NFTView> {
     return Stack(
       children: <Widget>[
         this.showNFT(),
-      //  this.getUserAndTitle()
+        //  this.getUserAndTitle()
+        this.showBuyButton(context),
       ],
+    );
+  }
+
+  Widget showBuyButton(BuildContext context) {
+    return Positioned(
+      bottom: 5.0, //距离底边18px（中间左边）
+      right: 165,
+      child: InkWell(
+        onTap: () {
+          print('******************');
+        },
+        child: Container(
+          height: 48,
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 2,
+            bottom: 0,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(16.0),
+            ),
+            //   border: Border.all(color: Colors.grey.withOpacity(0.2)),
+            border: Border.all(color: Colors.blue),
+          ),
+          child: Icon(
+            Icons.add,
+            color: Colors.blue,
+            size: 28,
+          ),
+        ),
+      ),
     );
   }
 
@@ -71,9 +74,7 @@ class NFTViewState extends State<NFTView> {
     return Container(
       color: Colors.white,
       child: Center(
-        //child: Image.asset(widget.image),
-       // child: Image.asset(NFTData.nlist[widget.index].path),
-        child:Image.network(NFTData.nlist[widget.index].path),
+        child: Image.network(NFTData.nlist[widget.index].path),
       ),
     );
   }
@@ -111,8 +112,7 @@ class NFTViewState extends State<NFTView> {
             Container(
               padding: EdgeInsets.only(bottom: 5),
               width: 250,
-              child: Text(
-                  NFTData.nlist[widget.index].desc,
+              child: Text(NFTData.nlist[widget.index].desc,
                   style: TextStyle(
                     color: Colors.black,
                   )),
@@ -125,10 +125,10 @@ class NFTViewState extends State<NFTView> {
               height: 25,
               child: ListView(
                 // reverse: true,
-                controller: scroController,
+                //  controller: scroController,
                 physics: new NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-              //  children: <Widget>[this.getMusicTitle()],
+                //  children: <Widget>[this.getMusicTitle()],
               ),
             )
           ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/qrcode/qr_gen.dart';
 import 'package:xumi_app/qrcode/qr_scan.dart';
+import '../data/user_info.dart';
 
 class MemberPage extends StatelessWidget {
+  UserInfo me = UserInfo.me;
   @override
   Widget buildc(BuildContext context) {
     return Scaffold(
@@ -50,7 +52,7 @@ class MemberPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 4),
                     child: Text(
-                      'Andy 黄',
+                      me.nick + '(' + me.did +')',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.grey,
@@ -65,7 +67,7 @@ class MemberPage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius:
                           const BorderRadius.all(Radius.circular(60.0)),
-                      child: Image.asset('assets/images/head.jpg'),
+                      child: Image.asset(me.image),
                     ),
                   ),
                 ],
@@ -88,7 +90,8 @@ class MemberPage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return QRHomePage();
-                  }));},
+                  }));
+                },
               ),
               ListTile(
                 title: Text(
@@ -102,9 +105,10 @@ class MemberPage extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 onTap: () {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-    return BarcodeScanPage();
-    }));},
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return BarcodeScanPage();
+                  }));
+                },
               ),
               ListTile(
                 title: Text(

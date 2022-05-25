@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CatePage extends StatelessWidget {
+class BagPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
