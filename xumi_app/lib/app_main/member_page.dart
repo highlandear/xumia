@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/qrcode/qr_gen.dart';
-import 'package:xumi_app/qrcode/qr_scan.dart';
-import '../data/user_info.dart';
+import 'package:xumi_app/data/global.dart';
+import 'package:xumi_app/utils/qr_gen.dart';
+import 'package:xumi_app/utils/qr_scan.dart';
+import '../bean/user_info.dart';
 
 class MemberPage extends StatelessWidget {
-  UserInfo me = UserInfo.me;
+  UserInfo me = Global.mydata.me;
   @override
   Widget buildc(BuildContext context) {
     return Scaffold(

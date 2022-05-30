@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-/**
- * 首页
- */
 class QRHomePage extends StatefulWidget {
   @override
   _QRHomePageState createState() => _QRHomePageState();

@@ -21,7 +21,6 @@ class _BarcodeScanPageState extends State<BarcodeScanPage> {
     //返回扫描的参数
     var result = await BarcodeScanner.scan(options: options);
     //扫描返回值的类型
-    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
     print(result.type);
     //返回参数
     print(result.rawContent);
@@ -45,8 +44,6 @@ class _BarcodeScanPageState extends State<BarcodeScanPage> {
   @override
   void dispose() {
     super.dispose();
-  //  _doBarcodeScan().cancel();//销毁
-    Navigator.of(context).pop();
   }
   @override
   Widget build(BuildContext context) {

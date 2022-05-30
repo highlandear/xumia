@@ -1,7 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-
-import '../data/nftdata.dart';
+import '../bean/nftdata.dart';
+import '../data/config.dart';
+import '../data/global.dart';
+import '../utils/http_util.dart';
+import '../utils/httphelper.dart';
 import 'NFTView.dart';
 
 class MagzinePage extends StatefulWidget {
@@ -15,23 +17,25 @@ class _MagPageState extends State<MagzinePage> {
   @override
   void initState() {
     super.initState();
+   // loadContent();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('+++++bul+++++\t');
+
     return WillPopScope(
       onWillPop: () {
-        return new Future.value(false);
+        return new Future.value(true);
       },
       child: Scaffold(
         backgroundColor: Colors.black,
-        //body: this.getMain(),
         body: Stack(
           children: <Widget>[
             Container(
               child: PageView.builder(
                 controller: pageController,
-                itemCount: NFTData.nlist.length,
+                itemCount: Global.mydata.nlist.length,
                 // reverse: false,
                 physics: PageScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {

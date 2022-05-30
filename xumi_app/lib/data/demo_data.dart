@@ -26,4 +26,16 @@ class DemoData {
     ),
 
   ];
+
+/*
+    //String value = await RequestData('http://10.0.0.6:8080/logon.do').request();
+    RequestData('http://10.0.0.6:8080/signin.do').request().then((value) => {
+      print(value),
+
+      MyData.instance.nlist = (jsonDecode(value) as List<dynamic>)
+          .map((e) => NFTData.fromJson((e as Map<String, dynamic>)))
+          .toList()
+    });
+    */
+
 }

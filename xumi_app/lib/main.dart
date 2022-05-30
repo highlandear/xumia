@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/qrcode/qr_scan.dart';
+import 'package:xumi_app/utils/qr_scan.dart';
 
 import 'app_main/index.dart';
-import 'qrcode/qr_gen.dart';
+import 'utils/qr_gen.dart';
 
 void main() {
   runApp(const MyApp());

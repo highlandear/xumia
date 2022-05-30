@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class NFTData {
   NFTData({
     this.path = '',
@@ -9,12 +11,18 @@ class NFTData {
   String desc;
   String owner;
 
-  factory NFTData.fromJson(Map<String, dynamic> json) {
+  static NFTData fromJson(Map<String, dynamic> json) {
     return NFTData(
       path: json['path'],
     );
   }
-  static List<NFTData> nlist = [];
+
+  static List<NFTData> listfromJson(dynamic json) {
+    return (jsonDecode(json) as List<dynamic>)
+          .map((e) => NFTData.fromJson((e as Map<String, dynamic>)))
+          .toList();
+  }
+
   /*
   static List<NFTData> ntlist = <NFTData>[
     NFTData(

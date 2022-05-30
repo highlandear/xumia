@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../data/nftdata.dart';
+import 'package:xumi_app/utils/httphelper.dart';
+import '../data/global.dart';
+import '../data/config.dart';
+import '../utils/http_util.dart';
 
 class NFTView extends StatefulWidget {
   NFTView({Key? key, required this.index}) : super(key: key);
   int index;
- // List<NFTData> nlist = NFTData.nlist;
   @override
   State<StatefulWidget> createState() {
     return NFTViewState();
@@ -19,8 +21,6 @@ class NFTViewState extends State<NFTView> {
 
   @override
   void dispose() {
-    //  this.scroController.dispose();
-    //  this.timer.cancel();
     super.dispose();
   }
 
@@ -41,7 +41,7 @@ class NFTViewState extends State<NFTView> {
       right: 165,
       child: InkWell(
         onTap: () {
-          print('******************');
+            print(widget.index);
         },
         child: Container(
           height: 48,
@@ -74,11 +74,11 @@ class NFTViewState extends State<NFTView> {
     return Container(
       color: Colors.white,
       child: Center(
-        child: Image.network(NFTData.nlist[widget.index].path),
+        child: Image.network(Global.mydata.nlist[widget.index].path),
       ),
     );
   }
-
+/*
   Widget getMusicTitle() {
     return Container(
       // color: Colors.red,
@@ -94,6 +94,8 @@ class NFTViewState extends State<NFTView> {
     );
   }
 
+ */
+/*
   Widget getUserAndTitle() {
     return Positioned(
       bottom: 60,
@@ -105,14 +107,14 @@ class NFTViewState extends State<NFTView> {
             Padding(
               padding: EdgeInsets.only(bottom: 5),
               child: Text(
-                '@' + NFTData.nlist[widget.index].owner,
+                '@' + Global.mydata.nlist[widget.index].owner,
                 style: TextStyle(color: Colors.black),
               ),
             ),
             Container(
               padding: EdgeInsets.only(bottom: 5),
               width: 250,
-              child: Text(NFTData.nlist[widget.index].desc,
+              child: Text(Global.mydata.nlist[widget.index].desc,
                   style: TextStyle(
                     color: Colors.black,
                   )),
@@ -124,8 +126,6 @@ class NFTViewState extends State<NFTView> {
               width: 200,
               height: 25,
               child: ListView(
-                // reverse: true,
-                //  controller: scroController,
                 physics: new NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 //  children: <Widget>[this.getMusicTitle()],
@@ -135,5 +135,13 @@ class NFTViewState extends State<NFTView> {
         ),
       ),
     );
+  }
+
+ */
+  test(){
+    //Map<String,String> para = {'username': 'hzs', 'password':'qwert'};
+    //Http.http.post('http://10.0.0.6:8080/logout.do', parameters: para, onSuccess: (t) { print('******************'); print(t.toString()); }, onError: (String error) {  });
+    // AHttp.http.get(Config.LOGIN).then((value) => {print(value.toString())});
+    //AHttp.http.post(Config.LOGOUT, parameters:para).then((value) => {print(value.toString())});
   }
 }
