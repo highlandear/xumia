@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class QRHomePage extends StatefulWidget {
+class QRPage extends StatefulWidget {
+  QRPage(this.title,this.data);
+
+  String title;
+  String data;
   @override
   _QRHomePageState createState() => _QRHomePageState();
 }
 
-class _QRHomePageState extends State<QRHomePage>
+class _QRHomePageState extends State<QRPage>
     with AutomaticKeepAliveClientMixin { // 切换界面保持，不被重置
 
   @override
@@ -16,11 +20,11 @@ class _QRHomePageState extends State<QRHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: new Text("我的二维码"),
+        title: new Text(widget.title),
       ),
       body: new Center(
         child: new QrImage(
-          data: "黄小笛的测试数据https://www.cat.log.net",
+          data: widget.data,
           size: 200.0,
         ),
       ),

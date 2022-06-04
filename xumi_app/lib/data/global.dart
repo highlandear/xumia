@@ -1,16 +1,30 @@
- import '../bean/nftdata.dart';
+import 'dart:convert';
+import '../bean/nftdata.dart';
 import '../bean/user_info.dart';
+import '../utils/http_util.dart';
+import '../utils/local_util.dart';
+import 'config.dart';
 
-class Global{
-   static Global _instance = Global();
+class Global {
+  static Global _instance = Global();
+  static Global get mydata => _instance;
 
-   static Global get mydata => _instance;
+  UserInfo me = UserInfo();
 
-   List<NFTData> nlist = [];
-   UserInfo me = UserInfo(nick: 'Andy 黄',
-       did: '0X75C2839BE207343373',
-       tel: '132222222222',
-       addr: '北京',
-       image: 'assets/images/head.jpg'
-   );
- }
+  loadMe() {
+    AStorage.getv('me').then((value) => {
+          me =
+              null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value)),
+        });
+  }
+
+  logout(){
+    me = UserInfo();
+  }
+
+  Future loadData() async {
+    //  return NFTData.listfromJson(await XHttp.instance.get(Config.FRESH));
+    return NFTData.listfromJson(
+        await XHttp.instance.get(Config.FRESH, params: {'username': me.did}));
+  }
+}

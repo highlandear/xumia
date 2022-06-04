@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../data/config.dart';
+import '../../data/config.dart';
 
 class Http {
   static Http _http = Http();

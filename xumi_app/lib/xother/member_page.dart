@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/data/global.dart';
-import 'package:xumi_app/utils/qr_gen.dart';
 import 'package:xumi_app/utils/qr_scan.dart';
-import '../bean/user_info.dart';
+import '../../bean/user_info.dart';
 
 class MemberPage extends StatelessWidget {
   UserInfo me = Global.mydata.me;
@@ -16,9 +15,7 @@ class MemberPage extends StatelessWidget {
           TextButton(
             child: const Text("我的二维码"),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return QRHomePage();
-              }));
+
             },
           ),
           TextButton(
@@ -53,7 +50,7 @@ class MemberPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 4),
                     child: Text(
-                      me.nick + '(' + me.did +')',
+                      '',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.grey,
@@ -68,7 +65,7 @@ class MemberPage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius:
                           const BorderRadius.all(Radius.circular(60.0)),
-                      child: Image.asset(me.image),
+                    //  child: Image.asset(me.image),
                     ),
                   ),
                 ],
@@ -89,9 +86,7 @@ class MemberPage extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return QRHomePage();
-                  }));
+
                 },
               ),
               ListTile(

@@ -1,8 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:xumi_app/utils/httphelper.dart';
+import 'package:xumi_app/bean/user_info.dart';
 import '../data/global.dart';
-import '../data/config.dart';
-import '../utils/http_util.dart';
+import '../utils/local_util.dart';
 
 class NFTView extends StatefulWidget {
   NFTView({Key? key, required this.index}) : super(key: key);
@@ -42,6 +43,16 @@ class NFTViewState extends State<NFTView> {
       child: InkWell(
         onTap: () {
             print(widget.index);
+            UserInfo ui = UserInfo(
+              did:'test',
+              tel:'10'
+            );
+          //  AStorage.setv('me', jsonEncode(Global.mydata.me.toJson()));
+            AStorage.setv('me', jsonEncode(ui.toJson()));
+            AStorage.getv('me').then((value) => {
+              // if(value == null)
+              print('null===== $value')
+            });
         },
         child: Container(
           height: 48,
@@ -74,7 +85,7 @@ class NFTViewState extends State<NFTView> {
     return Container(
       color: Colors.white,
       child: Center(
-        child: Image.network(Global.mydata.nlist[widget.index].path),
+       // child: Image.network(Global.mydata.nlist[widget.index].path),
       ),
     );
   }

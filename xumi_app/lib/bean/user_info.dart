@@ -1,21 +1,37 @@
-class UserInfo{
+class UserInfo {
   UserInfo({
-    this.nick='',
-    this.did='',
-    this.tel='',
-    this.addr='',
-    this.image=''
-});
-  String nick;
+    this.username = '',
+    this.did = '',
+    this.tel = '',
+    //  this.addr = '',
+    //  this.image = ''
+  });
+  String username;
   String did;
   String tel;
-  String addr;
-  String image;
+  //String addr;
+  // String image;
+
+  toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['did'] = this.did;
+    //data['tel'] = this.tel;
+    data['username'] = this.username;
+
+    return data;
+  }
 
   static UserInfo fromJson(Map<String, dynamic> json) {
+    if (json == null) {
+      return UserInfo();
+    }
     return UserInfo(
-      nick: json['nick'],
-      did : json['did'],
+      did: json['did'],
+     // tel: json['tel'],
+      username: json['username'],
     );
   }
+
+  online(){return ! did.isEmpty;}
+
 }

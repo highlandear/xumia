@@ -2,11 +2,13 @@ import 'dart:convert';
 
 class NFTData {
   NFTData({
+    this.id = '',
     this.path = '',
     this.desc = '',
     this.owner = '',
   });
 
+  String id;
   String path;
   String desc;
   String owner;
