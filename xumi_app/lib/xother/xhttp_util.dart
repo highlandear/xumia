@@ -24,7 +24,6 @@ class AHttp {
   static const String PATCH = 'patch';
   static const String DELETE = 'delete';
   getm(String url, params) async {
-    print('hehhre');
       Response response = await dio.get(url,queryParameters: params ?? new Map<String, dynamic>());
       return response.data;
   }

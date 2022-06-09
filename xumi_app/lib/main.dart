@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/utils/qr_scan.dart';
-
+import 'package:xumi_app/utils/toast_util.dart';
 import 'app_main/index.dart';
-import 'utils/qr_gen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(XToast.wrap(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -32,8 +31,6 @@ class MyApp extends StatelessWidget {
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
        home: Indexpage(),
-      // home: QRHomePage(),
-      // home: BarcodeScanPage(),
     );
   }
 }

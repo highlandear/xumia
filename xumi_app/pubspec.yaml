@@ -20,7 +20,7 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.16.2 <3.0.0"
 
-# Dependencies specify other packages that your package needs in order to work.
+# Dependencies specify xother packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
 # dependencies can be manually updated by changing the version numbers below to
@@ -49,6 +49,7 @@ dev_dependencies:
   barcode_scan2: ^4.2.0
   dio: ^4.0.6
   shared_preferences: ^2.0.15
+  oktoast: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -63,6 +64,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/find/
+    - assets/images/mine/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -78,7 +81,7 @@ flutter:
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
+  # list giving the asset and xother descriptors for the font. For
   # example:
   # fonts:
   #   - family: Schyler

@@ -6,6 +6,5 @@ class ClickItem {
   // type
   String type;
 
-
   ClickItem(this.imageName, this.title, this.type, this.hasDivid);
 }

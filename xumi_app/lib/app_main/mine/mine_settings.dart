@@ -22,8 +22,8 @@ class SettingsPage extends StatelessWidget {
         }));
         break;
       case 'exit':
-        Global.mydata.logout();
-        Navigator.pop(context, true);
+      //  Global.mydata.logout();
+      //  Navigator.pop(context, true);
         break;
       default:
         break;

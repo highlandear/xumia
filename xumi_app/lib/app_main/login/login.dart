@@ -6,6 +6,7 @@ import '../../bean/user_info.dart';
 import '../../data/config.dart';
 import '../../data/global.dart';
 import '../../utils/http_util.dart';
+import '../../utils/toast_util.dart';
 import 'loading.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,36 +26,36 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            // leading: _leading(context),
-            title: Text('登录'),
-            actions: <Widget>[
-              TextButton(
-                child: Text(' 注册', style: TextStyle(color: Colors.white)),
-                onPressed: () {
-                  print('注册页面');
-                  // Get.to(() => RegisterPage());
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return (RegisterPage());
-                  }));
-                },
-              )
-            ],
-          ),
-          body: GestureDetector(
-            onTap: () {
-              // 点击空白页面关闭键盘
-              closeKeyboard(context);
+      appBar: AppBar(
+        // leading: _leading(context),
+        title: Text('登录'),
+        actions: <Widget>[
+          TextButton(
+            child: Text(' 注册', style: TextStyle(color: Colors.white)),
+            onPressed: () {
+              print('注册页面');
+              // Get.to(() => RegisterPage());
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return (RegisterPage());
+              }));
             },
-            child: SingleChildScrollView(
-              padding:
-              const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-              child: buildForm(context),
-            ),
-          ),
-        );
+          )
+        ],
+      ),
+      body: GestureDetector(
+        onTap: () {
+          // 点击空白页面关闭键盘
+          closeKeyboard(context);
+        },
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+          child: buildForm(context),
+        ),
+      ),
+    );
   }
 
   //构建表单
@@ -150,7 +151,6 @@ class _LoginPageState extends State<LoginPage> {
     FocusScope.of(context).requestFocus(blankNode);
   }
 
-  //验证通过提交数据
   void _onSubmit(BuildContext context) {
     closeKeyboard(context);
 
@@ -165,7 +165,24 @@ class _LoginPageState extends State<LoginPage> {
             loadingView: CircularProgressIndicator(),
           );
         });
-
+    XHttp.instance
+        .post(Config.LOGIN, params: {
+          'username': _unameController.text,
+          'password': _pwdController.text
+        })
+        .then((data) => {
+              print(data.toString()),
+              Global.mydata.me = UserInfo.fromJson(jsonDecode(data)),
+              Navigator.pop(context),
+              XToast.error('test'),
+              // Navigator.pop(context),
+              Navigator.pop(context, true),
+            })
+        .catchError((onError) {
+          Navigator.of(context).pop();
+          XToast.error('bad network');
+        });
+/*
     XHttp.instance.post(Config.LOGIN, params: {
       'username': _unameController.text,
       'password': _pwdController.text
@@ -173,9 +190,12 @@ class _LoginPageState extends State<LoginPage> {
       print(data.toString()),
           Global.mydata.me = UserInfo.fromJson(jsonDecode(data)),
           Navigator.pop(context),
+    XToast.error('test'),
          // Navigator.pop(context),
           Navigator.pop(context,true),
         });
+
+ */
     /*
     UserProfile userProfile = Provider.of<UserProfile>(context, listen: false);
 
