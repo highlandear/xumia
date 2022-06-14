@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/utils/toast_util.dart';
+import 'utils/xtoast.dart';
 import 'app_main/index.dart';
 
 void main() {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // magzine: const MyHomePage(title: 'Flutter Demo Home Page'),
        home: Indexpage(),
     );
   }
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
+  // This widget is the magzine page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 class BarcodeScanPage extends StatefulWidget {
-  BarcodeScanPage({Key? key}) : super(key: key);
+  const BarcodeScanPage({Key? key}) : super(key: key);
 
   @override
   State<BarcodeScanPage> createState() => _BarcodeScanPageState();
@@ -9,7 +9,7 @@ class BarcodeScanPage extends StatefulWidget {
 
 class _BarcodeScanPageState extends State<BarcodeScanPage> {
   //现在的时间
-  var _currentTime = DateTime.now().hour;
+  final _currentTime = DateTime.now().hour;
   //控制闪光灯
   bool? flashLigh = true;
 
@@ -31,15 +31,13 @@ class _BarcodeScanPageState extends State<BarcodeScanPage> {
   @override
   void initState() {
     super.initState();
-  /*
+
     //如果早上7至晚上19点，闪光灯默认关闭
     if (_currentTime >= 7 && _currentTime <= 19) {
       setState(() {
         flashLigh = false;
       });
     }
-
-   */
   }
   @override
   void dispose() {
@@ -49,7 +47,7 @@ class _BarcodeScanPageState extends State<BarcodeScanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('扫描页面'),
+          title: const Text('扫描页面'),
         ),
 
         body: Center(

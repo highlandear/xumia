@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
 import '../../data/config.dart';
-import '../../utils/http_util.dart';
+import '../../utils/xhttp.dart';
+import '../../utils/xtoast.dart';
 import 'loading.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -178,11 +178,18 @@ class _RegisterPageState extends State<RegisterPage> {
     XHttp.instance.post(Config.SIGNUP, params: {
       'username': _unameController.text,
       'password': _pwdController.text
-    }).then((data) => {
-          Navigator.pop(context),
-          print(data.toString()),
-          print(jsonDecode(data)['errorCode']),
-          Navigator.pop(context)
-        });
+    }).then((val) {
+      var erode = jsonDecode(val)['errorCode'];
+      if(erode == 0)
+      {
+        XToast.toast('注册成功');
+        Navigator.pop(context);
+        Navigator.pop(context);
+      }
+      else{
+        XToast.error("该用户名已注册");
+        Navigator.pop(context);
+      }
+    });
   }
 }

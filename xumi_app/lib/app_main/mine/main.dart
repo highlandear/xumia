@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'mine_color.dart';
-import 'mine_content.dart';
+import 'colors.dart';
+import 'operation.dart';
+
 class MineMainPage extends StatefulWidget{
   @override
   _MineMainPageState createState() => _MineMainPageState();

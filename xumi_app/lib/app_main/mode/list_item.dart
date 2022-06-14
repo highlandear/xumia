@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/mine/mine_color.dart';
+import '../mine/colors.dart';
 import 'item.dart';
 
 class ListClickItem extends StatefulWidget {
@@ -37,7 +37,7 @@ class _ListClickItemState extends State<ListClickItem> {
           bottom: 0,
           child: _container(),
         ),
-        Positioned(
+        const Positioned(
           bottom: 0,
           height: 1,
           left: 60,
@@ -54,7 +54,7 @@ class _ListClickItemState extends State<ListClickItem> {
   Container _container() {
     return Container(
       child: Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         child: _row(),
       ),
       color: Colors.white,
@@ -70,16 +70,16 @@ class _ListClickItemState extends State<ListClickItem> {
             SizedBox(
               width: 30,
               height: 30,
-              child: Image(image: AssetImage('${widget.model.imageName}')),
+              child: Image(image: AssetImage(widget.model.imageName)),
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8)),
             Text(
-              '${widget.model.title}',
-              style: TextStyle(fontSize: 17),
+              widget.model.title,
+              style: const TextStyle(fontSize: 17),
             ),
           ],
         ),
-        Expanded(child: Padding(padding: EdgeInsets.zero)),
+        const Expanded(child: Padding(padding: EdgeInsets.zero)),
         /*SizedBox(
           width: 12,
           height: 30,

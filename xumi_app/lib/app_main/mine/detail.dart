@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/data/global.dart';
-import '../../utils/qr_gen.dart';
-import '../../utils/qr_scan.dart';
+import '../../../data/global.dart';
+import '../../utils/xqrgen.dart';
+import '../../utils/xqrscan.dart';
 import '../mode/item.dart';
 import '../mode/list_view.dart';
 

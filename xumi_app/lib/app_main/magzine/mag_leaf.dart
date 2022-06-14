@@ -1,21 +1,19 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:xumi_app/bean/nftdata.dart';
+import '../../bean/user_info.dart';
+import '../../data/global.dart';
+import '../login/signup.dart';
 
-class MagItemView extends StatefulWidget {
-  MagItemView({Key? key, required this.item}) : super(key: key);
+class MagLeafView extends StatelessWidget {
+  MagLeafView({Key? key, required this.item}) : super(key: key);
   NFTData item;
-  @override
-  State<StatefulWidget> createState() {
-    return _MagItemViewState();
-  }
-}
+  final UserInfo me = Global.mydata.me;
 
-class _MagItemViewState extends State<MagItemView> {
-  @override
-  void initState() {
-    super.initState();
+  _buyItem(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return (RegisterPage());
+    }));
+    print('${me.username} buy this one, ${item.path}');
   }
 
   @override
@@ -27,23 +25,21 @@ class _MagItemViewState extends State<MagItemView> {
       ],
     );
   }
-
   Widget _showMagItem() {
     return Container(
       color: Colors.white,
       child: Center(
-       // child: Image.network(Global.mydata.nlist[widget.index].path),
-        child: Image.network(widget.item.path),
+        child: Image.network(item.path),
       ),
     );
   }
-
   Widget _showBuyButton(BuildContext context) {
     return Positioned(
-      bottom: 5.0, //距离底边18px（中间左边）
+      bottom: 5.0,
       right: 165,
       child: InkWell(
         onTap: () {
+          _buyItem(context);
         },
         child: Container(
           height: 48,
@@ -58,7 +54,6 @@ class _MagItemViewState extends State<MagItemView> {
             borderRadius: const BorderRadius.all(
               Radius.circular(16.0),
             ),
-            //   border: Border.all(color: Colors.grey.withOpacity(0.2)),
             border: Border.all(color: Colors.blue),
           ),
           child: Icon(

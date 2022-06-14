@@ -1,8 +1,8 @@
 import 'dart:convert';
 import '../bean/nftdata.dart';
 import '../bean/user_info.dart';
-import '../utils/http_util.dart';
-import '../utils/local_util.dart';
+import '../utils/xhttp.dart';
+import '../utils/xlocalstorage.dart';
 import 'config.dart';
 
 class Global {
@@ -18,13 +18,15 @@ class Global {
         });
   }
 
-  logout(){
-    me = UserInfo();
-  }
+  logout() => me = UserInfo();
 
-  Future loadData() async {
-    //  return NFTData.listfromJson(await XHttp.instance.get(Config.FRESH));
+  Future loadMagData() async {
     return NFTData.listfromJson(
         await XHttp.instance.get(Config.FRESH, params: {'username': me.did}));
+  }
+
+  Future loadGalleryData() async{
+    return NFTData.listfromJson(
+        await XHttp.instance.get(Config.GALLERY, params: {'username': me.did}));
   }
 }

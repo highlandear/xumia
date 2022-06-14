@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:xumi_app/app_main/mode/item.dart';
-
+import 'item.dart';
 import 'list_item.dart';
 
 class ItemModelView extends StatelessWidget {
-  ItemModelView(this._models, this._ontap);
+  const ItemModelView(this._models, this._ontap, {Key? key}) : super(key: key);
 
-  List<ClickItem> _models;
+  final List<ClickItem> _models;
 
-  Function _ontap;
+  final Function _ontap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +20,17 @@ class ItemModelView extends StatelessWidget {
     List<Widget> _items = [];
     _models.forEach((model) {
       if (model.type == 'divid') {
-        _items.add(Padding(
+        _items.add(const Padding(
           padding: EdgeInsets.only(top: 10),
         ));
       } else {
         _items.add(
-          Container(
+          SizedBox(
             height: 60.0,
             child: ListClickItem(
               model: model,
               onTap: (model) {
                 _ontap(context, model.type);
-                print('${model.title}');
               },
             ),
           ),

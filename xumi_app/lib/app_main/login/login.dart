@@ -1,13 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/login/signup.dart';
 import '../../bean/user_info.dart';
 import '../../data/config.dart';
 import '../../data/global.dart';
-import '../../utils/http_util.dart';
-import '../../utils/toast_util.dart';
+import '../../utils/xhttp.dart';
+import '../../utils/xtoast.dart';
 import 'loading.dart';
+import 'signup.dart';
+
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,29 +17,27 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // 响应空白处的焦点的Node
   bool _isShowPassWord = false;
   FocusNode blankNode = FocusNode();
-  TextEditingController _unameController = TextEditingController();
-  TextEditingController _pwdController = TextEditingController();
-  GlobalKey _formKey = GlobalKey<FormState>();
+  final TextEditingController _unameController = TextEditingController();
+  final TextEditingController _pwdController = TextEditingController();
+  final GlobalKey _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         // leading: _leading(context),
-        title: Text('登录'),
+        title: const Text('登录'),
         actions: <Widget>[
           TextButton(
-            child: Text(' 注册', style: TextStyle(color: Colors.white)),
+            child: const Text(' 注册', style: TextStyle(color: Colors.white)),
             onPressed: () {
-              print('注册页面');
-              // Get.to(() => RegisterPage());
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return (RegisterPage());
               }));
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
       autovalidateMode: AutovalidateMode.disabled,
       child: Column(
         children: <Widget>[
-          Center(
+          const Center(
               heightFactor: 1.5,
               child: FlutterLogo(
                 size: 64,
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
           TextFormField(
               autofocus: false,
               controller: _unameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: 'user name',
                   hintText: 'Please enter your login name or email',
                   hintStyle: TextStyle(fontSize: 12),
@@ -91,8 +91,8 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                   labelText: 'password',
                   hintText: 'please enter passwd',
-                  hintStyle: TextStyle(fontSize: 12),
-                  icon: Icon(Icons.lock),
+                  hintStyle: const TextStyle(fontSize: 12),
+                  icon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                       icon: Icon(
                         _isShowPassWord
@@ -120,15 +120,15 @@ class _LoginPageState extends State<LoginPage> {
                   return ElevatedButton(
                     style: TextButton.styleFrom(
                         primary: Theme.of(context).primaryColor,
-                        padding: EdgeInsets.all(15.0)),
-                    child: Text('I18n.of(context).login',
+                        padding: const EdgeInsets.all(15.0)),
+                    child: const Text('I18n.of(context).login',
                         style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       //由于本widget也是Form的子代widget，所以可以通过下面方式获取FormState
                       if (Form.of(context)!.validate()) {
                         _onSubmit(context);
                       }
-                      print('onpress ');
+                     // print('onpress ');
                     },
                   );
                 })),
@@ -161,60 +161,27 @@ class _LoginPageState extends State<LoginPage> {
           return LoadingDialog(
             showContent: false,
             backgroundColor: Colors.black38,
-            //   loadingView: SpinKitCircle(color: Colors.white),
-            loadingView: CircularProgressIndicator(),
+            loadingView: const CircularProgressIndicator(),
           );
         });
-    XHttp.instance
-        .post(Config.LOGIN, params: {
-          'username': _unameController.text,
-          'password': _pwdController.text
-        })
-        .then((data) => {
-              print(data.toString()),
-              Global.mydata.me = UserInfo.fromJson(jsonDecode(data)),
-              Navigator.pop(context),
-              XToast.error('test'),
-              // Navigator.pop(context),
-              Navigator.pop(context, true),
-            })
-        .catchError((onError) {
-          Navigator.of(context).pop();
-          XToast.error('bad network');
-        });
-/*
     XHttp.instance.post(Config.LOGIN, params: {
       'username': _unameController.text,
       'password': _pwdController.text
-    }).then((data) => {
-      print(data.toString()),
-          Global.mydata.me = UserInfo.fromJson(jsonDecode(data)),
-          Navigator.pop(context),
-    XToast.error('test'),
-         // Navigator.pop(context),
-          Navigator.pop(context,true),
-        });
-
- */
-    /*
-    UserProfile userProfile = Provider.of<UserProfile>(context, listen: false);
-
-    XHttp.post("/user/login", {
-      "username": _unameController.text,
-      "password": _pwdController.text
-    }).then((response) {
-      Navigator.pop(context);
-      if (response['errorCode'] == 0) {
-        userProfile.nickName = response['data']['nickname'];
-        ToastUtils.toast(I18n.of(context).loginSuccess);
-        Get.off(() => MainHomePage());
-      } else {
-        ToastUtils.error(response['errorMsg']);
+    }).then((val) {
+      var erode = jsonDecode(val)['errorCode'];
+      if (erode == 0) {
+        XToast.toast('顺利登录');
+        Global.mydata.me = UserInfo.fromJson(jsonDecode(val)['data']);
+        Navigator.pop(context);
+        Navigator.pop(context, true);
+      } else if(erode == 1){
+        XToast.error("请先注册");
+        Navigator.pop(context);
       }
-    }).catchError((onError) {
-      Navigator.of(context).pop();
-      ToastUtils.error(onError);
+      else if(erode == 2){
+        XToast.error("用户名密码不匹配");
+        Navigator.pop(context);
+      }
     });
-    */
   }
 }

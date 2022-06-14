@@ -1,31 +1,47 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:xumi_app/bean/user_info.dart';
-import 'package:xumi_app/data/global.dart';
-import '../utils/qr_gen.dart';
-import '../app_main/mine/mine_color.dart';
+import '../../../../bean/user_info.dart';
+import '../../../../data/global.dart';
+import '../login/login.dart';
+import 'detail.dart';
+import 'colors.dart';
 
-class MineHeader extends StatefulWidget{
+class MyInfoHead extends StatefulWidget {
   @override
-  _MineHeaderState createState() => _MineHeaderState();
+  _MyInfoHeadState createState() => _MyInfoHeadState();
 }
-class _MineHeaderState extends State<MineHeader>  {
-  UserInfo me = Global.mydata.me ;
+
+class _MyInfoHeadState extends State<MyInfoHead> {
+  late UserInfo me;
+
   @override
   void initState() {
     super.initState();
-    Global.mydata.loadMe();
+    _getMe();
+  }
+
+  _getMe() {
+    setState(() {
+      me = Global.mydata.me;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('XXXXXXXXXXXXXXXXXX ');
-        //Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //    return QRHomePage();
-       // }));
+        if (!me.online())
+          Navigator.of(context)
+              .push(
+                new MaterialPageRoute(builder: (_) => LoginPage()),
+              )
+              .then((val) => val != null ? _getMe() : null);
+        else {
+          Navigator.of(context)
+              .push(
+            new MaterialPageRoute(builder: (_) => MydetailView()),
+          )
+              .then((val) => val != null ? _getMe() : null);
+        }
       },
       child: Stack(
         children: [
@@ -35,25 +51,28 @@ class _MineHeaderState extends State<MineHeader>  {
           Positioned(
             left: 20,
             top: 100,
-            child: _infoRow(),
+            child: _buildMyInfo(),
           ),
           Positioned(
             right: 15,
             top: 148,
-            child: _scanRow(),
+            child: _buildArrow(),
           ),
         ],
       ),
     );
   }
 
-  Row _infoRow() {
+  Row _buildMyInfo() {
     return Row(
       children: [
         SizedBox(
           width: 80,
           height: 80,
           //child: Image.network(me.image),
+          child: Image(
+            image: AssetImage('assets/images/mine/head.jpg'),
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(left: 15),
@@ -65,7 +84,7 @@ class _MineHeaderState extends State<MineHeader>  {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                me.tel == '' ? '点击登录' : me.tel,
+                me.online() ? me.username : '点击登录',
                 style: TextStyle(
                   color: MineColors.xumi_black,
                   fontSize: 16,
@@ -73,8 +92,7 @@ class _MineHeaderState extends State<MineHeader>  {
                 ),
               ),
               Text(
-                // '微信号: Maojunhao',
-                me.did,
+                me.online() ? me.did : '点击登录',
                 style: TextStyle(
                   color: MineColors.xumi_black,
                   fontSize: 15,
@@ -87,7 +105,7 @@ class _MineHeaderState extends State<MineHeader>  {
     );
   }
 
-  Row _scanRow() {
+  Row _buildArrow() {
     return Row(
       children: [
         SizedBox(

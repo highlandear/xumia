@@ -43,7 +43,7 @@ class LoadingDialog extends Dialog {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                loadingView == null ? CircularProgressIndicator() : loadingView,
+                loadingView,
                 showContent
                     ? Padding(
                   padding: const EdgeInsets.only(
@@ -51,7 +51,7 @@ class LoadingDialog extends Dialog {
                   ),
                   child: Text(content),
                 )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),

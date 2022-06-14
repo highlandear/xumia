@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PageController pageController = new PageController(keepPage: false);
 
-  Future _future = Global.mydata.loadData();
+  final Future _future = Global.mydata.loadMagData();
 
   var _nlist = [];
 
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: this.futureBuilder(),
+      body: this._futureBuilder(),
     );
   }
 
@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  FutureBuilder futureBuilder() {
-    return new FutureBuilder(
+  FutureBuilder _futureBuilder() {
+    return FutureBuilder(
       builder: (context, AsyncSnapshot async) {
         switch (async.connectionState) {
           case ConnectionState.active:
