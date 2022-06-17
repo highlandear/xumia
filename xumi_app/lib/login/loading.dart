@@ -13,7 +13,7 @@ class LoadingDialog extends Dialog {
   //背景颜色
   final Color backgroundColor;
 
-  LoadingDialog(
+  const LoadingDialog(
       {
         required this.loadingView,
         this.content = "加载中...",

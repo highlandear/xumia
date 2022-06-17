@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../data/global.dart';
+import '../../login/sign.dart';
 import '../../utils/xqrscan.dart';
 import '../../utils/xtoast.dart';
 import '../mode/item.dart';
@@ -24,6 +26,10 @@ class MineContent extends StatelessWidget {
     );
   }
 _tap(BuildContext context, String type){
+  if (! Global.mydata.me.online()) {
+    XToast.error('请点击登录');
+    return;
+  }
   switch (type) {
     case 'setting':
       Navigator.push(context,

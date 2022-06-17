@@ -5,10 +5,9 @@ class FullScreenImagePage extends StatefulWidget {
   const FullScreenImagePage(this.imageurl);
 
   @override
-  _FullScreenImagePageState createState() {
-    return _FullScreenImagePageState();
-  }
+  _FullScreenImagePageState createState() => _FullScreenImagePageState();
 }
+
 class _FullScreenImagePageState extends State<FullScreenImagePage> {
   @override
   void initState() {
@@ -22,11 +21,11 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("图片详情页面"),
+        title: const Text("图片详情页面"),
         centerTitle: true,
       ),
       body:Container(
-        margin: EdgeInsets.all(20.0),
+        margin: const EdgeInsets.all(20.0),
         child: Image.network(widget.imageurl, fit: BoxFit.fitWidth,),
       ),
     );

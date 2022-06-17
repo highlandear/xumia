@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
-const DEFAULT_TOAST_DURATION = Duration(seconds: 2);
-const DEFAULT_TOAST_COLOR = Color(0xFF424242);
-
 class XToast{
+
+  static const _defaultToastDuration = Duration(seconds: 2);
+  static const _defaultToastColor = Color(0xFF424242);
+
   static wrap(Widget child) {
     return OKToast(
       ///字体大小
-      textStyle: TextStyle(fontSize: 16, color: Colors.white),
-      backgroundColor: DEFAULT_TOAST_COLOR,
+      textStyle: const TextStyle(fontSize: 16, color: Colors.white),
+      backgroundColor: _defaultToastColor,
       radius: 10,
       dismissOtherOnShow: true,
-      textPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+      textPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: child,
-      duration: DEFAULT_TOAST_DURATION,
+      duration: _defaultToastDuration,
     );
   }
 
   static void toast(String msg,
-      {Duration duration = DEFAULT_TOAST_DURATION,
-        Color color = DEFAULT_TOAST_COLOR}) {
+      {Duration duration = _defaultToastDuration,
+        Color color = _defaultToastColor}) {
     showToast(msg, duration: duration, backgroundColor: color);
   }
 
-  static void waring(String msg, {Duration duration = DEFAULT_TOAST_DURATION}) {
+  static void waring(String msg, {Duration duration = _defaultToastDuration}) {
     showToast(msg, duration: duration, backgroundColor: Colors.yellow);
   }
 
-  static void error(String msg, {Duration duration = DEFAULT_TOAST_DURATION}) {
+  static void error(String msg, {Duration duration = _defaultToastDuration}) {
     showToast(msg, duration: duration, backgroundColor: Colors.red);
   }
 
   static void success(String msg,
-      {Duration duration = DEFAULT_TOAST_DURATION}) {
+      {Duration duration = _defaultToastDuration}) {
     showToast(msg, duration: duration, backgroundColor: Colors.lightGreen);
   }
 }

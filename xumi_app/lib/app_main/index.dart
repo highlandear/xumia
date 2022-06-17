@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'gallery/main.dart';
-import 'magzine/mag_main.dart';
+import 'magazine/main.dart';
 import 'mine/main.dart';
 
-class Indexpage extends StatefulWidget {
-  const Indexpage({Key? key}) : super(key: key);
+class IndexPage extends StatefulWidget {
+  const IndexPage({Key? key}) : super(key: key);
 
   @override
   _IndexpageState createState() => _IndexpageState();
 }
 
-class _IndexpageState extends State<Indexpage> {
+class _IndexpageState extends State<IndexPage> {
   final List<BottomNavigationBarItem> bottomtabs=[
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled),label: "我的"),
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.book),label: "杂志"),
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.bag),label: "画廊"),
   ];
 
-  final List taBodies=[MineMainPage(),HomePage(),const Gallery()];
+  final List taBodies=[MineMainPage(),const HomePage(),const Gallery()];
   //final List taBodies=[MineMainPage(),MagzinePage(),BagPage()];
   int currentIndex=1;
   var currentPage;
@@ -46,6 +46,5 @@ class _IndexpageState extends State<Indexpage> {
       ),
       body: currentPage,
     );
-
   }
 }

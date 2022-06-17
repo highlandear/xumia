@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/login/sign.dart';
 import '../../data/global.dart';
 import 'card.dart';
 
@@ -15,6 +16,10 @@ class _GalleryState extends State<Gallery> {
 
   @override
   Widget build(BuildContext context) {
+    if(! Global.mydata.me.online()) {
+      return const SignPage();
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: _futureBuilder(),

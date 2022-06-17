@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../data/global.dart';
-import 'mag_leaf.dart';
+import 'leaf.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  PageController pageController = new PageController(keepPage: false);
+  PageController pageController = PageController(keepPage: false);
 
   final Future _future = Global.mydata.loadMagData();
-
-  var _nlist = [];
 
   @override
   void initState() {
@@ -23,33 +23,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: this._futureBuilder(),
+      body: _futureBuilder(),
     );
   }
 
   buildWaiting() {
-    return new Center(
-      child: new CircularProgressIndicator(),
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 
   buildError(String e) {
-    return new Center(
-      child: new Text(e),
+    return Center(
+      child: Text(e),
     );
   }
 
-  buildItem() {
-    return Container(
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: _nlist.length,
-        physics: PageScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) {
-          return MagLeafView(item: _nlist[index]);
-        },
-        scrollDirection: Axis.vertical,
-      ),
+  buildItem(_nlist) {
+    return PageView.builder(
+      controller: pageController,
+      itemCount: _nlist.length,
+      physics: const PageScrollPhysics(),
+      itemBuilder: (BuildContext context, int index) {
+        return MagLeafView(item: _nlist[index]);
+      },
+      scrollDirection: Axis.vertical,
     );
   }
 
@@ -64,8 +62,7 @@ class _HomePageState extends State<HomePage> {
             {
               if (async.hasError) return buildError('请检查网络');
               if (async.hasData) {
-                _nlist = async.data;
-                return buildItem();
+                return buildItem(async.data);
               }
               return buildError('e2');
             }
@@ -73,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             return buildError('e3');
         }
       },
-      future: this._future,
+      future: _future,
     );
   }
 }

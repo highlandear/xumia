@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class NFTData {
   NFTData({
-    this.id = '',
+    this.id = 'testid',
     this.path = '',
     this.desc = '',
     this.owner = '',

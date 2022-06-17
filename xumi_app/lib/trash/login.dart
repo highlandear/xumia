@@ -1,17 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import '../../bean/user_info.dart';
+import '../login/address.dart';
+import '../../bean/userinfo.dart';
 import '../../data/config.dart';
 import '../../data/global.dart';
 import '../../utils/xhttp.dart';
 import '../../utils/xtoast.dart';
-import 'loading.dart';
+import '../login/loading.dart';
 import 'signup.dart';
 
-
-
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextButton.styleFrom(
                         primary: Theme.of(context).primaryColor,
                         padding: const EdgeInsets.all(15.0)),
-                    child: const Text('I18n.of(context).login',
+                    child: const Text('登录',
                         style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       //由于本widget也是Form的子代widget，所以可以通过下面方式获取FormState
@@ -158,13 +159,13 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return LoadingDialog(
+          return const LoadingDialog(
             showContent: false,
             backgroundColor: Colors.black38,
-            loadingView: const CircularProgressIndicator(),
+            loadingView: CircularProgressIndicator(),
           );
         });
-    XHttp.instance.post(Config.LOGIN, params: {
+    XHttp.instance.post(Config.signReq, params: {
       'username': _unameController.text,
       'password': _pwdController.text
     }).then((val) {

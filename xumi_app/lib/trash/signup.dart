@@ -4,27 +4,29 @@ import 'package:flutter/material.dart';
 import '../../data/config.dart';
 import '../../utils/xhttp.dart';
 import '../../utils/xtoast.dart';
-import 'loading.dart';
+import '../login/loading.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  // 响应空白处的焦点的Node
+
   bool _isShowPassWord = false;
   bool _isShowPassWordRepeat = false;
   FocusNode blankNode = FocusNode();
-  TextEditingController _unameController = TextEditingController();
-  TextEditingController _pwdController = TextEditingController();
-  TextEditingController _pwdRepeatController = TextEditingController();
-  GlobalKey _formKey = GlobalKey<FormState>();
+  final TextEditingController _unameController = TextEditingController();
+  final TextEditingController _pwdController = TextEditingController();
+  final TextEditingController _pwdRepeatController = TextEditingController();
+  final GlobalKey _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('注册')),
+      appBar: AppBar(title: const Text('注册')),
       body: GestureDetector(
         onTap: () {
           // 点击空白页面关闭键盘
@@ -48,11 +50,11 @@ class _RegisterPageState extends State<RegisterPage> {
           TextFormField(
               autofocus: false,
               controller: _unameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: '用户名',
                   hintText: '用户名',
                   hintStyle: TextStyle(fontSize: 12),
-                  icon: Icon(Icons.person)),
+                  icon: Icon(Icons.phone)),
               //校验用户名
               validator: (v) {
                 /* return v.trim().length > 0
@@ -66,8 +68,8 @@ class _RegisterPageState extends State<RegisterPage> {
               decoration: InputDecoration(
                   labelText: 'passwd',
                   hintText: 'enter passwd',
-                  hintStyle: TextStyle(fontSize: 12),
-                  icon: Icon(Icons.lock),
+                  hintStyle: const TextStyle(fontSize: 12),
+                  icon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                       icon: Icon(
                         _isShowPassWord
@@ -93,8 +95,8 @@ class _RegisterPageState extends State<RegisterPage> {
               decoration: InputDecoration(
                   labelText: '再次输入',
                   hintText: 'repeat enter passwd',
-                  hintStyle: TextStyle(fontSize: 12),
-                  icon: Icon(Icons.lock),
+                  hintStyle: const TextStyle(fontSize: 12),
+                  icon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                       icon: Icon(
                         _isShowPassWordRepeat
@@ -124,8 +126,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   return ElevatedButton(
                     style: TextButton.styleFrom(
                         primary: Theme.of(context).primaryColor,
-                        padding: EdgeInsets.all(15.0)),
-                    child: Text('I18n.of(context).register',
+                        padding: const EdgeInsets.all(15.0)),
+                    child: const Text('注册',
                         style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       //由于本widget也是Form的子代widget，所以可以通过下面方式获取FormState
@@ -169,13 +171,13 @@ class _RegisterPageState extends State<RegisterPage> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return LoadingDialog(
+          return const LoadingDialog(
             showContent: false,
             backgroundColor: Colors.black38,
             loadingView: CircularProgressIndicator(),
           );
         });
-    XHttp.instance.post(Config.SIGNUP, params: {
+    XHttp.instance.post(Config.signReq, params: {
       'username': _unameController.text,
       'password': _pwdController.text
     }).then((val) {

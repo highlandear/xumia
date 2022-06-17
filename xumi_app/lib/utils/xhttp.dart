@@ -57,8 +57,7 @@ class XHttp {
     if (response.statusCode == 200) {
       return response.data;
     }
-  //  print(response.statusCode);
-  //  print('err === ${response.statusCode}+${response.statusMessage}');
+
     return null;
   }
   get(String url, {params}) async {
@@ -77,8 +76,13 @@ class XHttp {
     return _onResponse(response);
   }
 
-  Future postJson(String url, data) async {
-    Response response = await _dio.post(url, data: data);
+  Future postJson(String url, {data}) async {
+    Response response = await _dio.post(url,  data: data);
+    return _onResponse(response);
+  }
+
+  Future postData(String url, {params, data}) async {
+    Response response = await _dio.post(url, queryParameters: params, data: data);
     return _onResponse(response);
   }
 

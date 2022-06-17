@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRPage extends StatefulWidget {
-  QRPage(this.title,this.data);
+  QRPage(this.title,this.data, {Key? key}) : super(key: key);
 
   String title;
   String data;
@@ -19,11 +19,11 @@ class _QRHomePageState extends State<QRPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
-      body: new Center(
-        child: new QrImage(
+      body: Center(
+        child: QrImage(
           data: widget.data,
           size: 200.0,
         ),
