@@ -26,7 +26,7 @@ class MineContent extends StatelessWidget {
     );
   }
 _tap(BuildContext context, String type){
-  if (! Global.mydata.me.online()) {
+  if (! Global.user.info.online()) {
     XToast.error('请点击登录');
     return;
   }
@@ -40,7 +40,7 @@ _tap(BuildContext context, String type){
     case 'scan':
       Navigator.push(context,
           MaterialPageRoute(builder: (context) {
-            return (BarcodeScanPage());
+            return (const BarcodeScanPage());
           }));
       break;
     case 'ticket':
@@ -58,7 +58,7 @@ _buildItems(BuildContext context, Function tap) {
 
    List<Widget> _items = [];
     _items.add(
-      Container(
+      const SizedBox(
         height: 200,
         child: MyInfoHead(),
       ),

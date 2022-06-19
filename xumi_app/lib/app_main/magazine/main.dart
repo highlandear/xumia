@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PageController pageController = PageController(keepPage: false);
 
-  final Future _future = Global.mydata.loadMagData();
+  final Future _future = Global.user.loadMagData();
 
   @override
   void initState() {

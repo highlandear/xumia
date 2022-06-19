@@ -23,7 +23,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
 
   _getMe() {
     setState(() {
-      me = Global.mydata.me;
+      me = Global.user.info;
     });
   }
 
@@ -34,13 +34,13 @@ class _MyInfoHeadState extends State<MyInfoHead> {
         if (!me.online()) {
           Navigator.of(context)
               .push(
-                MaterialPageRoute(builder: (_) => SignPage()),
+                MaterialPageRoute(builder: (_) => const SignPage()),
               )
               .then((val) => val != null ? _getMe() : null);
         } else {
           Navigator.of(context)
               .push(
-                MaterialPageRoute(builder: (_) => MydetailView()),
+                MaterialPageRoute(builder: (_) => MyDetailView()),
               )
               .then((val) => val != null ? _getMe() : null);
         }

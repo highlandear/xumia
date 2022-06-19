@@ -7,12 +7,37 @@ class CardsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> det = [];
-    data.forEach((element) {
-      det.add(_buildCard(context, element));
-    });
+    List<Widget> cards = [];
+
+    for (var element in data) {
+      cards.add(_buildCard(context, element));
+    }
+    if (cards.isEmpty) {
+      cards.add(_buildEmptyCard(context));
+    }
     return ListView(
-      children: det,
+      children: cards,
+    );
+  }
+
+  Widget _buildEmptyCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        elevation: 50.0,
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: const Text('目前没有通证'),
+              margin: const EdgeInsets.all(10),
+            ),
+            const ListTile(
+              title: Text("你可以到杂志页选购相应产品，获取通证"),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -47,7 +72,7 @@ class CardsView extends StatelessWidget {
                   ),
               title: Text("Candy Shop"),
               subtitle: Text(
-                "Flutter is Goole's moblie UI framework for crafting higt ",
+                "description ",
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),

@@ -1,0 +1,97 @@
+import 'package:flutter/material.dart';
+import 'package:xumi_app/utils/xtoast.dart';
+import '../bean/deliverdata.dart';
+import '../data/global.dart';
+import 'loading.dart';
+
+class AddressSelectionPage extends StatefulWidget {
+  AddressSelectionPage({Key? key, this.data = ''}) : super(key: key);
+
+  String data;
+
+  @override
+  _AddressSelectionPageState createState() => _AddressSelectionPageState();
+}
+
+class _AddressSelectionPageState extends State<AddressSelectionPage> {
+
+  Widget _buildDefaultView(DeliverData d) {
+    return ListTile(
+      leading: const Icon(Icons.check, color: Colors.red),
+      title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('${d.name}(${d.tel})'),
+            SizedBox(height: 10),
+            Text(d.address),
+            Text(d.detail),
+            Divider(height: 20),
+
+          ]),
+    //  trailing: Icon(Icons.edit, color: Colors.blue),
+
+      onTap: () {
+
+      },
+    );
+  }
+
+  Widget _buildOtherView(DeliverData d) {
+    return ListTile(
+      // leading: const Icon(Icons.check, color: Colors.red),
+      title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('${d.name}(${d.tel})'),
+            SizedBox(height: 10),
+            Text(d.address),
+          ]),
+    //  trailing: Icon(Icons.edit, color: Colors.blue),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("请选择收货地址"),
+        ),
+        body: Container(
+          child: Stack(
+            children: <Widget>[
+              ListView(
+                children: <Widget>[
+                  SizedBox(height: 20),
+                  _buildDefaultView(Global.user.house),
+                 // Divider(height: 20),
+                // _buildOtherView(Global.user.house),
+                  ElevatedButton(onPressed: (){
+                    _buyThisItem(context);
+                  }, child: const Text('确认')),
+                ],
+              ),
+            ],
+          ),
+        ));
+  }
+
+  _buyThisItem(context){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const LoadingDialog(
+            showContent: false,
+            backgroundColor: Colors.black38,
+            loadingView: CircularProgressIndicator(),
+          );
+        });
+    Global.user.reqSendItem(widget.data, success: (){
+      XToast.success('请等待收货');
+      Navigator.pop(context);
+      Navigator.pop(context);
+    }, fail:(){
+
+    });
+  }
+}

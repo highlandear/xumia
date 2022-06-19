@@ -1,5 +1,7 @@
 package com.xumi.provider.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DataList<T> {
@@ -16,9 +18,15 @@ public class DataList<T> {
 	public String toJson() {
 		return JsonObj.toJson(this);
 	}
+	/*
 	
 	public void add(T d) {
 		data.add(d);
 		status = data.isEmpty() ? "1" : "0";
+	}
+	*/
+	
+	public void setList(List<T> list) {
+		data = list;
 	}
 }

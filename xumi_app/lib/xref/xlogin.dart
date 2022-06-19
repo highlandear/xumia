@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import '../login/address.dart';
+import '../login/newaddress.dart';
 import '../../bean/userinfo.dart';
 import '../../data/config.dart';
 import '../../data/global.dart';
@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
       var erode = jsonDecode(val)['errorCode'];
       if (erode == 0) {
         XToast.toast('顺利登录');
-        Global.mydata.me = UserInfo.fromJson(jsonDecode(val)['data']);
+        Global.user.info = UserInfo.fromJson(jsonDecode(val)['data']);
         Navigator.pop(context);
         Navigator.pop(context, true);
       } else if(erode == 1){

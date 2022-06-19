@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../bean/deliverdata.dart';
 import '../data/global.dart';
 
@@ -59,9 +58,9 @@ class _MyAddressPageState extends State<MyAddressPage> {
               ListView(
                 children: <Widget>[
                   SizedBox(height: 20),
-                  _buildDefaultView(Global.mydata.house),
+                  _buildDefaultView(Global.user.house),
                   Divider(height: 20),
-                  _buildOtherView(Global.mydata.house),
+                  _buildOtherView(Global.user.house),
                 ],
               ),
             ],

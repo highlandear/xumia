@@ -80,13 +80,6 @@ class _ListClickItemState extends State<ListClickItem> {
           ],
         ),
         const Expanded(child: Padding(padding: EdgeInsets.zero)),
-        /*SizedBox(
-          width: 12,
-          height: 30,
-          child: Image(
-              image: AssetImage('assets/images/find/find_arrow_right.png')),
-        ),
-         */
       ],
     );
   }

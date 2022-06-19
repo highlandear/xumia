@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class NFTData {
   NFTData({
-    this.id = 'testid',
+    this.id = '',
     this.path = '',
     this.desc = '',
     this.owner = '',
@@ -15,7 +15,9 @@ class NFTData {
 
   static NFTData fromJson(Map<String, dynamic> json) {
     return NFTData(
+      id:json['id'],
       path: json['path'],
+      desc: json['desc'],
     );
   }
 

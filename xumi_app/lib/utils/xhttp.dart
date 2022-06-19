@@ -5,7 +5,7 @@ class XHttp {
   static final XHttp _http = XHttp();
 
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: Config.BASE_URL,
+    baseUrl: Config.baseURL,
     connectTimeout: 5000,
     receiveTimeout: 5000,
     headers: {"token": ""},

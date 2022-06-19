@@ -19,10 +19,12 @@ import com.xumi.provider.model.UserManager;
 public class Logon {
 	  static final String indexReq = "index.action";
 	  static final String signReq = "sign.action";
-	  static final String postAddr = "postaddr.action";
+	  static final String addNewAddress = "addNewAddress.action";
 	  static final String reqAddr = "reqaddr.action";
 	  static final String galleryReq = "gallery.action";
-	  
+	  static final String reqItem2NewAddr = "reqItem2NewAddr.action";
+	  static final String reqSendItem ="reqSendItem.action";
+
 	@RequestMapping(value = indexReq, method = RequestMethod.GET)
 	public String index(HttpServletRequest request) {
 
@@ -48,12 +50,9 @@ public class Logon {
 		return res.toJson();
 	}
 
-	/**
-	 * user post address data, if post an "itemid" then
-	 * this is a purchase action 
-	 */
-	@RequestMapping(value = postAddr, method = RequestMethod.POST)
-	public String sendMyaddr(@RequestParam("username") String username, @RequestParam("itemid") String itemid,
+
+	@RequestMapping(value = reqItem2NewAddr, method = RequestMethod.POST)
+	public String sendItem2NewAddress(@RequestParam("username") String username, @RequestParam("itemid") String itemid,
 			@RequestBody DeliverData user) {
 
 		System.out.println(username);
@@ -62,13 +61,46 @@ public class Logon {
 		System.out.println(user.getName());
 		System.out.println(user.getAddress());
 		System.out.println(user.getDetail());
+		
+		UserManager.getInstance().addAddr(username, user);
+		UserManager.getInstance().addItem(itemid);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
 		res.add(user);
 
 		return res.toJson();
 	}
+	@RequestMapping(value = reqSendItem, method = RequestMethod.POST)
+	public String sendItem2me(@RequestParam("username") String username, @RequestParam("itemid") String itemid) {
+
+		System.out.println(username);
+		System.out.println(itemid);
+		
+		UserManager.getInstance().addItem(itemid);
+
+		DataBean res = new DataBean("0");
+		return res.toJson();
+	}
 	
+	
+	@RequestMapping(value = addNewAddress, method = RequestMethod.POST)
+	public String addNewAddress(@RequestParam("username") String username, @RequestBody DeliverData user) {
+
+		System.out.println(username);
+		System.out.println(user.getTel());
+		System.out.println(user.getName());
+		System.out.println(user.getAddress());
+		System.out.println(user.getDetail());
+		
+		UserManager.getInstance().addAddr(username, user);
+
+		DataBean<DeliverData> res = new DataBean<DeliverData>();
+		res.add(user);
+	
+
+		return res.toJson();
+	}
+
 	@RequestMapping(value = reqAddr, method = RequestMethod.GET)
 	public String reqAddr(@RequestParam("username") String username) {
 

@@ -1,20 +1,18 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:city_pickers/city_pickers.dart';
-import 'package:xumi_app/bean/deliverdata.dart';
-import '../../data/config.dart';
-import '../../utils/xhttp.dart';
+
 import '../../utils/xtoast.dart';
+import '../bean/deliverdata.dart';
 import '../bean/userinfo.dart';
 import '../data/global.dart';
 import 'loading.dart';
 
 class AddAddressPage extends StatefulWidget {
-  const AddAddressPage({Key? key, required this.title, this.itemid = ''})
+    AddAddressPage({Key? key, required this.title, this.data=''})
       : super(key: key);
 
   final String title;
-  final String itemid;
+  String data;
 
   @override
   _AddAddressPageState createState() => _AddAddressPageState();
@@ -28,7 +26,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
 
   final GlobalKey _formKey = GlobalKey<FormState>();
   late String area = '';
-  final UserInfo _me = Global.mydata.me;
+  final UserInfo _me = Global.user.info;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +141,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
     );
   }
 
-  getSignInfo() {
+  getAddressInfo() {
     DeliverData ud = DeliverData(
         tel: _telController.text,
         name: _unameController.text,
@@ -169,25 +167,26 @@ class _AddAddressPageState extends State<AddAddressPage> {
             loadingView: CircularProgressIndicator(),
           );
         });
-    // XHttp.instance.postJson(Config.sign, params: {}).then((val) {
-    XHttp.instance
-        .postData(Config.postAddr,
-            params: {'username': _me.tel, 'itemid': widget.itemid},
-            data: getSignInfo())
-        .then((val) {
-      print(val);
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        Global.mydata.house = DeliverData.fromJson(jsonDecode(val)['data']);
-        print(jsonDecode(val)['data']);
-        print(Global.mydata.house.address);
-        XToast.toast('地址添加成功');
+
+    if (widget.data.isEmpty) {
+      //仅添加地址
+      Global.user.reqAddNewAddress(getAddressInfo(), success: () {
+        XToast.success("添加成功");
         Navigator.pop(context);
         Navigator.pop(context);
-      } else {
-        XToast.error("该用户名已注册");
+      }, fail: () {
         Navigator.pop(context);
-      }
-    });
+      });
+    } else {
+      // 请求购买，发货到新地址
+      Global.user.reqSendMeItem2NewAddress(getAddressInfo(), widget.data,
+          success: () {
+        XToast.success("获取成功，请等待发货");
+        Navigator.pop(context);
+        Navigator.pop(context);
+      }, fail: () {
+        Navigator.pop(context);
+      });
+    }
   }
 }

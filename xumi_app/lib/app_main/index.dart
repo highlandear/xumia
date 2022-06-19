@@ -19,7 +19,6 @@ class _IndexpageState extends State<IndexPage> {
   ];
 
   final List taBodies=[MineMainPage(),const HomePage(),const Gallery()];
-  //final List taBodies=[MineMainPage(),MagzinePage(),BagPage()];
   int currentIndex=1;
   var currentPage;
 
