@@ -8,7 +8,7 @@ import '../../data/global.dart';
 import '../../utils/xhttp.dart';
 import '../../utils/xtoast.dart';
 import '../login/loading.dart';
-import 'signup.dart';
+import 'xsignup.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

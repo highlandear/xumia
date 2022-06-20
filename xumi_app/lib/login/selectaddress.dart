@@ -22,10 +22,10 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('${d.name}(${d.tel})'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(d.address),
             Text(d.detail),
-            Divider(height: 20),
+            const Divider(height: 20),
 
           ]),
     //  trailing: Icon(Icons.edit, color: Colors.blue),
@@ -43,7 +43,7 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('${d.name}(${d.tel})'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(d.address),
           ]),
     //  trailing: Icon(Icons.edit, color: Colors.blue),
@@ -54,24 +54,22 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("请选择收货地址"),
+          title: const Text("请选择收货地址"),
         ),
-        body: Container(
-          child: Stack(
-            children: <Widget>[
-              ListView(
-                children: <Widget>[
-                  SizedBox(height: 20),
-                  _buildDefaultView(Global.user.house),
-                 // Divider(height: 20),
-                // _buildOtherView(Global.user.house),
-                  ElevatedButton(onPressed: (){
-                    _buyThisItem(context);
-                  }, child: const Text('确认')),
-                ],
-              ),
-            ],
-          ),
+        body: Stack(
+          children: <Widget>[
+            ListView(
+              children: <Widget>[
+                const SizedBox(height: 20),
+                _buildDefaultView(Global.user.house),
+               // Divider(height: 20),
+              // _buildOtherView(Global.user.house),
+                ElevatedButton(onPressed: (){
+                  _buyThisItem(context);
+                }, child: const Text('确认')),
+              ],
+            ),
+          ],
         ));
   }
 

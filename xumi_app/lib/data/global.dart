@@ -106,7 +106,7 @@ class Global {
         info = UserInfo.fromJson(jsonDecode(val)['data']);
         success();
       } else {
-       fail();
+       fail(erode);
       }
     });
   }

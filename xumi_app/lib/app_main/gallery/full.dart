@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FullScreenImagePage extends StatefulWidget {
-  final String  imageurl;
-  const FullScreenImagePage(this.imageurl);
+
+  const FullScreenImagePage({Key? key, required this.imageURL}) : super(key: key);
+  final String  imageURL;
 
   @override
   _FullScreenImagePageState createState() => _FullScreenImagePageState();
@@ -26,7 +27,7 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
       ),
       body:Container(
         margin: const EdgeInsets.all(20.0),
-        child: Image.network(widget.imageurl, fit: BoxFit.fitWidth,),
+        child: Image.network(widget.imageURL, fit: BoxFit.fitWidth,),
       ),
     );
   }

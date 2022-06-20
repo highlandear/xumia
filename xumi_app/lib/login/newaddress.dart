@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:city_pickers/city_pickers.dart';
-
 import '../../utils/xtoast.dart';
 import '../bean/deliverdata.dart';
 import '../bean/userinfo.dart';
@@ -8,11 +7,11 @@ import '../data/global.dart';
 import 'loading.dart';
 
 class AddAddressPage extends StatefulWidget {
-    AddAddressPage({Key? key, required this.title, this.data=''})
+    const AddAddressPage({Key? key, required this.title, this.data='' })
       : super(key: key);
 
   final String title;
-  String data;
+  final String data;
 
   @override
   _AddAddressPageState createState() => _AddAddressPageState();

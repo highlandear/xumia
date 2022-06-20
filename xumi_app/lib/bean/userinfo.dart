@@ -16,9 +16,6 @@ class UserInfo {
   }
 
   static UserInfo fromJson(Map<String, dynamic> json) {
-    if (json == null) {
-      return UserInfo();
-    }
     return UserInfo(
       did: json['did'],
      tel: json['tel'],

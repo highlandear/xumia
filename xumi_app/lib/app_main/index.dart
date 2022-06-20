@@ -8,17 +8,17 @@ class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);
 
   @override
-  _IndexpageState createState() => _IndexpageState();
+  _IndexPageState createState() => _IndexPageState();
 }
 
-class _IndexpageState extends State<IndexPage> {
-  final List<BottomNavigationBarItem> bottomtabs=[
+class _IndexPageState extends State<IndexPage> {
+  final List<BottomNavigationBarItem> bottomTabs=[
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled),label: "我的"),
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.book),label: "杂志"),
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.bag),label: "画廊"),
   ];
 
-  final List taBodies=[MineMainPage(),const HomePage(),const Gallery()];
+  final List taBodies=[const MineMainPage(),const HomePage(),const Gallery()];
   int currentIndex=1;
   var currentPage;
 
@@ -35,7 +35,7 @@ class _IndexpageState extends State<IndexPage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
-        items: bottomtabs,
+        items: bottomTabs,
         onTap: (index){
           setState(() {
             currentIndex=index;

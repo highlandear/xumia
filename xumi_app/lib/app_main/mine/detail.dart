@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import '../../../data/global.dart';
 import '../../login/newaddress.dart';
@@ -10,10 +8,10 @@ import '../mode/list_view.dart';
 
 class MyDetailView extends StatelessWidget {
   final _models = [
-    ClickItem('', '', 'divid', false),
+    ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_scan.png', '我的二维码', 'myqr', false),
     ClickItem('assets/images/find/find_scan.png', '地址管理', 'addr', false),
-    ClickItem('', '', 'divid', false),
+    ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_collection.png', '退出登录', 'exit', true)
   ];
 
@@ -24,7 +22,7 @@ class MyDetailView extends StatelessWidget {
       case 'myqr':
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           //return (QRPage('二维码信息', Global.mydata.me.did));
-          return (QRPage('二维码信息', 'http://cognitivelab.net/app-debug.apk'));
+          return (QRPage('二维码信息', 'http://cognitivelab.net/app-release.apk'));
         }));
         break;
       case 'addr':
@@ -53,7 +51,7 @@ class MyDetailView extends StatelessWidget {
       }));
     }, fail: () {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddAddressPage(title: '填写收件人信息'));
+        return (const AddAddressPage(title: '填写收件人信息'));
       }));
     });
   }

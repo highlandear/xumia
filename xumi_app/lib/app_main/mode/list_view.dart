@@ -3,11 +3,11 @@ import 'item.dart';
 import 'list_item.dart';
 
 class ItemModelView extends StatelessWidget {
-  const ItemModelView(this._models, this._ontap, {Key? key}) : super(key: key);
+  const ItemModelView(this._models, this._onTap, {Key? key}) : super(key: key);
 
   final List<ClickItem> _models;
 
-  final Function _ontap;
+  final Function _onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +18,8 @@ class ItemModelView extends StatelessWidget {
 
   _buildItems(BuildContext context) {
     List<Widget> _items = [];
-    _models.forEach((model) {
-      if (model.type == 'divid') {
+    for (var model in _models) {
+      if (model.type == 'divide') {
         _items.add(const Padding(
           padding: EdgeInsets.only(top: 10),
         ));
@@ -30,13 +30,13 @@ class ItemModelView extends StatelessWidget {
             child: ListClickItem(
               model: model,
               onTap: (model) {
-                _ontap(context, model.type);
+                _onTap(context, model.type);
               },
             ),
           ),
         );
       }
-    });
+    }
     return _items;
   }
 }

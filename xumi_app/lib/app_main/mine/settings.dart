@@ -7,10 +7,10 @@ class SettingsPage extends StatelessWidget {
   SettingsPage({Key? key}) : super(key: key);
 
   final _models = [
-    ClickItem('', '', 'divid', false),
+    ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine.png', '账号安全', 'acc', false),
     ClickItem('assets/images/find/find_scan.png', '地址管理', 'addr', false),
-    ClickItem('', '', 'divid', false),
+    ClickItem('', '', 'divide', false),
     ClickItem(
         'assets/images/mine/mine_collection.png', '其他设置', 'settings', true)
   ];

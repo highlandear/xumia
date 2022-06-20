@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 
 //loading加载框
 class LoadingDialog extends Dialog {
+  const LoadingDialog(
+      {Key? key,
+      required this.loadingView,
+      this.content = "加载中...",
+      this.showContent = true,
+      this.radius = 10,
+      this.backgroundColor = Colors.white})
+      : super(key: key);
+
   //loading动画
   final Widget loadingView;
   //提示内容
@@ -12,16 +21,6 @@ class LoadingDialog extends Dialog {
   final double radius;
   //背景颜色
   final Color backgroundColor;
-
-  const LoadingDialog(
-      {
-        required this.loadingView,
-        this.content = "加载中...",
-        this.showContent = true,
-        this.radius = 10,
-        this.backgroundColor = Colors.white})
-  ;
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -46,11 +45,11 @@ class LoadingDialog extends Dialog {
                 loadingView,
                 showContent
                     ? Padding(
-                  padding: const EdgeInsets.only(
-                    top: 16,
-                  ),
-                  child: Text(content),
-                )
+                        padding: const EdgeInsets.only(
+                          top: 16,
+                        ),
+                        child: Text(content),
+                      )
                     : const SizedBox(),
               ],
             ),

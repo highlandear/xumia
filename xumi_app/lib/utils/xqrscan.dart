@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
+
 class BarcodeScanPage extends StatefulWidget {
   const BarcodeScanPage({Key? key}) : super(key: key);
 
@@ -11,12 +12,12 @@ class _BarcodeScanPageState extends State<BarcodeScanPage> {
   //现在的时间
   final _currentTime = DateTime.now().hour;
   //控制闪光灯
-  bool? flashLigh = true;
+  bool? flashLight = true;
 
   _doBarcodeScan() async {
     //ScanOptions设置闪光灯和前后摄像头
     var options = ScanOptions(
-        autoEnableFlash: flashLigh!,
+        autoEnableFlash: flashLight!,
         strings: {'cancel': '取消', 'flash_on': '闪光灯开/关', 'flash_off': '闪光灯开/关'});
     //返回扫描的参数
     var result = await BarcodeScanner.scan(options: options);
@@ -35,26 +36,28 @@ class _BarcodeScanPageState extends State<BarcodeScanPage> {
     //如果早上7至晚上19点，闪光灯默认关闭
     if (_currentTime >= 7 && _currentTime <= 19) {
       setState(() {
-        flashLigh = false;
+        flashLight = false;
       });
     }
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('扫描页面'),
         ),
-
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(onPressed: _doBarcodeScan, child: Text('开始扫描')),
+              ElevatedButton(
+                  onPressed: _doBarcodeScan, child: const Text('开始扫描')),
             ],
           ),
         ));

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'full.dart';
 
 class CardsView extends StatelessWidget {
-  CardsView({Key? key, required this.data}) : super(key: key);
-  var data;
+  const CardsView({Key? key, required this.data}) : super(key: key);
+  final List data;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class CardsView extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return FullScreenImagePage(item.path);
+              return FullScreenImagePage(imageURL: item.path,);
             },
           ),
         );

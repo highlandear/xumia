@@ -1,16 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import '../../bean/deliverdata.dart';
 import '../../bean/nftdata.dart';
-import '../../data/config.dart';
 import '../../data/global.dart';
 import '../../login/newaddress.dart';
-import '../../login/addrsel.dart';
 import '../../login/selectaddress.dart';
 import '../../login/sign.dart';
-import '../../utils/xhttp.dart';
-import '../../utils/xtoast.dart';
 
 class MagLeafView extends StatelessWidget {
   const MagLeafView({Key? key, required this.item}) : super(key: key);

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRPage extends StatefulWidget {
-  QRPage(this.title,this.data, {Key? key}) : super(key: key);
+  const QRPage(this.title,this.data, {Key? key}) : super(key: key);
 
-  String title;
-  String data;
+  final String title;
+  final String data;
+
   @override
   _QRHomePageState createState() => _QRHomePageState();
 }

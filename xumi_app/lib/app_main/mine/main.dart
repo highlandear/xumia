@@ -3,6 +3,8 @@ import 'colors.dart';
 import 'operation.dart';
 
 class MineMainPage extends StatefulWidget{
+  const MineMainPage({Key? key}) : super(key: key);
+
   @override
   _MineMainPageState createState() => _MineMainPageState();
 

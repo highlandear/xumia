@@ -3,12 +3,14 @@ import '../mine/colors.dart';
 import 'item.dart';
 
 class ListClickItem extends StatefulWidget {
-  final ClickItem model;
-  final void Function(ClickItem model) onTap;
   const ListClickItem({
+    Key? key,
     required this.model,
     required this.onTap,
-  });
+  }) : super(key: key);
+
+  final ClickItem model;
+  final void Function(ClickItem model) onTap;
 
   @override
   _ListClickItemState createState() => _ListClickItemState();
@@ -20,7 +22,7 @@ class _ListClickItemState extends State<ListClickItem> {
     return SizedBox(
       child: GestureDetector(
         onTap: () {
-          if (widget.onTap != null) widget.onTap(widget.model);
+          widget.onTap(widget.model);
         },
         child: _stack(),
       ),

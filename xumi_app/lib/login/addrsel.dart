@@ -18,13 +18,13 @@ class _MyAddressPageState extends State<MyAddressPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('${d.name}(${d.tel})'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(d.address),
             Text(d.detail),
-            Divider(height: 20),
+            const Divider(height: 20),
 
           ]),
-      trailing: Icon(Icons.edit, color: Colors.blue),
+      trailing: const Icon(Icons.edit, color: Colors.blue),
 
       onTap: () {
 
@@ -39,10 +39,10 @@ class _MyAddressPageState extends State<MyAddressPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('${d.name}(${d.tel})'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(d.address),
           ]),
-      trailing: Icon(Icons.edit, color: Colors.blue),
+      trailing: const Icon(Icons.edit, color: Colors.blue),
     );
   }
 
@@ -50,21 +50,19 @@ class _MyAddressPageState extends State<MyAddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("收货地址列表"),
+          title: const Text("收货地址列表"),
         ),
-        body: Container(
-          child: Stack(
-            children: <Widget>[
-              ListView(
-                children: <Widget>[
-                  SizedBox(height: 20),
-                  _buildDefaultView(Global.user.house),
-                  Divider(height: 20),
-                  _buildOtherView(Global.user.house),
-                ],
-              ),
-            ],
-          ),
+        body: Stack(
+          children: <Widget>[
+            ListView(
+              children: <Widget>[
+                const SizedBox(height: 20),
+                _buildDefaultView(Global.user.house),
+                const Divider(height: 20),
+                _buildOtherView(Global.user.house),
+              ],
+            ),
+          ],
         ));
   }
 }

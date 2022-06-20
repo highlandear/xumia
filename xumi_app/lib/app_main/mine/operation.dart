@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../data/global.dart';
-import '../../login/sign.dart';
 import '../../utils/xqrscan.dart';
 import '../../utils/xtoast.dart';
 import '../mode/item.dart';
@@ -9,13 +8,15 @@ import 'settings.dart';
 import 'head.dart';
 
 class MineContent extends StatelessWidget {
-  final _models = [
-    ClickItem('', '', 'divid', false),
+   MineContent({Key? key}) : super(key: key);
+
+   final _models = [
+    ClickItem('', '', 'divide', false),
     ClickItem('assets/images/find/find_scan.png', '扫码', 'scan', false),
-    ClickItem('', '', 'divid', false),
+    ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_collection.png', '门票', 'ticket', true),
     ClickItem('assets/images/mine/mine_wallet.png', '卡包', 'cards', true),
-    ClickItem('', '', 'divid', false),
+    ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false)
   ];
 
@@ -25,6 +26,7 @@ class MineContent extends StatelessWidget {
       children: _buildItems(context, _tap),
     );
   }
+
 _tap(BuildContext context, String type){
   if (! Global.user.info.online()) {
     XToast.error('请点击登录');

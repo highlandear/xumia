@@ -98,8 +98,8 @@ class _SignPageState extends State<SignPage> {
           XToast.toast('登录成功');
           Navigator.pop(context);
           Navigator.pop(context, true);
-    }, fail: (){
-          XToast.error("登录失败");
+    }, fail: (value){
+          XToast.error('登录失败 $value');
           Navigator.pop(context);
     });
   }

@@ -3,8 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'full.dart';
 
 class StaggerView extends StatelessWidget {
-  StaggerView({Key? key, required this.data}) : super(key: key);
-  var data;
+  const StaggerView({Key? key, required this.data}) : super(key: key);
+  final List data;
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +15,25 @@ class StaggerView extends StatelessWidget {
       body: StaggeredGridView.countBuilder(
         padding: const EdgeInsets.all(8.0),
         crossAxisCount: 4,
-        itemCount: this.data.length,
+        itemCount: data.length,
         itemBuilder: (context, i) {
           return Material(
             elevation: 8.0,
-            borderRadius: new BorderRadius.all(
-              new Radius.circular(8.0),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8.0),
             ),
-            child: new InkWell(
+            child: InkWell(
               onTap: () {
                 Navigator.push(
                   context,
-                  new MaterialPageRoute(
+                  MaterialPageRoute(
                     builder: (context) {
-                      return FullScreenImagePage(data[i].path);
+                      return FullScreenImagePage(imageURL: data[i].path,);
                     },
                   ),
                 );
               },
-              child: new Hero(
+              child: Hero(
                 tag: data[i].path,
                 //child: CachedNetworkImage(
                 child: Image.network(data[i].path),
@@ -42,7 +42,7 @@ class StaggerView extends StatelessWidget {
           );
         },
         staggeredTileBuilder: (int index) =>
-            new StaggeredTile.count(2, index == 0 ? 2.5 : 3), //
+            StaggeredTile.count(2, index == 0 ? 2.5 : 3), //
         mainAxisSpacing: 8.0,
         crossAxisSpacing: 8.0,
       ),

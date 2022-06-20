@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/login/sign.dart';
 import '../../data/global.dart';
 import 'card.dart';
 import 'logintip.dart';

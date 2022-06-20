@@ -1,10 +1,11 @@
 class ClickItem {
   String imageName;
+
   String title;
 
-  bool hasDivid;
+  bool hasDivide;
 
   String type;
 
-  ClickItem(this.imageName, this.title, this.type, this.hasDivid);
+  ClickItem(this.imageName, this.title, this.type, this.hasDivide);
 }

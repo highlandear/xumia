@@ -30,7 +30,7 @@ class XHttp {
     }));
   }
 
-  void _handleError(DioError e) {
+  _handleError(DioError e) {
     switch (e.type) {
       case DioErrorType.connectTimeout:
         print("连接超时");
@@ -51,6 +51,7 @@ class XHttp {
         print("未知错误");
         break;
     }
+    return '{"status" : "timeout"}';
   }
 
   _onResponse(Response response) {
@@ -60,30 +61,47 @@ class XHttp {
 
     return null;
   }
+
   get(String url, {params}) async {
     Response response;
-    if (params != null) {
-      response = await _dio.get(url, queryParameters: params);
-    } else {
-      response = await _dio.get(url);
+    try {
+      if (params != null) {
+        response = await _dio.get(url, queryParameters: params);
+      } else {
+        response = await _dio.get(url);
+      }
+      return _onResponse(response);
+    } on DioError catch (e) {
+      return _handleError(e);
     }
-
-    return _onResponse(response);
   }
 
   post(String url, {params}) async {
-    Response response = await _dio.post(url, queryParameters: params);
-    return _onResponse(response);
+    try {
+      Response response = await _dio.post(url, queryParameters: params);
+      return _onResponse(response);
+    } on DioError catch (e) {
+      return _handleError(e);
+    }
   }
 
   Future postJson(String url, {data}) async {
-    Response response = await _dio.post(url,  data: data);
-    return _onResponse(response);
+    try {
+      Response response = await _dio.post(url, data: data);
+      return _onResponse(response);
+    } on DioError catch (e) {
+      return _handleError(e);
+    }
   }
 
   Future postData(String url, {params, data}) async {
-    Response response = await _dio.post(url, queryParameters: params, data: data);
-    return _onResponse(response);
+    try {
+      Response response =
+          await _dio.post(url, queryParameters: params, data: data);
+      return _onResponse(response);
+    } on DioError catch (e) {
+      return _handleError(e);
+    }
   }
 
   Future downloadFile(urlPath, savePath) async {
@@ -91,13 +109,11 @@ class XHttp {
     try {
       response = await _dio.download(urlPath, savePath,
           onReceiveProgress: (int count, int total) {
-        //进度
         print("$count $total");
       });
+      return response.data;
     } on DioError catch (e) {
-      _handleError(e);
-      return null;
+      return _handleError(e);
     }
-    return response.data;
   }
 }
