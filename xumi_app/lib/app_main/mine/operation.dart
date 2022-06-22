@@ -16,6 +16,7 @@ class MineContent extends StatelessWidget {
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_collection.png', '门票', 'ticket', true),
     ClickItem('assets/images/mine/mine_wallet.png', '卡包', 'cards', true),
+    ClickItem('assets/images/mine/mine_collection.png', '家园', 'home', true),
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false)
   ];

@@ -29,7 +29,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
 
   @override
   Widget build(BuildContext context) {
-    _telController.text = _me.online() ? _me.tel : '';
+    _telController.text = _me.online() ? _me.mainID : '';
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: GestureDetector(

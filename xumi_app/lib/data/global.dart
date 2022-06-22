@@ -26,22 +26,25 @@ class Global {
 
   Future loadMagData() async {
     return NFTData.listfromJson(await XHttp.instance
-        .get(Config.indexReq, params: {'username': info.did}));
+        .get(Config.magzine, params: {'username': info.did}));
   }
 
   Future loadGalleryData() async {
     return NFTData.listfromJson(await XHttp.instance
-        .get(Config.galleryReq, params: {'username': info.did}));
+        .get(Config.getMyData, params: {'username': info.did, 'datatype': 'gallery'}));
   }
 
+  /*
   Future loadAddressData() async {
     return DeliverData.fromJson(
-        await XHttp.instance.get(Config.reqAddr, params: {'username': info.tel}));
+        await XHttp.instance.get(Config.reqAddr, params: {'username': info.mainID}));
   }
+
+   */
 
   reqMyAddress({success, fail}) {
     XHttp.instance
-        .get(Config.reqAddr, params: {'username': info.tel}).then((val) {
+        .get(Config.myAddress, params: {'username': info.mainID}).then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
         house = DeliverData.fromJson(jsonDecode(val)['data']);
@@ -54,8 +57,8 @@ class Global {
 
   reqSendMeItem2NewAddress(where, itemid, {success, fail}) {
     XHttp.instance
-        .postData(Config.reqItem2NewAddr,
-            params: {'username': info.tel, 'itemid': itemid}, data: where)
+        .postData(Config.buyItem2NewAddress,
+            params: {'username': info.mainID, 'itemid': itemid}, data: where)
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
@@ -69,8 +72,8 @@ class Global {
 
   reqSendItem(itemid, {success, fail}) {
     XHttp.instance
-        .postData(Config.reqSendItem,
-        params: {'username': info.tel, 'itemid': itemid})
+        .postData(Config.buyItem,
+        params: {'username': info.mainID, 'itemid': itemid})
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
@@ -84,7 +87,7 @@ class Global {
   reqAddNewAddress(where, {success, fail}) {
     XHttp.instance
         .postData(Config.addNewAddress,
-        params: {'username': info.tel}, data: where)
+        params: {'username': info.mainID}, data: where)
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
@@ -97,7 +100,7 @@ class Global {
   }
 
   reqLogin(username, password, {success, fail}) {
-    XHttp.instance.post(Config.signReq, params: {
+    XHttp.instance.post(Config.login, params: {
       'username': username,
       'password': password,
     }).then((val) {

@@ -68,9 +68,19 @@ public class UserManager {
 	public void addItem(String id) {
 		useritems.put(id, ItemManager.getInstance().get(id));
 	}
-	
+/*
 	public String getMyGalleryJson(String username) {
 		
+		java.util.List<MagData> list = new java.util.ArrayList<MagData>();
+		list.addAll(useritems.values());
+		
+		DataBean<List<MagData>> ret = new DataBean<>();
+		ret.add(list);
+		
+		return ret.toJson();
+	}
+*/
+	public String getMyDataJson(String username, String datatype) {
 		java.util.List<MagData> list = new java.util.ArrayList<MagData>();
 		list.addAll(useritems.values());
 		

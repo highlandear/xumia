@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
             loadingView: CircularProgressIndicator(),
           );
         });
-    XHttp.instance.post(Config.signReq, params: {
+    XHttp.instance.post(Config.login, params: {
       'username': _unameController.text,
       'password': _pwdController.text
     }).then((val) {

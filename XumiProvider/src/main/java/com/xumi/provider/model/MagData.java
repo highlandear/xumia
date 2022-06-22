@@ -12,6 +12,7 @@ public class MagData {
 		this.path = p;
 		this.desc = d;
 	}
+	
 	@JsonProperty("id")
 	String id;
 	

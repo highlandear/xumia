@@ -17,28 +17,32 @@ import com.xumi.provider.model.UserManager;
 @RestController
 @EnableAutoConfiguration
 public class Logon {
-	  static final String indexReq = "index.action";
-	  static final String signReq = "sign.action";
-	  static final String addNewAddress = "addNewAddress.action";
-	  static final String reqAddr = "reqaddr.action";
-	  static final String galleryReq = "gallery.action";
-	  static final String reqItem2NewAddr = "reqItem2NewAddr.action";
-	  static final String reqSendItem ="reqSendItem.action";
+	  static final String magzine = "magazine";
+	  static final String login = "login";
+	  static final String addNewAddress = "addNewAddress";
+	  static final String myAddress = "myAddress";
+	  static final String buyItem2NewAddress = "buyItem2NewAddress";
+	  static final String buyItem ="buyItem";
+	  static final String getMyData="getMyData";
 
-	@RequestMapping(value = indexReq, method = RequestMethod.GET)
+	@RequestMapping(value = magzine, method = RequestMethod.GET)
 	public String index(HttpServletRequest request) {
 
 		String username = request.getParameter("username");
 		return UserManager.getInstance().getMyMagazineJson(username);
 	}
 
-	@RequestMapping(value = galleryReq, method = RequestMethod.GET)
-	public String gallery(HttpServletRequest request) {
+	@RequestMapping(value = getMyData, method = RequestMethod.GET)
+	public String getMyData(HttpServletRequest request) {
 		String username = request.getParameter("username");
-		return UserManager.getInstance().getMyGalleryJson(username);
+		String datatype = request.getParameter("datatype");
+		
+		return UserManager.getInstance().getMyDataJson(username, datatype);
+	//	return UserManager.getInstance().getMyGalleryJson(username);
 	}
+	
 
-	@RequestMapping(value = signReq, method = RequestMethod.POST)
+	@RequestMapping(value = login, method = RequestMethod.POST)
 	public String register(@RequestParam("username") String username, @RequestParam("password") String password) {
 		System.out.println("username is:" + username);
 		System.out.println("password is:" + password);
@@ -50,8 +54,19 @@ public class Logon {
 		return res.toJson();
 	}
 
+	@RequestMapping(value = buyItem, method = RequestMethod.POST)
+	public String sendItem2me(@RequestParam("username") String username, @RequestParam("itemid") String itemid) {
 
-	@RequestMapping(value = reqItem2NewAddr, method = RequestMethod.POST)
+		System.out.println(username);
+		System.out.println(itemid);
+		
+		UserManager.getInstance().addItem(itemid);
+
+		DataBean<?> res = new DataBean<>("0");
+		return res.toJson();
+	}
+	
+	@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
 	public String sendItem2NewAddress(@RequestParam("username") String username, @RequestParam("itemid") String itemid,
 			@RequestBody DeliverData user) {
 
@@ -70,18 +85,6 @@ public class Logon {
 
 		return res.toJson();
 	}
-	@RequestMapping(value = reqSendItem, method = RequestMethod.POST)
-	public String sendItem2me(@RequestParam("username") String username, @RequestParam("itemid") String itemid) {
-
-		System.out.println(username);
-		System.out.println(itemid);
-		
-		UserManager.getInstance().addItem(itemid);
-
-		DataBean res = new DataBean("0");
-		return res.toJson();
-	}
-	
 	
 	@RequestMapping(value = addNewAddress, method = RequestMethod.POST)
 	public String addNewAddress(@RequestParam("username") String username, @RequestBody DeliverData user) {
@@ -101,7 +104,7 @@ public class Logon {
 		return res.toJson();
 	}
 
-	@RequestMapping(value = reqAddr, method = RequestMethod.GET)
+	@RequestMapping(value = myAddress, method = RequestMethod.GET)
 	public String reqAddr(@RequestParam("username") String username) {
 
 		System.out.println(username);

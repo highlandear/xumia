@@ -1,16 +1,16 @@
 class UserInfo {
   UserInfo({
-   this.did = '',
-    this.tel = '',
+    this.did = '',
+    this.mainID = '',
   });
 
   String did;
-  String tel;
+  String mainID; // tel
 
   toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['did'] = did;
-    data['tel'] = tel;
+    data['tel'] = mainID;
 
     return data;
   }
@@ -18,9 +18,11 @@ class UserInfo {
   static UserInfo fromJson(Map<String, dynamic> json) {
     return UserInfo(
       did: json['did'],
-     tel: json['tel'],
+      mainID: json['tel'],
     );
   }
 
-  bool online(){return  did.isNotEmpty;}
+  bool online() {
+    return did.isNotEmpty;
+  }
 }
