@@ -13,10 +13,20 @@ public class MagData {
 	MagData() {
 	}
 
-	MagData(String i, String p, String d) {
+	MagData(String i, String p,  String c, String d, String o) {
 		this.id = i;
 		this.path = p;
 		this.desc = d;
+		this.condition = c;
+		this.owner = o;
+	}
+	
+	MagData(String i, String p, String d, String o) {
+		this.id = i;
+		this.path = p;
+		this.desc = d;
+		this.condition = "";
+		this.owner = o;
 	}
 	
 	MagData addItem(MagItem m) {this.items.add(m);return this;}
@@ -29,6 +39,12 @@ public class MagData {
 
 	@JsonProperty("desc")
 	String desc;
+	
+	@JsonProperty("condition")
+	String condition;
+	
+	@JsonProperty("owner")
+	String owner;
 	
 	@JsonIgnore
 	java.util.List<MagItem> items = new java.util.ArrayList<MagItem>();

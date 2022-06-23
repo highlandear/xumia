@@ -6,18 +6,22 @@ class NFTData {
     this.path = '',
     this.desc = '',
     this.owner = '',
+    this.condition = ''
   });
 
   String id;
   String path;
   String desc;
   String owner;
+  String condition;
 
   static NFTData fromJson(Map<String, dynamic> json) {
     return NFTData(
       id:json['id'],
       path: json['path'],
       desc: json['desc'],
+      condition: json['condition'],
+      owner: json['owner']
     );
   }
 

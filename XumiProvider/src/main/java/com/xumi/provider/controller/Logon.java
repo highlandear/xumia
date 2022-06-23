@@ -29,6 +29,7 @@ public class Logon {
 	public String index(HttpServletRequest request) {
 
 		String username = request.getParameter("username");
+		System.out.println(UserManager.getInstance().getMyMagazineJson(username));
 		return UserManager.getInstance().getMyMagazineJson(username);
 	}
 

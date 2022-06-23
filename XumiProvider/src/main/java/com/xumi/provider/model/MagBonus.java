@@ -6,5 +6,5 @@ package com.xumi.provider.model;
  *
  */
 public class MagBonus implements MagItem {
-
+	public String condition() {return "house";}
 }

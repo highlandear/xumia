@@ -17,9 +17,9 @@ public class MagManager {
 	
 
 	public void load() {
-		this.add(new MagData("1", paths[0], "注册就送数字藏品，边顶产品邮寄到家").addItem(m[0]).addItem(m[1]));
-		this.add(new MagData("2", paths[1], "买就送秋秋的艺术品").addItem(m[0]));
-		this.add(new MagData("3", paths[2], "超级植物线下门票").addItem(m[2]));
+		this.add(new MagData("1", paths[0], "ad", "注册就送数字藏品，边顶产品邮寄到家", "边顶").addItem(m[0]).addItem(m[1]));
+		this.add(new MagData("2", paths[1], "买就送秋秋的数字艺术品","秋秋").addItem(m[0]));
+		this.add(new MagData("3", paths[2], "边顶大会线下门票","广彬").addItem(m[2]));
 	}
 	
 
