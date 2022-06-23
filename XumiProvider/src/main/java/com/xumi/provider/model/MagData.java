@@ -1,7 +1,13 @@
 package com.xumi.provider.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 杂志单页数据
+ * @author 
+ *
+ */
 public class MagData {
 
 	MagData() {
@@ -13,6 +19,8 @@ public class MagData {
 		this.desc = d;
 	}
 	
+	MagData addItem(MagItem m) {this.items.add(m);return this;}
+	
 	@JsonProperty("id")
 	String id;
 	
@@ -21,4 +29,7 @@ public class MagData {
 
 	@JsonProperty("desc")
 	String desc;
+	
+	@JsonIgnore
+	java.util.List<MagItem> items = new java.util.ArrayList<MagItem>();
 }

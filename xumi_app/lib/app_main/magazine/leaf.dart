@@ -9,41 +9,12 @@ class MagLeafView extends StatelessWidget {
   const MagLeafView({Key? key, required this.item}) : super(key: key);
   final NFTData item;
 
-  _buyItem(BuildContext context) {
-    // 没有登录，先登录
-    if (!Global.user.info.online()) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (const SignPage());
-      }));
-      return;
-    }
-
-    // 本地有地址
-    if (Global.user.house.hasAddress()) {
-     // XToast.toast('已有地址');
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddressSelectionPage(data: item.id));
-      }));
-      return;
-    }
-
-    // 本地无地址，向服务器请求
-    Global.user.reqMyAddress(success: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddressSelectionPage(data: item.id));
-      }));
-    }, fail: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddAddressPage(title: '收件人信息', data: item.id));
-      }));
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         _showMagItem(),
+        _showDescx(),
         _showBuyButton(context),
       ],
     );
@@ -54,6 +25,45 @@ class MagLeafView extends StatelessWidget {
       color: Colors.white,
       child: Center(
         child: Image.network(item.path),
+      ),
+    );
+  }
+
+   Widget _showDescx() {
+    return Positioned(
+      left: 20,
+      bottom: 60,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.blue.withOpacity(0.6),
+          gradient: const LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Colors.blue,
+                Colors.blue,
+              ]),
+        ),
+
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Text(
+                '@' + item.owner,
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Text(item.desc,
+                  style: const TextStyle(
+                    color: Colors.black,
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -89,5 +99,35 @@ class MagLeafView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _buyItem(BuildContext context) {
+    // 没有登录，先登录
+    if (!Global.user.info.online()) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return (const SignPage());
+      }));
+      return;
+    }
+
+    // 本地有地址
+    if (Global.user.house.hasAddress()) {
+      // XToast.toast('已有地址');
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return (AddressSelectionPage(data: item.id));
+      }));
+      return;
+    }
+
+    // 本地无地址，向服务器请求
+    Global.user.reqMyAddress(success: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return (AddressSelectionPage(data: item.id));
+      }));
+    }, fail: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return (AddAddressPage(title: '收件人信息', data: item.id));
+      }));
+    });
   }
 }

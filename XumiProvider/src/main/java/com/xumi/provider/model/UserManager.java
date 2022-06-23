@@ -60,13 +60,13 @@ public class UserManager {
 	public String getMyMagazineJson(String username) {
 		
 		DataBean<List<MagData>> ret = new DataBean<>();
-		ret.add(ItemManager.getInstance().getMagList());
+		ret.add(MagManager.getInstance().getMagList());
 
 		return ret.toJson();
 	}
 
 	public void addItem(String id) {
-		useritems.put(id, ItemManager.getInstance().get(id));
+		useritems.put(id, MagManager.getInstance().get(id));
 	}
 /*
 	public String getMyGalleryJson(String username) {
