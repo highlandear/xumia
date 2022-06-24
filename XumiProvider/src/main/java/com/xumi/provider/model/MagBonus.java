@@ -5,6 +5,11 @@ package com.xumi.provider.model;
  * @author
  *
  */
-public class MagBonus implements MagItem {
-	public String condition() {return "house";}
+public class MagBonus implements MagAsset {
+
+	@Override
+	public String tocken() {
+		return "bonus";
+	}
+	String value = this.getClass().descriptorString();
 }

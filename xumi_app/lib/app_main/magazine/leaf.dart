@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/utils/xtoast.dart';
-import '../../bean/nftdata.dart';
+import '../../bean/magdata.dart';
 import '../../data/global.dart';
 import '../../login/newaddress.dart';
 import '../../login/selectaddress.dart';
@@ -9,7 +9,7 @@ import '../../utils/browser.dart';
 
 class MagLeafView extends StatelessWidget {
   const MagLeafView({Key? key, required this.item}) : super(key: key);
-  final NFTData item;
+  final MagData item;
 
   @override
   Widget build(BuildContext context) {

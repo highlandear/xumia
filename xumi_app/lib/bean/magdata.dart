@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class NFTData {
-  NFTData({
+class MagData {
+  MagData({
     this.id = '',
     this.path = '',
     this.desc = '',
@@ -15,8 +15,8 @@ class NFTData {
   String owner;
   String condition;
 
-  static NFTData fromJson(Map<String, dynamic> json) {
-    return NFTData(
+  static MagData fromJson(Map<String, dynamic> json) {
+    return MagData(
       id:json['id'],
       path: json['path'],
       desc: json['desc'],
@@ -25,9 +25,10 @@ class NFTData {
     );
   }
 
-  static List<NFTData> listfromJson(dynamic json) {
+  static List<MagData> listfromJson(dynamic json) {
+    print(json);
     return (jsonDecode(json)['data'] as List<dynamic>)
-          .map((e) => NFTData.fromJson((e as Map<String, dynamic>)))
+          .map((e) => MagData.fromJson((e as Map<String, dynamic>)))
           .toList();
   }
 }

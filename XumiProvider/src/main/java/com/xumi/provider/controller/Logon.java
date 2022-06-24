@@ -33,13 +33,17 @@ public class Logon {
 		return UserManager.getInstance().getMyMagazineJson(username);
 	}
 
+	/**
+	 * 
+	 * @param datatype : gallery,tickets,homeitem,
+	 * @return
+	 */
 	@RequestMapping(value = getMyData, method = RequestMethod.GET)
 	public String getMyData(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		String datatype = request.getParameter("datatype");
 		
 		return UserManager.getInstance().getMyDataJson(username, datatype);
-	//	return UserManager.getInstance().getMyGalleryJson(username);
 	}
 	
 
@@ -61,9 +65,9 @@ public class Logon {
 		System.out.println(username);
 		System.out.println(itemid);
 		
-		UserManager.getInstance().addItem(itemid);
+		boolean ok = UserManager.getInstance().buyFromMag(itemid);
 
-		DataBean<?> res = new DataBean<>("0");
+		DataBean<?> res = new DataBean<>(ok? "0":"1");
 		return res.toJson();
 	}
 	
@@ -79,7 +83,8 @@ public class Logon {
 		System.out.println(user.getDetail());
 		
 		UserManager.getInstance().addAddr(username, user);
-		UserManager.getInstance().addItem(itemid);
+		//UserManager.getInstance().buyFromMag(itemid);
+		boolean ok = UserManager.getInstance().buyFromMag(itemid);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
 		res.add(user);

@@ -4,14 +4,7 @@ import java.util.List;
 
 public class UserManager {
 
-	public static UserManager getInstance() {
-		return instance;
-	}
-	private static UserManager instance = new UserManager();
 
-	private java.util.Map<String, UserData> users = new java.util.HashMap<String, UserData>();
-	private java.util.Map<String, DeliverData> delivers = new java.util.HashMap<String, DeliverData>();
-	java.util.Map<String, MagData> useritems = new java.util.HashMap<String, MagData>();
 
 
 	public DeliverData getAddr(String un) {
@@ -65,28 +58,37 @@ public class UserManager {
 		return ret.toJson();
 	}
 
-	public void addItem(String id) {
-		useritems.put(id, MagManager.getInstance().get(id));
+	public boolean buyFromMag(String magid) {
+		MagData d = MagManager.getInstance().get(magid);
+		if(d == null)
+		{
+			System.out.println("xxx");
+			return false;
+		}
+		
+		myassets.addAll(d.assets);
+		System.out.println(d.desc);
+		return true;
 	}
-/*
-	public String getMyGalleryJson(String username) {
-		
-		java.util.List<MagData> list = new java.util.ArrayList<MagData>();
-		list.addAll(useritems.values());
-		
-		DataBean<List<MagData>> ret = new DataBean<>();
-		ret.add(list);
-		
-		return ret.toJson();
-	}
-*/
+
 	public String getMyDataJson(String username, String datatype) {
-		java.util.List<MagData> list = new java.util.ArrayList<MagData>();
-		list.addAll(useritems.values());
-		
-		DataBean<List<MagData>> ret = new DataBean<>();
-		ret.add(list);
-		
-		return ret.toJson();
+		DataBean<java.util.List<MagAsset>> res = new DataBean<>();
+		java.util.List<MagAsset> list = new java.util.ArrayList<MagAsset>();
+		myassets.forEach(e->{
+			if(datatype.equals(e.tocken())) {
+				list.add(e);
+			}
+			
+		});
+	
+		res.add(list);
+		System.out.println(res.toJson());
+		return res.toJson();
 	}
+	
+	public static UserManager getInstance() {return instance;}
+	private static UserManager instance = new UserManager();
+	private java.util.Map<String, UserData> users = new java.util.HashMap<String, UserData>();
+	private java.util.Map<String, DeliverData> delivers = new java.util.HashMap<String, DeliverData>();
+	java.util.List<MagAsset> myassets = new java.util.ArrayList<MagAsset>();
 }

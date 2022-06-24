@@ -1,6 +1,7 @@
 import 'dart:convert';
 import '../bean/deliverdata.dart';
-import '../bean/nftdata.dart';
+import '../bean/gnftdata.dart';
+import '../bean/magdata.dart';
 import '../bean/userinfo.dart';
 import '../utils/xhttp.dart';
 import '../utils/xlocalstorage.dart';
@@ -25,13 +26,13 @@ class Global {
   }
 
   Future loadMagData() async {
-    return NFTData.listfromJson(await XHttp.instance
+    return MagData.listfromJson(await XHttp.instance
         .get(Config.magzine, params: {'username': info.did}));
   }
 
   Future loadGalleryData() async {
-    return NFTData.listfromJson(await XHttp.instance
-        .get(Config.getMyData, params: {'username': info.did, 'datatype': 'gallery'}));
+    return GNFTData.listfromJson(await XHttp.instance
+        .get(Config.getMyData, params: {'username': info.did, 'datatype': 'art'}));
   }
 
   /*

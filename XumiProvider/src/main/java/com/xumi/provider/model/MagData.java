@@ -29,7 +29,7 @@ public class MagData {
 		this.owner = o;
 	}
 	
-	MagData addItem(MagItem m) {this.items.add(m);return this;}
+	MagData addItem(MagAsset m) {this.assets.add(m);return this;}
 	
 	@JsonProperty("id")
 	String id;
@@ -47,5 +47,5 @@ public class MagData {
 	String owner;
 	
 	@JsonIgnore
-	java.util.List<MagItem> items = new java.util.ArrayList<MagItem>();
+	java.util.List<MagAsset> assets = new java.util.ArrayList<MagAsset>();
 }
