@@ -1,9 +1,13 @@
 package com.xumi.provider.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class MagHomeItem implements MagAsset {
 	@Override
 	public String tocken() {
 		return "home";
 	}
-	String value = this.getClass().descriptorString();
+	
+	@JsonProperty("value")
+	String value;
 }

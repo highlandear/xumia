@@ -1,5 +1,7 @@
 package com.xumi.provider.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 线下惊喜，比如注册后邮寄物品等
  * @author
@@ -11,5 +13,7 @@ public class MagBonus implements MagAsset {
 	public String tocken() {
 		return "bonus";
 	}
-	String value = this.getClass().descriptorString();
+	
+	@JsonProperty("value")
+	String value;
 }

@@ -65,14 +65,14 @@ class CardsView extends StatelessWidget {
               ),
               margin: const EdgeInsets.all(10),
             ),
-            const ListTile(
-              leading: CircleAvatar(
+             ListTile(
+              leading: const CircleAvatar(
                   //  backgroundImage: NetworkImage(
                   //     item.desc),
                   ),
-              title: Text("Candy Shop"),
+              title: Text(item.owner),
               subtitle: Text(
-                "description ",
+                item.desc,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),

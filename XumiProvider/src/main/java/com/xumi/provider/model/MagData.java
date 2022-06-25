@@ -13,7 +13,7 @@ public class MagData {
 	MagData() {
 	}
 
-	MagData(String i, String p,  String c, String d, String o) {
+	MagData(String i, String p, String d, String o, String c) {
 		this.id = i;
 		this.path = p;
 		this.desc = d;
@@ -40,6 +40,7 @@ public class MagData {
 	@JsonProperty("desc")
 	String desc;
 	
+	// 获取条件
 	@JsonProperty("condition")
 	String condition;
 	

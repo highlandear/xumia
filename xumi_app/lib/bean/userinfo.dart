@@ -10,7 +10,7 @@ class UserInfo {
   toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['did'] = did;
-    data['tel'] = mainID;
+    data['mainID'] = mainID;
 
     return data;
   }
@@ -18,7 +18,7 @@ class UserInfo {
   static UserInfo fromJson(Map<String, dynamic> json) {
     return UserInfo(
       did: json['did'],
-      mainID: json['tel'],
+      mainID: json['mainID'],
     );
   }
 

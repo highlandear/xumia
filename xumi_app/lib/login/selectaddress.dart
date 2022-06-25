@@ -84,7 +84,7 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
             loadingView: CircularProgressIndicator(),
           );
         });
-    Global.user.reqSendItem(widget.data, success: (){
+    Global.user.reqBuyItem(widget.data, success: (){
       XToast.success('请等待收货');
       Navigator.pop(context);
       Navigator.pop(context);

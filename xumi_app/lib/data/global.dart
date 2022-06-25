@@ -16,7 +16,8 @@ class Global {
 
   loadMe() {
     AStorage.getv('me').then((value) => {
-          info = null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
+          info =
+              null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
         });
   }
 
@@ -31,8 +32,8 @@ class Global {
   }
 
   Future loadGalleryData() async {
-    return GNFTData.listfromJson(await XHttp.instance
-        .get(Config.getMyData, params: {'username': info.did, 'datatype': 'art'}));
+    return GNFTData.listfromJson(await XHttp.instance.get(Config.getMyData,
+        params: {'username': info.did, 'datatype': 'art'}));
   }
 
   /*
@@ -71,11 +72,9 @@ class Global {
     });
   }
 
-  reqSendItem(itemid, {success, fail}) {
-    XHttp.instance
-        .postData(Config.buyItem,
-        params: {'username': info.mainID, 'itemid': itemid})
-        .then((val) {
+  reqBuyItem(itemid, {success, fail}) {
+    XHttp.instance.postData(Config.buyItem,
+        params: {'username': info.mainID, 'itemid': itemid}).then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
         success();
@@ -88,7 +87,7 @@ class Global {
   reqAddNewAddress(where, {success, fail}) {
     XHttp.instance
         .postData(Config.addNewAddress,
-        params: {'username': info.mainID}, data: where)
+            params: {'username': info.mainID}, data: where)
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
@@ -110,7 +109,19 @@ class Global {
         info = UserInfo.fromJson(jsonDecode(val)['data']);
         success();
       } else {
-       fail(erode);
+        fail(erode);
+      }
+    });
+  }
+
+  reqMyData(datatype, {success, fail}) {
+    XHttp.instance.get(Config.getMyData,
+        params: {'username': info.did, 'datatype': datatype}).then((val) {
+      var erode = jsonDecode(val)['status'];
+      if (erode == '0') {
+        success(val);
+      } else {
+        fail(erode);
       }
     });
   }

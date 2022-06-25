@@ -138,15 +138,25 @@ class MagLeafView extends StatelessWidget {
           return (AddAddressPage(title: '收件人信息', data: item.id));
         }));
       });
-    }else{
+    }else if(item.condition.isEmpty){
+      Global.user.reqBuyItem(item.id, success: (){
         XToast.success('已经直接购入，请查看');
+
+      }, fail:(){});
+    }
+    else{
         Navigator.of(context)
             .push( MaterialPageRoute(builder: (_) {
-          return const Browser(
-            url: "https://flutter-io.cn/",
-            title: "Flutter 中文社区",
+          return Browser(
+            url: item.condition,
+            title: "请完成小任务",
           );
         }));
+
+     /* Global.user.reqBuyItem(item.id, success: (){
+        XToast.success('已经直接购入，请查看');
+
+      }, fail:(){});*/
     }
   }
 }

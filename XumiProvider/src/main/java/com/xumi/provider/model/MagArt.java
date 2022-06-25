@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class MagArt implements MagAsset {
 
 	MagArt(){}
-	MagArt(String path){this.path = path;}
+	MagArt(String path, String desc, String owner){this.path = path; this.desc = desc;}
 	
 	@Override
 	public String tocken() {
@@ -13,5 +13,11 @@ public class MagArt implements MagAsset {
 	}
 	
 	@JsonProperty("path")
-	String path;	
+	String path;
+	
+	@JsonProperty("desc")
+	String desc;
+	
+	@JsonProperty("owner")
+	String owner;
 }

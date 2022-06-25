@@ -15,7 +15,7 @@ public class UserData {
 		return JsonObj.toJson(this);
 	}
 	
-	@JsonProperty(value = "tel")
+	@JsonProperty(value = "mainID")
 	String tel;
 	
 	@JsonProperty(value = "did")

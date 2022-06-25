@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/app_main/gallery/stagger.dart';
 import '../../data/global.dart';
 import 'card.dart';
 import 'logintip.dart';
@@ -48,7 +49,8 @@ class _GalleryState extends State<Gallery> {
             {
               if (async.hasError) return _buildError('请检查网络');
               if (async.hasData) {
-                return CardsView(data: async.data);
+              return CardsView(data: async.data);
+                //return StaggerView(data: async.data);
               }
               return _buildError('e2');
             }

@@ -9,5 +9,5 @@ public class MagMembership implements MagAsset {
 	}
 	
 	@JsonProperty("value")
-	String value = this.getClass().descriptorString();
+	String value = "card";
 }

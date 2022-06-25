@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 class MagData {
   MagData({
     this.id = '',
