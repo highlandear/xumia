@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/app_main/magazine/itemdetail.dart';
 import 'package:xumi_app/utils/xtoast.dart';
-import '../../bean/magdata.dart';
+import '../../bean/certipass.dart';
 import '../../data/global.dart';
 import '../../login/newaddress.dart';
 import '../../login/selectaddress.dart';
@@ -9,7 +10,7 @@ import '../../utils/browser.dart';
 
 class MagLeafView extends StatelessWidget {
   const MagLeafView({Key? key, required this.item}) : super(key: key);
-  final MagData item;
+  final CertiPass item;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,11 @@ class MagLeafView extends StatelessWidget {
   }
 
   Widget _showMagItem() {
-    print(item.condition);
+    // print(item.condition);
     return Container(
       color: Colors.white,
       child: Center(
-        child: Image.network(item.path),
+        child: Image.network(item.cover),
       ),
     );
   }
@@ -78,37 +79,47 @@ class MagLeafView extends StatelessWidget {
 
   Widget _showBuyButton(BuildContext context) {
     return Positioned(
-      bottom: 5.0,
-      right: 165,
+      bottom: 20.0,
+      right: 120,
       child: InkWell(
         onTap: () {
-          _buyItem(context);
+          _watchDetail(context);
+        //  _buyItem(context);
         },
         child: Container(
           height: 48,
           padding: const EdgeInsets.only(
-            left: 16.0,
-            right: 16.0,
+            left: 10.0,
+            right: 10.0,
             top: 2,
             bottom: 0,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.black.withOpacity(0.5),
             borderRadius: const BorderRadius.all(
-              Radius.circular(16.0),
+              Radius.circular(20.0),
             ),
             border: Border.all(color: Colors.blue),
           ),
-          child: const Icon(
-            Icons.add,
-            color: Colors.blue,
-            size: 28,
+          // child: const Icon(
+          //   Icons.add,
+          //   color: Colors.blue,
+          //   size: 28,
+          // ),
+          child:const Text('点击查看详情',style: TextStyle(
+              color: Colors.yellow,
+              fontSize: 20
+          )
           ),
         ),
       ),
     );
   }
-
+  _watchDetail(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return (ItemDetail(item: this.item,));
+    }));
+  }
   _buyItem(BuildContext context) {
     // 没有登录，先登录
     if (!Global.user.info.online()) {

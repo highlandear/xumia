@@ -32,7 +32,7 @@ class _LoginTipPageState extends State<LoginTipPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: _login, child: const Text('点登录')),
+                ElevatedButton(onPressed: _login, child: const Text('我的画廊')),
               ],
             ),
           ));

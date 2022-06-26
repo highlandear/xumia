@@ -3,6 +3,7 @@ package com.xumi.provider.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xumi.provider.model.json.JsonObj;
 
 public class DataList<T> {
 	DataList(){}

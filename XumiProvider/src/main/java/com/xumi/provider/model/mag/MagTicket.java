@@ -1,11 +1,11 @@
-package com.xumi.provider.model;
+package com.xumi.provider.model.mag;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MagTicket implements MagAsset {
 	
 	MagTicket(){}
-	MagTicket(String p, String d){this.path = p; this.desc = d;}
+	public MagTicket(String p, String d){this.path = p; this.desc = d;}
 	
 	@Override
 	public String tocken() {

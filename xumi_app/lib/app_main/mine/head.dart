@@ -29,7 +29,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return Material(child:InkWell(
       onTap: () {
         if (!me.online()) {
           Navigator.of(context)
@@ -62,6 +62,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
           ),
         ],
       ),
+    ),
     );
   }
 

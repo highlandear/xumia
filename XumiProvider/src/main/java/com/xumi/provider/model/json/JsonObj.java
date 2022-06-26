@@ -1,4 +1,4 @@
-package com.xumi.provider.model;
+package com.xumi.provider.model.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

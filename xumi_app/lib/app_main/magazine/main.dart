@@ -60,7 +60,8 @@ class _HomePageState extends State<HomePage> {
               return buildWaiting();
           case ConnectionState.done:
             {
-              if (async.hasError) return buildError('请检查网络');
+              if (async.hasError){
+                return buildError('请检查网络');}
               if (async.hasData) {
                 return buildItem(async.data);
               }

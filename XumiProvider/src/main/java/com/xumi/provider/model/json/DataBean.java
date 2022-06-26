@@ -1,9 +1,11 @@
-package com.xumi.provider.model;
+package com.xumi.provider.model.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DataBean<T> {
+	
 	public DataBean(){}
+	
 	public DataBean(String s){this.status = s;}
 	
 	@JsonProperty(value = "status")

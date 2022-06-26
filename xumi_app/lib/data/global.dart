@@ -1,7 +1,7 @@
 import 'dart:convert';
 import '../bean/deliverdata.dart';
 import '../bean/gnftdata.dart';
-import '../bean/magdata.dart';
+import '../bean/certipass.dart';
 import '../bean/userinfo.dart';
 import '../utils/xhttp.dart';
 import '../utils/xlocalstorage.dart';
@@ -27,7 +27,7 @@ class Global {
   }
 
   Future loadMagData() async {
-    return MagData.listfromJson(await XHttp.instance
+    return CertiPass.listfromJson(await XHttp.instance
         .get(Config.magzine, params: {'username': info.did}));
   }
 

@@ -1,4 +1,4 @@
-package com.xumi.provider.model;
+package com.xumi.provider.model.mag;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +13,7 @@ public class MagData {
 	MagData() {
 	}
 
-	MagData(String i, String p, String d, String o, String c) {
+	public MagData(String i, String p, String d, String o, String c) {
 		this.id = i;
 		this.path = p;
 		this.desc = d;
@@ -21,7 +21,7 @@ public class MagData {
 		this.owner = o;
 	}
 	
-	MagData(String i, String p, String d, String o) {
+	public MagData(String i, String p, String d, String o) {
 		this.id = i;
 		this.path = p;
 		this.desc = d;
@@ -29,7 +29,7 @@ public class MagData {
 		this.owner = o;
 	}
 	
-	MagData addItem(MagAsset m) {this.assets.add(m);return this;}
+	public MagData addItem(MagAsset m) {this.assets.add(m);return this;}
 	
 	@JsonProperty("id")
 	String id;

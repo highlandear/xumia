@@ -1,6 +1,7 @@
-package com.xumi.provider.model;
+package com.xumi.provider.model.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xumi.provider.model.json.JsonObj;
 
 public class UserData {
 	

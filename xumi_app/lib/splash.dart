@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_main/index.dart';
+import 'app_main/plain.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -27,7 +28,8 @@ class _SplashPageState extends State<SplashPage> {
     Timer(
         const Duration(seconds: 1),
         () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => const IndexPage())));
+         builder: (BuildContext context) => const IndexPage())));
+        //   builder: (BuildContext context) => PlainPage())));
   }
 
   @override

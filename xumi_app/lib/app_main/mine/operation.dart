@@ -31,8 +31,9 @@ class MineContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Material( child: Column(
       children: _buildItems(context, _tap),
+    ),
     );
   }
 

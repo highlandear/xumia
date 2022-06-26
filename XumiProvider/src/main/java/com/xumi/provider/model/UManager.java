@@ -2,7 +2,13 @@ package com.xumi.provider.model;
 
 import java.util.List;
 
-public class UserManager {
+import com.xumi.provider.model.json.DataBean;
+import com.xumi.provider.model.mag.MagAsset;
+import com.xumi.provider.model.mag.MagData;
+import com.xumi.provider.model.mag.MagManager;
+import com.xumi.provider.model.user.UserData;
+
+public class UManager {
 
 
 
@@ -66,8 +72,8 @@ public class UserManager {
 			return false;
 		}
 		
-		myassets.addAll(d.assets);
-		System.out.println(d.desc);
+	//	myassets.addAll(d.assets);
+	//	System.out.println(d.desc);
 		return true;
 	}
 
@@ -86,8 +92,8 @@ public class UserManager {
 		return res.toJson();
 	}
 	
-	public static UserManager getInstance() {return instance;}
-	private static UserManager instance = new UserManager();
+	public static UManager getInstance() {return instance;}
+	private static UManager instance = new UManager();
 	private java.util.Map<String, UserData> users = new java.util.HashMap<String, UserData>();
 	private java.util.Map<String, DeliverData> delivers = new java.util.HashMap<String, DeliverData>();
 	java.util.List<MagAsset> myassets = new java.util.ArrayList<MagAsset>();

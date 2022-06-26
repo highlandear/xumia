@@ -1,3 +1,4 @@
+
 package com.xumi.provider.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +14,12 @@ import com.xumi.provider.model.DeliverData;
 import com.xumi.provider.model.UManager;
 import com.xumi.provider.model.json.DataBean;
 import com.xumi.provider.model.user.UserData;
+import com.xumi.provider.model.user.UserManager;
 
 @RestController
 @EnableAutoConfiguration
-public class Logon {
-	/*
+public class RequestHandler {
+	
 	  static final String magzine = "magazine";
 	  static final String login = "login";
 	  static final String addNewAddress = "addNewAddress";
@@ -27,20 +29,24 @@ public class Logon {
 	  static final String getMyData="getMyData";
 
 	@RequestMapping(value = magzine, method = RequestMethod.GET)
-	public String index(HttpServletRequest request) {
+	public String magazine(HttpServletRequest request) {
 
 		String username = request.getParameter("username");
-		System.out.println(UserManager.getInstance().getMyMagazineJson(username));
+	
 		return UserManager.getInstance().getMyMagazineJson(username);
 	}
 
-
+	/**
+	 * 
+	 * @param datatype : gallery,tickets,homeitem,
+	 * @return
+	 */
 	@RequestMapping(value = getMyData, method = RequestMethod.GET)
 	public String getMyData(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		String datatype = request.getParameter("datatype");
 		
-		return UserManager.getInstance().getMyDataJson(username, datatype);
+		return UManager.getInstance().getMyDataJson(username, datatype);
 	}
 	
 
@@ -48,7 +54,7 @@ public class Logon {
 	public String register(@RequestParam("username") String username, @RequestParam("password") String password) {
 		System.out.println("username is:" + username);
 		System.out.println("password is:" + password);
-		UserData u = UserManager.getInstance().careatUser(username, password);
+		UserData u = UManager.getInstance().careatUser(username, password);
 
 		DataBean<UserData> res = new DataBean<UserData>();
 		res.add(u);
@@ -62,7 +68,7 @@ public class Logon {
 		System.out.println(username);
 		System.out.println(itemid);
 		
-		boolean ok = UserManager.getInstance().buyFromMag(itemid);
+		boolean ok = UManager.getInstance().buyFromMag(itemid);
 
 		DataBean<?> res = new DataBean<>(ok? "0":"1");
 		return res.toJson();
@@ -79,9 +85,9 @@ public class Logon {
 		System.out.println(user.getAddress());
 		System.out.println(user.getDetail());
 		
-		UserManager.getInstance().addAddr(username, user);
+		UManager.getInstance().addAddr(username, user);
 		//UserManager.getInstance().buyFromMag(itemid);
-		boolean ok = UserManager.getInstance().buyFromMag(itemid);
+		boolean ok = UManager.getInstance().buyFromMag(itemid);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
 		res.add(user);
@@ -98,7 +104,7 @@ public class Logon {
 		System.out.println(user.getAddress());
 		System.out.println(user.getDetail());
 		
-		UserManager.getInstance().addAddr(username, user);
+		UManager.getInstance().addAddr(username, user);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
 		res.add(user);
@@ -113,10 +119,10 @@ public class Logon {
 		System.out.println(username);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
-		DeliverData d = UserManager.getInstance().getAddr(username);
+		DeliverData d = UManager.getInstance().getAddr(username);
 		res.add(d);
 
 		return res.toJson();
 	}
-	*/
 }
+
