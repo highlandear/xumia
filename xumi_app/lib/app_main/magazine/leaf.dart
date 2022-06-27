@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/app_main/magazine/itemdetail.dart';
+import 'package:xumi_app/app_main/magazine/shoplist.dart';
 import 'package:xumi_app/utils/xtoast.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
@@ -16,24 +17,28 @@ class MagLeafView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        _showMagItem(),
+        _showMagItem(context),
         _showDescx(),
         _showBuyButton(context),
       ],
     );
   }
 
-  Widget _showMagItem() {
+  Widget _showMagItem(BuildContext context) {
     // print(item.condition);
     return Container(
       color: Colors.white,
-      child: Center(
-        child: Image.network(item.cover),
-      ),
+      width: MediaQuery.of(context).size.width, // 屏幕宽度
+      height: MediaQuery.of(context).size.height, // 屏幕高度
+
+      // child: Center(
+      child: Image.network(item.cover, fit: BoxFit.cover),
+
+      //),
     );
   }
 
-   Widget _showDescx() {
+  Widget _showDescx() {
     return Positioned(
       left: 10,
       right: 0,
@@ -52,7 +57,6 @@ class MagLeafView extends StatelessWidget {
                 Colors.blue,
               ]),
         ),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -66,10 +70,7 @@ class MagLeafView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
               child: Text(item.desc,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18
-                  )),
+                  style: const TextStyle(color: Colors.black, fontSize: 18)),
             ),
           ],
         ),
@@ -84,7 +85,7 @@ class MagLeafView extends StatelessWidget {
       child: InkWell(
         onTap: () {
           _watchDetail(context);
-        //  _buyItem(context);
+          //  _buyItem(context);
         },
         child: Container(
           height: 48,
@@ -106,20 +107,20 @@ class MagLeafView extends StatelessWidget {
           //   color: Colors.blue,
           //   size: 28,
           // ),
-          child:const Text('点击查看详情',style: TextStyle(
-              color: Colors.yellow,
-              fontSize: 20
-          )
-          ),
+          child: const Text('点击查看详情',
+              style: TextStyle(color: Colors.yellow, fontSize: 20)),
         ),
       ),
     );
   }
+
   _watchDetail(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return (ItemDetail(item: this.item,));
+      //return (PassDetailPage(item: this.item));
+      return (ShopListPage());
     }));
   }
+
   _buyItem(BuildContext context) {
     // 没有登录，先登录
     if (!Global.user.info.online()) {
@@ -149,22 +150,19 @@ class MagLeafView extends StatelessWidget {
           return (AddAddressPage(title: '收件人信息', data: item.id));
         }));
       });
-    }else if(item.condition.isEmpty){
-      Global.user.reqBuyItem(item.id, success: (){
+    } else if (item.condition.isEmpty) {
+      Global.user.reqBuyItem(item.id, success: () {
         XToast.success('已经直接购入，请查看');
+      }, fail: () {});
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+        return Browser(
+          url: item.condition,
+          title: "请完成小任务",
+        );
+      }));
 
-      }, fail:(){});
-    }
-    else{
-        Navigator.of(context)
-            .push( MaterialPageRoute(builder: (_) {
-          return Browser(
-            url: item.condition,
-            title: "请完成小任务",
-          );
-        }));
-
-     /* Global.user.reqBuyItem(item.id, success: (){
+      /* Global.user.reqBuyItem(item.id, success: (){
         XToast.success('已经直接购入，请查看');
 
       }, fail:(){});*/

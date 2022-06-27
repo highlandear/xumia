@@ -26,9 +26,11 @@ public abstract class CertiPass {
 	@JsonProperty("id")
 	String id;
 	
+	// 封面
 	@JsonProperty("cover")
-	String cover;
+	String cover;		
 
+	// 描述信息
 	@JsonProperty("desc")
 	String desc;
 	
