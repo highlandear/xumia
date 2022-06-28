@@ -7,7 +7,9 @@ class CertiPass {
       this.cover = '',
       this.desc = '',
       this.owner = '',
-      this.condition = ''});
+      this.condition = '',
+        this.price = ''
+      });
 
   String id;
   String type;
@@ -15,6 +17,7 @@ class CertiPass {
   String desc;
   String owner;
   String condition;
+  String price;
 
   static CertiPass fromJson(Map<String, dynamic> json) {
     return CertiPass(
@@ -23,7 +26,9 @@ class CertiPass {
         cover: json['cover'],
         desc: json['desc'],
         condition: json['condition'],
-        owner: json['owner']);
+        owner: json['owner'],
+         price:json['price']
+        );
   }
 
   static List<CertiPass> listfromJson(dynamic json) {

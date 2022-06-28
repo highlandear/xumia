@@ -44,6 +44,9 @@ public abstract class CertiPass {
 	@JsonProperty("type")
 	String type;
 	
+	@JsonProperty("price")
+	String price = "￥50.00";
+	
 	@JsonIgnore
 	NFTData data = null;
 }

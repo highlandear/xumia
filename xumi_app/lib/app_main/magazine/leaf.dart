@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/magazine/itemdetail.dart';
-import 'package:xumi_app/app_main/magazine/shoplist.dart';
 import 'package:xumi_app/utils/xtoast.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
@@ -8,6 +6,8 @@ import '../../login/newaddress.dart';
 import '../../login/selectaddress.dart';
 import '../../login/sign.dart';
 import '../../utils/browser.dart';
+import 'buypage.dart';
+import 'itemdetail.dart';
 
 class MagLeafView extends StatelessWidget {
   const MagLeafView({Key? key, required this.item}) : super(key: key);
@@ -88,36 +88,43 @@ class MagLeafView extends StatelessWidget {
           //  _buyItem(context);
         },
         child: Container(
-          height: 48,
-          padding: const EdgeInsets.only(
-            left: 10.0,
-            right: 10.0,
-            top: 2,
-            bottom: 0,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(20.0),
+            height: 48,
+            padding: const EdgeInsets.only(
+              left: 10.0,
+              right: 10.0,
+              top: 2,
+              bottom: 0,
             ),
-            border: Border.all(color: Colors.blue),
-          ),
-          // child: const Icon(
-          //   Icons.add,
-          //   color: Colors.blue,
-          //   size: 28,
-          // ),
-          child: const Text('点击查看详情',
-              style: TextStyle(color: Colors.yellow, fontSize: 20)),
-        ),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.5),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+              border: Border.all(color: Colors.blue),
+            ),
+            child: Container(
+              margin: const EdgeInsets.all(8),
+              decoration: const ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
+                  ),
+                ),
+              ),
+              child: const Center(
+                  child: Text(
+                "点击查看详情",
+                style: TextStyle(color: Colors.white),
+              )),
+            )),
       ),
     );
   }
 
   _watchDetail(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //return (PassDetailPage(item: this.item));
-      return (ShopListPage());
+      // return (PassDetailPage(item: this.item));
+      return (ShopDetailPage(item : item));
     }));
   }
 

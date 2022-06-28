@@ -7,19 +7,12 @@ class PassDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-        //  title: const Text("图片详情页面"),
-        //  centerTitle: true,
-          backgroundColor: Colors.transparent,
-        ),
-        body
-    : ListView(
+   return ListView(
       children:  <Widget>[
         _buildPassCard(context, item),
         _buildDescCard(context),
       ]
-    ),);
+    );
   }
 
   Widget _buildDescCard(BuildContext context) {
@@ -32,7 +25,7 @@ class PassDetailPage extends StatelessWidget {
           children: <Widget>[
             Container(
               child: Text(item.owner),
-              margin: const EdgeInsets.all(10),
+            //  margin: const EdgeInsets.all(10),
             ),
              ListTile(
               title: Text(item.desc),
