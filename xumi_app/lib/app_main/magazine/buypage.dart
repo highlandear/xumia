@@ -1,19 +1,18 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:xumi_app/bean/certipass.dart';
-import 'productshow.dart';
+import 'package:xumi_app/utils/xtoast.dart';
 
-///商品详情页面，实现淘宝京东等效果
-class ShopDetailPage extends StatefulWidget {
-  ShopDetailPage({Key? key, required this.item}) : super(key: key);
+/// 详细展示和购买页面
+class PurchasePage extends StatefulWidget {
+  const PurchasePage({Key? key, required this.item}) : super(key: key);
   final CertiPass item;
 
   @override
-  ShopDetailState createState() => ShopDetailState();
+  _PurchaseState createState() => _PurchaseState();
 }
 
-class ShopDetailState extends State<ShopDetailPage>
+class _PurchaseState extends State<PurchasePage>
     with SingleTickerProviderStateMixin {
   ///tab栏
   var tabs = <Tab>[];
@@ -21,25 +20,16 @@ class ShopDetailState extends State<ShopDetailPage>
 
   ///滑动监听
   final ScrollController _scrollController = ScrollController();
-
-  ///监听商品模块的位置信息
-  // GlobalKey _goodsKey = GlobalKey();
-  var _goodHeight = 0.0;
-
-  ///详情页，用于展示商品图文信息
-  //late Html _html;
+  final _goodHeight = 0.0;
   ///滑动多少距离显示顶部bar
-  double DEFAULT_SCROLLER = 100;
+  final _defaultScroller = 20;
 
   ///顶部bar的透明度，默认为透明，1为不透明
   double toolbarOpacity = 0.0;
-  // String htmlUrl = '<style>img {width: 100%}</style><p><img src="https://img10.360buyimg.com/cms/jfs/t1/182872/6/133/795112/607f3495Ea178190e/01c683a879c788c5.jpg"></p>';
 
   @override
   void initState() {
     super.initState();
-    //_html = new Html(data: htmlUrl);
-
     tabs = [
       const Tab(text: "商品"),
       const Tab(text: "详情"),
@@ -48,7 +38,7 @@ class ShopDetailState extends State<ShopDetailPage>
     _tabController = TabController(length: 2, vsync: this);
     _scrollController.addListener(() {
       ///如果滑动的偏移量超出了自己设定的值，tab栏就进行透明化操作
-      double t = _scrollController.offset / DEFAULT_SCROLLER;
+      double t = _scrollController.offset / _defaultScroller;
       if (t < 0.0) {
         t = 0.0;
       } else if (t > 1.0) {
@@ -76,8 +66,7 @@ class ShopDetailState extends State<ShopDetailPage>
     _tabController.dispose();
   }
 
-  ///计算商品信息页的高度
-
+  //计算商品信息页的高度
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,11 +78,10 @@ class ShopDetailState extends State<ShopDetailPage>
             controller: _scrollController,
             child: Column(
               children: [
-                ProductShowPage(item: widget.item),
-                //  PassDetailPage(item: widget.item),
-                Image.network(
-                //  widget.item.cover),
-                    'https://img10.360buyimg.com/cms/jfs/t1/182872/6/133/795112/607f3495Ea178190e/01c683a879c788c5.jpg'),
+               // _buildListView(context),
+                // Image.network(widget.item.cover),
+                if (widget.item.desc.isNotEmpty) _buildDescCard(context),
+                Image.network(widget.item.detail),
               ],
             ),
           ),
@@ -108,6 +96,75 @@ class ShopDetailState extends State<ShopDetailPage>
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildListView(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Stack(
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                ///banner广告图
+                child: Column(
+                  children: <Widget>[
+                    Image.network(
+                      widget.item.cover,
+                      // fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  padding:
+                  const EdgeInsets.only(left: 12, right: 48, top: 40, bottom: 20),
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                      left: 5,
+                      right: 5,
+                    ),
+                    child: const Icon(Icons.keyboard_arrow_left),
+                    decoration: const BoxDecoration(
+                      color: Colors.transparent,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          //  buildBodyView(context),
+         // _buildDescCard(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDescCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        elevation: 20.0,
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            Text('\n'),
+            Text('@${widget.item.owner}'),
+            ListTile(
+              title: Text(widget.item.desc),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -129,7 +186,6 @@ class ShopDetailState extends State<ShopDetailPage>
             )
           : IconButton(
               padding: EdgeInsets.symmetric(vertical: scale > 3.0 ? 0 : 10),
-              //icon: Image.asset("assets/images/mine/mine.png",),
               icon: const Icon(Icons.keyboard_arrow_left),
               onPressed: () {
                 Navigator.pop(context);
@@ -164,68 +220,107 @@ class ShopDetailState extends State<ShopDetailPage>
     );
   }
 
-  ///创建底部栏
+  ///创建底部操作栏
   BottomAppBar buildBottomBar() {
     return BottomAppBar(
       child: Container(
-        padding: EdgeInsets.only(left: 10, right: 10),
-        height: 50,
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        height: 60,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
-           // const Expanded(flex: 3, child: Text("联系客服")),
+            // const Expanded(flex: 3, child: Text("联系客服")),
             Expanded(flex: 3, child: Text(widget.item.price)),
-            Expanded(
-              flex: 3,
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                decoration: ShapeDecoration(
-                  gradient: LinearGradient(colors: [
-                    Color(int.parse("ffff9b00", radix: 16)),
-                    Color(int.parse("ffF8CD6A", radix: 16)),
-                  ]),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20.0),
-                    ),
-                  ),
-                ),
-                child: Center(
-                    child: const Text(
-                  "加入购物车",
-                  style: TextStyle(color: Colors.white),
-                )),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                decoration: ShapeDecoration(
-                  gradient: LinearGradient(colors: [
-                    Color(int.parse("ffFF5252", radix: 16)),
-                    Color(int.parse("ffFF0000", radix: 16)),
-                  ]),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20.0),
-                    ),
-                  ),
-                ),
-                child: const Center(
-                    child: Text(
-                  "直接购买",
-                  style: TextStyle(color: Colors.white),
-                )),
-              ),
-            ),
+            _buildCartButton(context),
+            _buildBuyButton(context),
           ],
         ),
       ),
     );
+  }
+
+  _buildCartButton(BuildContext context) {
+    return Expanded(
+      flex: 3,
+      child: Container(
+        margin: const EdgeInsets.all(8),
+        decoration: ShapeDecoration(
+          gradient: LinearGradient(colors: [
+            Color(int.parse("ffff9b00", radix: 16)),
+            Color(int.parse("ffF8CD6A", radix: 16)),
+          ]),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20.0),
+            ),
+          ),
+        ),
+        child: const Center(
+            child: Text(
+          "加入购物车",
+          style: TextStyle(color: Colors.white),
+        )),
+      ),
+    );
+  }
+
+  _buildBuyButton(BuildContext context) {
+    return Expanded(
+      flex: 3,
+      child: Container(
+        margin: const EdgeInsets.all(8),
+        decoration: ShapeDecoration(
+          gradient: LinearGradient(colors: [
+            Color(int.parse("ffFF5252", radix: 16)),
+            Color(int.parse("ffFF0000", radix: 16)),
+          ]),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20.0),
+            ),
+          ),
+        ),
+        child: GestureDetector(
+          onTap: (){_onBuyItem();},
+          child: const Center(
+              child: Text(
+            "购买",
+            style: TextStyle(color: Colors.white),
+          )),
+        ),
+      ),
+    );
+  }
+  Widget _buildBack(BuildContext context){
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Container(
+        width: 100,
+        height: 100,
+        padding:
+        const EdgeInsets.only(left: 12, right: 48, top: 40, bottom: 20),
+        child: Container(
+          padding: const EdgeInsets.only(
+            left: 5,
+            right: 5,
+          ),
+          child: const Icon(Icons.keyboard_arrow_left),
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+            shape: BoxShape.circle,
+          ),
+        ),
+      ),
+    );
+  }
+  _onBuyItem() {
+    print("----------------");
+    XToast.success('购买成功');
   }
 }

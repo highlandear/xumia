@@ -5,15 +5,16 @@ class CertiPass {
       {this.id = '',
       this.type = '',
       this.cover = '',
+      this.detail = '',
       this.desc = '',
       this.owner = '',
       this.condition = '',
-        this.price = ''
-      });
+      this.price = ''});
 
   String id;
   String type;
   String cover;
+  String detail;
   String desc;
   String owner;
   String condition;
@@ -24,11 +25,11 @@ class CertiPass {
         id: json['id'],
         type: json['type'],
         cover: json['cover'],
+        detail: json['detail'],
         desc: json['desc'],
         condition: json['condition'],
         owner: json['owner'],
-         price:json['price']
-        );
+        price: json['price']);
   }
 
   static List<CertiPass> listfromJson(dynamic json) {

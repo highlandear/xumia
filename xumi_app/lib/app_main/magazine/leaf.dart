@@ -18,7 +18,7 @@ class MagLeafView extends StatelessWidget {
     return Stack(
       children: <Widget>[
         _showMagItem(context),
-        _showDescx(),
+       // _showDescx(),
         _showBuyButton(context),
       ],
     );
@@ -124,7 +124,7 @@ class MagLeafView extends StatelessWidget {
   _watchDetail(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       // return (PassDetailPage(item: this.item));
-      return (ShopDetailPage(item : item));
+      return (PurchasePage(item : item));
     }));
   }
 

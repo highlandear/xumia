@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/bean/certipass.dart';
 
-class ProductShowPage extends StatelessWidget {
-  const ProductShowPage({Key? key, required this.item}) : super(key: key);
+class ProductInfoPage extends StatelessWidget {
+  const ProductInfoPage({Key? key, required this.item}) : super(key: key);
   final CertiPass item;
 
   @override

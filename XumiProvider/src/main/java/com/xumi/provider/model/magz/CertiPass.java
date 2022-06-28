@@ -3,24 +3,21 @@ package com.xumi.provider.model.magz;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public abstract class CertiPass {
+public final class CertiPass {
+	public static CertiPass create(String id,  String cover, String desc, String detail, String owner, String price) {
+		return new CertiPass(id, cover, desc, detail, owner, price);
+	}
 	
 	CertiPass(){}
 	
-	protected CertiPass(String i, String t, String c, String d, String o){
-		this.id = i;
-		this.cover = c;
-		this.desc = d;
-		this.owner = o;
+	private CertiPass(String id, String cover, String desc, String detail, String owner, String price){
+		this.id = id;
+		this.cover = cover;
+		this.desc = desc;
+		this.detail = detail;
+		this.owner = owner;
 		this.condition = "";
-		this.type = t;
-	}
-	
-	String getType() {return type;}
-	
-	CertiPass with(NFTData nft) {
-		this.data = nft;
-		return this;
+		this.price = price;
 	}
 	
 	@JsonProperty("id")
@@ -29,6 +26,9 @@ public abstract class CertiPass {
 	// 封面
 	@JsonProperty("cover")
 	String cover;		
+	
+	@JsonProperty("detail")
+	String detail;
 
 	// 描述信息
 	@JsonProperty("desc")
@@ -41,11 +41,8 @@ public abstract class CertiPass {
 	@JsonProperty("condition")
 	String condition;
 	
-	@JsonProperty("type")
-	String type;
-	
 	@JsonProperty("price")
-	String price = "￥50.00";
+	String price;
 	
 	@JsonIgnore
 	NFTData data = null;
