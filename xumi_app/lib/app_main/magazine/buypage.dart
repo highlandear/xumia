@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:xumi_app/bean/certipass.dart';
+import 'package:xumi_app/data/global.dart';
 import 'package:xumi_app/utils/xtoast.dart';
 
 /// 详细展示和购买页面
@@ -285,7 +286,7 @@ class _PurchaseState extends State<PurchasePage>
           ),
         ),
         child: GestureDetector(
-          onTap: (){_onBuyItem();},
+          onTap: (){_onBuyItem(context);},
           child: const Center(
               child: Text(
             "购买",
@@ -319,8 +320,11 @@ class _PurchaseState extends State<PurchasePage>
       ),
     );
   }
-  _onBuyItem() {
-    print("----------------");
-    XToast.success('购买成功');
+  _onBuyItem(BuildContext context) {
+   Global.user.reqBuyItem(widget.item.id, success: (){
+     XToast.success('购买成功');
+   }, fail:(){
+     XToast.success('购买成功');
+   });
   }
 }

@@ -2,6 +2,7 @@ package com.xumi.provider.model.magz;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xumi.provider.model.nft.NFTData;
 
 public final class CertiPass {
 	public static CertiPass create(String id,  String cover, String desc, String detail, String owner, String price) {
@@ -18,6 +19,16 @@ public final class CertiPass {
 		this.owner = owner;
 		this.condition = "";
 		this.price = price;
+	}
+
+	CertiPass with(NFTData data) {
+		nft = data;
+		return this;
+	}
+	
+	CertiPass with(ProductData data) {
+		product = data;
+		return this;
 	}
 	
 	@JsonProperty("id")
@@ -45,5 +56,8 @@ public final class CertiPass {
 	String price;
 	
 	@JsonIgnore
-	NFTData data = null;
+	ProductData product;
+	
+	@JsonIgnore
+	NFTData nft;
 }

@@ -3,7 +3,6 @@ import 'dart:convert';
 class CertiPass {
   CertiPass(
       {this.id = '',
-      this.type = '',
       this.cover = '',
       this.detail = '',
       this.desc = '',
@@ -12,7 +11,6 @@ class CertiPass {
       this.price = ''});
 
   String id;
-  String type;
   String cover;
   String detail;
   String desc;
@@ -23,7 +21,6 @@ class CertiPass {
   static CertiPass fromJson(Map<String, dynamic> json) {
     return CertiPass(
         id: json['id'],
-        type: json['type'],
         cover: json['cover'],
         detail: json['detail'],
         desc: json['desc'],

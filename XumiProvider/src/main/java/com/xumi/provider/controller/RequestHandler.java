@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xumi.provider.model.DeliverData;
 import com.xumi.provider.model.UManager;
 import com.xumi.provider.model.json.DataBean;
+import com.xumi.provider.model.magz.CertiPass;
+import com.xumi.provider.model.magz.Magazine;
 import com.xumi.provider.model.user.UserData;
 import com.xumi.provider.model.user.UserManager;
 
@@ -24,7 +26,7 @@ public class RequestHandler {
 	  static final String login = "login";
 	  static final String addNewAddress = "addNewAddress";
 	  static final String myAddress = "myAddress";
-	  static final String buyItem2NewAddress = "buyItem2NewAddress";
+//	  static final String buyItem2NewAddress = "buyItem2NewAddress";
 	  static final String buyItem ="buyItem";
 	  static final String getMyData="getMyData";
 
@@ -63,18 +65,22 @@ public class RequestHandler {
 	}
 
 	@RequestMapping(value = buyItem, method = RequestMethod.POST)
-	public String sendItem2me(@RequestParam("username") String username, @RequestParam("itemid") String itemid) {
-
-		System.out.println(username);
-		System.out.println(itemid);
+	public String buySth(@RequestParam("username") String username, @RequestParam("itemid") String itemid) {
+		UserData user = UserManager.getInstance().get(username);
+		if(user == null)
+			return "error";
 		
-		boolean ok = UManager.getInstance().buyFromMag(itemid);
+		CertiPass pass = Magazine.getInstance().get(itemid);
+		if(user == null)
+			return "error";
 
+		boolean ok = user.buy(pass);
+		
 		DataBean<?> res = new DataBean<>(ok? "0":"1");
 		return res.toJson();
 	}
 	
-	@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
+	//@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
 	public String sendItem2NewAddress(@RequestParam("username") String username, @RequestParam("itemid") String itemid,
 			@RequestBody DeliverData user) {
 

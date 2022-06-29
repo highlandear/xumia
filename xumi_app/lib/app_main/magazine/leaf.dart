@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/utils/xtoast.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
 import '../../login/newaddress.dart';
 import '../../login/selectaddress.dart';
 import '../../login/sign.dart';
 import '../../utils/browser.dart';
+import '../../utils/xtoast.dart';
 import 'buypage.dart';
-import 'itemdetail.dart';
+
 
 class MagLeafView extends StatelessWidget {
   const MagLeafView({Key? key, required this.item}) : super(key: key);
