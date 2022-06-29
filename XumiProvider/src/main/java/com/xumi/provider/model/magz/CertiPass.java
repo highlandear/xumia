@@ -16,8 +16,7 @@ public final class CertiPass {
 		this.cover = cover;
 		this.desc = desc;
 		this.detail = detail;
-		this.owner = owner;
-		this.condition = "";
+	//	this.owner = owner;
 		this.price = price;
 	}
 
@@ -26,9 +25,13 @@ public final class CertiPass {
 		return this;
 	}
 	
-	CertiPass with(ProductData data) {
-		product = data;
+	CertiPass with(String prodid) {
+		productid = prodid;
 		return this;
+	}
+	
+	public NFTData getNft() {
+		return this.nft;
 	}
 	
 	@JsonProperty("id")
@@ -45,18 +48,12 @@ public final class CertiPass {
 	@JsonProperty("desc")
 	String desc;
 	
-	@JsonProperty("owner")
-	String owner;	
-	
 	// 获取条件
-	@JsonProperty("condition")
-	String condition;
+	@JsonProperty("productid")
+	String productid = "";
 	
 	@JsonProperty("price")
 	String price;
-	
-	@JsonIgnore
-	ProductData product;
 	
 	@JsonIgnore
 	NFTData nft;

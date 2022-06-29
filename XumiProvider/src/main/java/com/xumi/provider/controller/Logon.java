@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xumi.provider.model.DeliverData;
-import com.xumi.provider.model.UManager;
 import com.xumi.provider.model.json.DataBean;
 import com.xumi.provider.model.user.UserData;
 

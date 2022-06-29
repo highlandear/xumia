@@ -1,18 +1,21 @@
 package com.xumi.provider.model.user;
 
+import com.xumi.provider.model.DeliverData;
 import com.xumi.provider.model.json.DataBean;
 import com.xumi.provider.model.magz.CertiPass;
 import com.xumi.provider.model.magz.Magazine;
+import com.xumi.provider.model.nft.NFTData;
 
 public class UserManager {
 
 	public UserData careatUser(String key, String pw) {
 
 		UserData u = users.get(key);
-		if(u == null)
-				u = new UserData(key, genDID());
+		if (u == null)
+			u = new UserData(key, genDID());
 
 		this.add(key, u);
+		System.out.println(u.tel);
 
 		return u;
 	}
@@ -35,50 +38,43 @@ public class UserManager {
 	}
 
 	public String getMyMagazineJson(String username) {
-		
+
 		DataBean<java.util.List<CertiPass>> ret = new DataBean<>();
-		
+
 		ret.add(Magazine.getInstance().getPassesList());
 
 		System.out.println("==========" + ret.toJson());
 		return ret.toJson();
 	}
 
-	public boolean buyFromMag(String magid) {
-		CertiPass d = Magazine.getInstance().get(magid);
-		
-		if(d == null)
-		{
-			System.out.println("xxx");
-			return false;
-		}
-		
-	//	myassets.addAll(d.assets);
-	//	System.out.println(d.desc);
-		return true;
-	}
 
 	public String getMyDataJson(String username, String datatype) {
-		/*
-		DataBean<java.util.List<MagAsset>> res = new DataBean<>();
-		java.util.List<MagAsset> list = new java.util.ArrayList<MagAsset>();
-		myassets.forEach(e->{
-			if(datatype.equals(e.tocken())) {
-				list.add(e);
-			}
-			
-		});
-	
-		res.add(list);
-		System.out.println(res.toJson());
+		UserData user = users.get(username);
+		if(user == null ) {
+			return "error";
+		}
+		
+		DataBean<java.util.List<NFTData>> res = new DataBean<>();
+		res.add(user.getMyNft(datatype));
+		
 		return res.toJson();
-		*/
-		return "";
 	}
-	
-	public static UserManager getInstance() {return instance;}
-	private static UserManager instance = new UserManager();
-	
-	private java.util.Map<String, UserData> users = new java.util.HashMap<String, UserData>();
-}
 
+	public DeliverData getAddr(String un) {
+		return delivers.get(un);
+	}
+
+	public void addAddr(String userid, DeliverData u) {
+		delivers.put(userid, u);
+	}
+
+	public static UserManager getInstance() {
+		return instance;
+	}
+
+	private static UserManager instance = new UserManager();
+
+	private java.util.Map<String, UserData> users = new java.util.HashMap<String, UserData>();
+
+	private java.util.Map<String, DeliverData> delivers = new java.util.HashMap<String, DeliverData>();
+}

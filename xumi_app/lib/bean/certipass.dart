@@ -6,17 +6,19 @@ class CertiPass {
       this.cover = '',
       this.detail = '',
       this.desc = '',
-      this.owner = '',
-      this.condition = '',
+  //    this.owner = '',
+      this.productid = '',
       this.price = ''});
 
   String id;
   String cover;
   String detail;
   String desc;
-  String owner;
-  String condition;
+//  String owner;
+  String productid;
   String price;
+
+  hasProduct() => productid.isNotEmpty;
 
   static CertiPass fromJson(Map<String, dynamic> json) {
     return CertiPass(
@@ -24,8 +26,8 @@ class CertiPass {
         cover: json['cover'],
         detail: json['detail'],
         desc: json['desc'],
-        condition: json['condition'],
-        owner: json['owner'],
+        productid: json['productid'],
+    //    owner: json['owner'],
         price: json['price']);
   }
 

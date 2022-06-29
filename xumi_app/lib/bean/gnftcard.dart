@@ -1,25 +1,24 @@
 import 'dart:convert';
 
-class GNFTCard {
-  GNFTCard({
+class NftArt {
+  NftArt({
     this.path = '',
-    this.desc = '',
+    this.data = '',
   });
 
   String path;
-  String desc;
-
-  static GNFTCard fromJson(Map<String, dynamic> json) {
-    return GNFTCard(
+  String data;
+  static NftArt fromJson(Map<String, dynamic> json) {
+    return NftArt(
       path: json['path'],
-      desc: json['desc']
+     // desc: json['desc']
     );
   }
 
-  static List<GNFTCard> listfromJson(dynamic json) {
+  static List<NftArt> listfromJson(dynamic json) {
    // print(json);
     return (jsonDecode(json)['data'] as List<dynamic>)
-        .map((e) => GNFTCard.fromJson((e as Map<String, dynamic>)))
+        .map((e) => NftArt.fromJson((e as Map<String, dynamic>)))
         .toList();
   }
 }

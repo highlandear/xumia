@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xumi.provider.model.DeliverData;
-import com.xumi.provider.model.UManager;
 import com.xumi.provider.model.json.DataBean;
 import com.xumi.provider.model.magz.CertiPass;
 import com.xumi.provider.model.magz.Magazine;
@@ -22,13 +21,13 @@ import com.xumi.provider.model.user.UserManager;
 @EnableAutoConfiguration
 public class RequestHandler {
 	
-	  static final String magzine = "magazine";
-	  static final String login = "login";
-	  static final String addNewAddress = "addNewAddress";
-	  static final String myAddress = "myAddress";
-//	  static final String buyItem2NewAddress = "buyItem2NewAddress";
-	  static final String buyItem ="buyItem";
-	  static final String getMyData="getMyData";
+	  static final String magzine = "magazine.do";
+	  static final String login = "login.do";
+	  static final String addNewAddress = "addNewAddress.do";
+	  static final String myAddress = "myAddress.do";
+	  static final String buyItem2NewAddress = "buyItem2NewAddress.do";
+	  static final String buyItem ="buyItem.do";
+	  static final String getMyData="getMyData.do";
 
 	@RequestMapping(value = magzine, method = RequestMethod.GET)
 	public String magazine(HttpServletRequest request) {
@@ -47,8 +46,9 @@ public class RequestHandler {
 	public String getMyData(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		String datatype = request.getParameter("datatype");
+		System.out.println(UserManager.getInstance().getMyDataJson(username, datatype));
 		
-		return UManager.getInstance().getMyDataJson(username, datatype);
+		return UserManager.getInstance().getMyDataJson(username, datatype);
 	}
 	
 
@@ -56,7 +56,7 @@ public class RequestHandler {
 	public String register(@RequestParam("username") String username, @RequestParam("password") String password) {
 		System.out.println("username is:" + username);
 		System.out.println("password is:" + password);
-		UserData u = UManager.getInstance().careatUser(username, password);
+		UserData u = UserManager.getInstance().careatUser(username, password);
 
 		DataBean<UserData> res = new DataBean<UserData>();
 		res.add(u);
@@ -71,8 +71,6 @@ public class RequestHandler {
 			return "error";
 		
 		CertiPass pass = Magazine.getInstance().get(itemid);
-		if(user == null)
-			return "error";
 
 		boolean ok = user.buy(pass);
 		
@@ -80,40 +78,47 @@ public class RequestHandler {
 		return res.toJson();
 	}
 	
-	//@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
+	@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
 	public String sendItem2NewAddress(@RequestParam("username") String username, @RequestParam("itemid") String itemid,
-			@RequestBody DeliverData user) {
+			@RequestBody DeliverData houseInfo) {
 
 		System.out.println(username);
 		System.out.println(itemid);
-		System.out.println(user.getTel());
-		System.out.println(user.getName());
-		System.out.println(user.getAddress());
-		System.out.println(user.getDetail());
+		System.out.println(houseInfo.getTel());
+		System.out.println(houseInfo.getName());
+		System.out.println(houseInfo.getAddress());
+		System.out.println(houseInfo.getDetail());
 		
-		UManager.getInstance().addAddr(username, user);
-		//UserManager.getInstance().buyFromMag(itemid);
-		boolean ok = UManager.getInstance().buyFromMag(itemid);
+		UserManager.getInstance().addAddr(username, houseInfo);
+		UserData user = UserManager.getInstance().get(username);
+		if(user == null)
+			return "error";
+		
+		CertiPass pass = Magazine.getInstance().get(itemid);
+		if(user == null)
+			return "error";
+
+		boolean ok = user.buy(pass);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
-		res.add(user);
+		res.add(houseInfo);
 
 		return res.toJson();
 	}
 	
 	@RequestMapping(value = addNewAddress, method = RequestMethod.POST)
-	public String addNewAddress(@RequestParam("username") String username, @RequestBody DeliverData user) {
+	public String addNewAddress(@RequestParam("username") String username, @RequestBody DeliverData house) {
 
 		System.out.println(username);
-		System.out.println(user.getTel());
-		System.out.println(user.getName());
-		System.out.println(user.getAddress());
-		System.out.println(user.getDetail());
+		System.out.println(house.getTel());
+		System.out.println(house.getName());
+		System.out.println(house.getAddress());
+		System.out.println(house.getDetail());
 		
-		UManager.getInstance().addAddr(username, user);
+		UserManager.getInstance().addAddr(username, house);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
-		res.add(user);
+		res.add(house);
 	
 
 		return res.toJson();
@@ -125,7 +130,7 @@ public class RequestHandler {
 		System.out.println(username);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
-		DeliverData d = UManager.getInstance().getAddr(username);
+		DeliverData d = UserManager.getInstance().getAddr(username);
 		res.add(d);
 
 		return res.toJson();

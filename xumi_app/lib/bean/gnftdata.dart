@@ -1,26 +1,21 @@
 import 'dart:convert';
 
 class GNFTData {
-  GNFTData({
-    this.id = '',
-    this.path = '',
-    this.desc = '',
-    this.owner = '',
-  });
+  GNFTData({this.data = '', this.caption = '', this.author = ''});
 
-  String id;
-  String path;
-  String desc;
-  String owner;
-
+  String caption;
+  String author;
+  String data;
   static GNFTData fromJson(Map<String, dynamic> json) {
     return GNFTData(
-        path: json['path'],
+        data: json['data'],
+        caption: json['caption'],
+        author: json['author']
     );
   }
 
   static List<GNFTData> listfromJson(dynamic json) {
-    print(json);
+    // print(json);
     return (jsonDecode(json)['data'] as List<dynamic>)
         .map((e) => GNFTData.fromJson((e as Map<String, dynamic>)))
         .toList();

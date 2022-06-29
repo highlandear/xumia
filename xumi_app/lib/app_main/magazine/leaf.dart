@@ -60,11 +60,11 @@ class MagLeafView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 5),
               child: Text(
-                '@' + item.owner,
-                style: const TextStyle(color: Colors.red, fontSize: 15),
+                '@' + "item.owner",
+                style: TextStyle(color: Colors.red, fontSize: 15),
               ),
             ),
             Padding(
@@ -137,7 +137,7 @@ class MagLeafView extends StatelessWidget {
       return;
     }
 
-    if (item.condition == 'ad') {
+    if (item.productid == 'ad') {
       // 本地有地址
       if (Global.user.house.hasAddress()) {
         // XToast.toast('已有地址');
@@ -157,14 +157,14 @@ class MagLeafView extends StatelessWidget {
           return (AddAddressPage(title: '收件人信息', data: item.id));
         }));
       });
-    } else if (item.condition.isEmpty) {
+    } else if (item.productid.isEmpty) {
       Global.user.reqBuyItem(item.id, success: () {
         XToast.success('已经直接购入，请查看');
       }, fail: () {});
     } else {
       Navigator.of(context).push(MaterialPageRoute(builder: (_) {
         return Browser(
-          url: item.condition,
+          url: item.productid,
           title: "请完成小任务",
         );
       }));

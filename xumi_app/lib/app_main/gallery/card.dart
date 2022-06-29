@@ -48,7 +48,7 @@ class CardsView extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return FullScreenImagePage(imageURL: item.path,);
+              return FullScreenImagePage(imageURL: item.data,);
             },
           ),
         );
@@ -60,7 +60,7 @@ class CardsView extends StatelessWidget {
           children: <Widget>[
             Container(
               child: Image.network(
-                item.path,
+                item.data,
                 fit: BoxFit.cover,
               ),
               margin: const EdgeInsets.all(10),
@@ -70,9 +70,9 @@ class CardsView extends StatelessWidget {
                   //  backgroundImage: NetworkImage(
                   //     item.desc),
                   ),
-              title: Text(item.owner),
+              title: Text(item.author),
               subtitle: Text(
-                item.desc,
+                item.caption,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),

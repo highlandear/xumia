@@ -33,16 +33,8 @@ class Global {
 
   Future loadGalleryData() async {
     return GNFTData.listfromJson(await XHttp.instance.get(Config.getMyData,
-        params: {'username': info.did, 'datatype': 'art'}));
+        params: {'username': info.mainID, 'datatype': 'art'}));
   }
-
-  /*
-  Future loadAddressData() async {
-    return DeliverData.fromJson(
-        await XHttp.instance.get(Config.reqAddr, params: {'username': info.mainID}));
-  }
-
-   */
 
   reqMyAddress({success, fail}) {
     XHttp.instance
@@ -116,7 +108,7 @@ class Global {
 
   reqMyData(datatype, {success, fail}) {
     XHttp.instance.get(Config.getMyData,
-        params: {'username': info.did, 'datatype': datatype}).then((val) {
+        params: {'username': info.mainID, 'datatype': datatype}).then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
         success(val);

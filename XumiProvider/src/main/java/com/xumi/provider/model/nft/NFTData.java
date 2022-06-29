@@ -4,12 +4,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class NFTData {
 	
-	NFTData(String type){this.type = type;}
+	NFTData(String data){this.data = data;}	
 	
-	public String getType() {return type;}
+	abstract public String getType();
 	
-	@JsonProperty("type")
-	String type;
+	public NFTData addCaption(String s) {
+		this.caption = s;		
+		return this;
+	}
+	
+	public NFTData addAuthor(String s) {
+		this.author = s;
+		return this;
+	}
+	
+	@JsonProperty("caption")
+	String caption = "";
+	
+	@JsonProperty("author")
+	String author = "";
 	
 	@JsonProperty("data")
 	String data;

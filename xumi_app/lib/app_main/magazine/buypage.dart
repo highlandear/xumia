@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:xumi_app/bean/certipass.dart';
-import 'package:xumi_app/data/global.dart';
-import 'package:xumi_app/utils/xtoast.dart';
+import '../../bean/certipass.dart';
+import '../../data/global.dart';
+import '../../login/newaddress.dart';
+import '../../login/selectaddress.dart';
+import '../../login/sign.dart';
+import '../../utils/xtoast.dart';
 
 /// 详细展示和购买页面
 class PurchasePage extends StatefulWidget {
@@ -18,10 +21,12 @@ class _PurchaseState extends State<PurchasePage>
   ///tab栏
   var tabs = <Tab>[];
   late TabController _tabController;
+  late CertiPass _item;
 
   ///滑动监听
   final ScrollController _scrollController = ScrollController();
   final _goodHeight = 0.0;
+
   ///滑动多少距离显示顶部bar
   final _defaultScroller = 20;
 
@@ -31,6 +36,7 @@ class _PurchaseState extends State<PurchasePage>
   @override
   void initState() {
     super.initState();
+    _item = widget.item;
     tabs = [
       const Tab(text: "商品"),
       const Tab(text: "详情"),
@@ -79,10 +85,10 @@ class _PurchaseState extends State<PurchasePage>
             controller: _scrollController,
             child: Column(
               children: [
-               // _buildListView(context),
+                // _buildListView(context),
                 // Image.network(widget.item.cover),
-                if (widget.item.desc.isNotEmpty) _buildDescCard(context),
-                Image.network(widget.item.detail),
+                if (_item.desc.isNotEmpty) _buildDescCard(context),
+                Image.network(_item.detail),
               ],
             ),
           ),
@@ -110,11 +116,12 @@ class _PurchaseState extends State<PurchasePage>
             children: <Widget>[
               Container(
                 color: Colors.white,
+
                 ///banner广告图
                 child: Column(
                   children: <Widget>[
                     Image.network(
-                      widget.item.cover,
+                      _item.cover,
                       // fit: BoxFit.cover,
                     ),
                   ],
@@ -127,8 +134,8 @@ class _PurchaseState extends State<PurchasePage>
                 child: Container(
                   width: 100,
                   height: 100,
-                  padding:
-                  const EdgeInsets.only(left: 12, right: 48, top: 40, bottom: 20),
+                  padding: const EdgeInsets.only(
+                      left: 12, right: 48, top: 40, bottom: 20),
                   child: Container(
                     padding: const EdgeInsets.only(
                       left: 5,
@@ -145,7 +152,7 @@ class _PurchaseState extends State<PurchasePage>
             ],
           ),
           //  buildBodyView(context),
-         // _buildDescCard(context),
+          // _buildDescCard(context),
         ],
       ),
     );
@@ -159,10 +166,10 @@ class _PurchaseState extends State<PurchasePage>
         margin: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            Text('\n'),
-            Text('@${widget.item.owner}'),
+            const Text('\n'),
+           // Text('@${_item.owner}'),
             ListTile(
-              title: Text(widget.item.desc),
+              title: Text(_item.desc),
             )
           ],
         ),
@@ -235,7 +242,7 @@ class _PurchaseState extends State<PurchasePage>
               width: 20,
             ),
             // const Expanded(flex: 3, child: Text("联系客服")),
-            Expanded(flex: 3, child: Text(widget.item.price)),
+            Expanded(flex: 3, child: Text(_item.price)),
             _buildCartButton(context),
             _buildBuyButton(context),
           ],
@@ -286,7 +293,9 @@ class _PurchaseState extends State<PurchasePage>
           ),
         ),
         child: GestureDetector(
-          onTap: (){_onBuyItem(context);},
+          onTap: () {
+            _onBuyItem(context);
+          },
           child: const Center(
               child: Text(
             "购买",
@@ -296,7 +305,8 @@ class _PurchaseState extends State<PurchasePage>
       ),
     );
   }
-  Widget _buildBack(BuildContext context){
+
+  Widget _buildBack(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
@@ -305,7 +315,7 @@ class _PurchaseState extends State<PurchasePage>
         width: 100,
         height: 100,
         padding:
-        const EdgeInsets.only(left: 12, right: 48, top: 40, bottom: 20),
+            const EdgeInsets.only(left: 12, right: 48, top: 40, bottom: 20),
         child: Container(
           padding: const EdgeInsets.only(
             left: 5,
@@ -320,11 +330,54 @@ class _PurchaseState extends State<PurchasePage>
       ),
     );
   }
+
+  _getMe(){
+    setState(() {
+    });
+  }
+
+  _login()  {
+    Navigator.of(context)
+        .push(
+      MaterialPageRoute(builder: (_) => const SignPage()),
+    )
+        .then((val) => val != null ? _getMe() : null);
+  }
+
   _onBuyItem(BuildContext context) {
-   Global.user.reqBuyItem(widget.item.id, success: (){
-     XToast.success('购买成功');
-   }, fail:(){
-     XToast.success('购买成功');
-   });
+    if (!Global.user.info.online()) {
+      _login();
+      return;
+    }
+
+    // 无附带线下产品
+    if (!_item.hasProduct()) {
+      Global.user.reqBuyItem(_item.id, success: () {
+        XToast.success('已经直接购入，请查看');
+      }, fail: () {});
+
+      return;
+    }
+
+    // 附带线下产品，本地有地址，要求用户选择已有地址
+    if (Global.user.house.hasAddress()) {
+      // XToast.toast('已有地址');
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return (AddressSelectionPage(data: _item.id));
+      }));
+
+      return;
+    }
+
+    // 本地无地址，向服务器请求地址列表
+    Global.user.reqMyAddress(success: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return (AddressSelectionPage(data: _item.id));
+      }));
+    }, fail: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return (AddAddressPage(title: '收件人信息', data: _item.id));
+      }));
+    });
   }
 }

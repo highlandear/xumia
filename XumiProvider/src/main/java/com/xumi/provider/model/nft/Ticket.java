@@ -1,10 +1,21 @@
 package com.xumi.provider.model.nft;
 
-public class Ticket extends NFTData {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-	Ticket() {
-		super("ticket");
+public class Ticket extends NFTData {
+	
+	public static Ticket create(String d) {
+		return new Ticket(d);
+	}
+
+	private Ticket(String data) {super(data);}
+
+	@Override
+	public String getType() {		
+		return "ticket";
 	}
 	
-	NFTData data;
+	@JsonIgnore
+	NFTData others;
+
 }

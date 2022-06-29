@@ -24,7 +24,7 @@ class PassDetailPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              child: Text(item.owner),
+              child: Text("tem.owner"),
             //  margin: const EdgeInsets.all(10),
             ),
              ListTile(

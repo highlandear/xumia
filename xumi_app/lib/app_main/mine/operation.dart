@@ -90,9 +90,10 @@ _tap(BuildContext context, String type){
 }
 
 _onData(context, type, data){
+
     switch(type){
       case 'ticket':
-        var list = GNFTCard.listfromJson(data);
+        var list = GNFTData.listfromJson(data);
         Navigator.of(context)
             .push( MaterialPageRoute(builder: (_) {
           return CardsView(data: list);

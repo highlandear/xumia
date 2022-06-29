@@ -69,7 +69,7 @@ class ProductInfoPage extends StatelessWidget {
         margin: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            Text(item.owner),
+            Text("item.owner"),
             ListTile(
               title: Text(item.desc),
             )
