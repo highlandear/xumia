@@ -21,13 +21,13 @@ import com.xumi.provider.model.user.UserManager;
 @EnableAutoConfiguration
 public class RequestHandler {
 	
-	  static final String magzine = "magazine.do";
-	  static final String login = "login.do";
-	  static final String addNewAddress = "addNewAddress.do";
-	  static final String myAddress = "myAddress.do";
-	  static final String buyItem2NewAddress = "buyItem2NewAddress.do";
-	  static final String buyItem ="buyItem.do";
-	  static final String getMyData="getMyData.do";
+	  static final String magzine = "magazine.do";	// 杂志主页请示
+	  static final String login = "login.do";		// 登录请示
+	  static final String addNewAddress = "addNewAddress.do";	// 添加地址请求
+	  static final String myAddress = "myAddress.do";	//请求保存的地址
+	  static final String buyItem2NewAddress = "buyItem2NewAddress.do"; // 买物品寄到新添加的地址
+	  static final String buyItem ="buyItem.do";	//	买物品
+	  static final String getMyData="getMyData.do";	//	获取个人的画廊、门票等数据
 
 	@RequestMapping(value = magzine, method = RequestMethod.GET)
 	public String magazine(HttpServletRequest request) {
