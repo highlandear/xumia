@@ -1,5 +1,10 @@
 package com.xumi.provider.model.nft;
 
+/**
+ * 会员卡
+ * @author
+ *
+ */
 public class Membership extends NFTData {
 
 	Membership(String data) {

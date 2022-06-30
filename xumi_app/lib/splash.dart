@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
         const Duration(seconds: 1),
         () => Navigator.of(context).pushReplacement(MaterialPageRoute(
         //  builder: (BuildContext context) => const IndexPage())));
-          builder: (BuildContext context) => PlainPage())));
+         builder: (BuildContext context) => PlainPage())));
   }
 
   @override

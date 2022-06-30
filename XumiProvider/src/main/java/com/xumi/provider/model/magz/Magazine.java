@@ -4,13 +4,18 @@ import com.xumi.provider.model.nft.Artwork;
 import com.xumi.provider.model.nft.NFTData;
 import com.xumi.provider.model.nft.Ticket;
 
+/**
+ * 杂志主页示例
+ * @author
+ *
+ */
 public class Magazine {
 
 	static String[] paths = { 
 			"https://cognitivelab.net/imgs/a.jpg", // 烟斗
 			"https://cognitivelab.net/imgs/d.jpg", //兔子 
 			
-			"https://cognitivelab.net/imgs/b.jpg", // 产吕
+			"https://cognitivelab.net/imgs/b.jpg", // 以下几个是边顶产品的信息图
 			"https://cognitivelab.net/imgs/c.jpg", //
 			"https://cognitivelab.net/imgs/e.jpg",
 			"https://cognitivelab.net/imgs/f.jpg", 
@@ -18,11 +23,15 @@ public class Magazine {
 			"https://img.alicdn.com/imgextra/i3/2209380674403/O1CN01CxRGs01iOcX7EnYlv_!!2209380674403.jpg", //喜马拉雅
 			};
 	
+	// 几个长图，用于介绍产品信息
 	static String [] details = {
 			"https://img.alicdn.com/imgextra/i4/2209380674403/O1CN01D0B3cA1iOcX1cx4vT_!!2209380674403.jpg",
 			"https://img10.360buyimg.com/cms/jfs/t1/182872/6/133/795112/607f3495Ea178190e/01c683a879c788c5.jpg"};
 
+	// 附加的可购买产品的标识
 	static String [] products = {"bd-16","bd-17"};
+	
+	// 几个NFT示例
 	static NFTData [] nfts = {
 			Artwork.create(paths[0]).addAuthor("秋秋").addCaption("这是秋秋在2016年的作品"),
 			Artwork.create(paths[1]).addAuthor("广彬").addCaption("广彬收藏的这是秋秋作品"),

@@ -1,4 +1,4 @@
-package com.xumi.provider.model;
+package com.xumi.provider.model.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

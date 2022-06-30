@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../data/global.dart';
-import 'card.dart';
-import 'logintip.dart';
+import 'gcard.dart';
+import '../../login/logintip.dart';
 
 class Gallery extends StatefulWidget {
   const Gallery({Key? key}) : super(key: key);
@@ -12,17 +12,21 @@ class Gallery extends StatefulWidget {
 
 class _GalleryState extends State<Gallery> {
 
-  final Future _future = Global.user.loadGalleryData();
+  late Future _future;// = Global.user.loadGalleryData();
 
   @override
   Widget build(BuildContext context) {
+
     if(Global.user.info.online()) {
+      _future = Global.user.loadGalleryData();
       return Scaffold(
         backgroundColor: Colors.white,
         body: _futureBuilder(),
       );
     }
-    return const LoginTipPage();
+    else {
+      return const LoginTipPage(tip: '登录进入我的画廊');
+    }
   }
 
   _buildWaiting() {
@@ -48,7 +52,7 @@ class _GalleryState extends State<Gallery> {
             {
               if (async.hasError) return _buildError('请检查网络');
               if (async.hasData) {
-              return CardsView(data: async.data);
+              return GalleryCardsView(data: async.data);
                 //return StaggerView(data: async.data);
               }
               return _buildError('e2');

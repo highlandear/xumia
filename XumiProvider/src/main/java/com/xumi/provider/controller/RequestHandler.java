@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xumi.provider.model.DeliverData;
 import com.xumi.provider.model.json.DataBean;
 import com.xumi.provider.model.magz.CertiPass;
 import com.xumi.provider.model.magz.Magazine;
+import com.xumi.provider.model.user.DeliverData;
 import com.xumi.provider.model.user.UserData;
 import com.xumi.provider.model.user.UserManager;
 
@@ -46,7 +46,7 @@ public class RequestHandler {
 	public String getMyData(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		String datatype = request.getParameter("datatype");
-		System.out.println(UserManager.getInstance().getMyDataJson(username, datatype));
+	//	System.out.println(UserManager.getInstance().getMyDataJson(username, datatype));
 		
 		return UserManager.getInstance().getMyDataJson(username, datatype);
 	}
@@ -54,8 +54,8 @@ public class RequestHandler {
 
 	@RequestMapping(value = login, method = RequestMethod.POST)
 	public String register(@RequestParam("username") String username, @RequestParam("password") String password) {
-		System.out.println("username is:" + username);
-		System.out.println("password is:" + password);
+	//	System.out.println("username is:" + username);
+	//	System.out.println("password is:" + password);
 		UserData u = UserManager.getInstance().careatUser(username, password);
 
 		DataBean<UserData> res = new DataBean<UserData>();
@@ -81,24 +81,24 @@ public class RequestHandler {
 	@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
 	public String sendItem2NewAddress(@RequestParam("username") String username, @RequestParam("itemid") String itemid,
 			@RequestBody DeliverData houseInfo) {
-
+/*
 		System.out.println(username);
 		System.out.println(itemid);
 		System.out.println(houseInfo.getTel());
 		System.out.println(houseInfo.getName());
 		System.out.println(houseInfo.getAddress());
 		System.out.println(houseInfo.getDetail());
-		
+*/		
 		UserManager.getInstance().addAddr(username, houseInfo);
 		UserData user = UserManager.getInstance().get(username);
 		if(user == null)
 			return "error";
 		
 		CertiPass pass = Magazine.getInstance().get(itemid);
-		if(user == null)
+		if(pass == null)
 			return "error";
-
-		boolean ok = user.buy(pass);
+		
+		user.buy(pass);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
 		res.add(houseInfo);
@@ -109,12 +109,13 @@ public class RequestHandler {
 	@RequestMapping(value = addNewAddress, method = RequestMethod.POST)
 	public String addNewAddress(@RequestParam("username") String username, @RequestBody DeliverData house) {
 
+		/*
 		System.out.println(username);
 		System.out.println(house.getTel());
 		System.out.println(house.getName());
 		System.out.println(house.getAddress());
 		System.out.println(house.getDetail());
-		
+		*/
 		UserManager.getInstance().addAddr(username, house);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
@@ -127,7 +128,7 @@ public class RequestHandler {
 	@RequestMapping(value = myAddress, method = RequestMethod.GET)
 	public String reqAddr(@RequestParam("username") String username) {
 
-		System.out.println(username);
+	//	System.out.println(username);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
 		DeliverData d = UserManager.getInstance().getAddr(username);

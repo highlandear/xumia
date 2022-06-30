@@ -2,6 +2,11 @@ package com.xumi.provider.model.nft;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * NFT数据抽象类
+ * @author
+ *
+ */
 public abstract class NFTData {
 	
 	NFTData(String data){this.data = data;}	
@@ -18,12 +23,15 @@ public abstract class NFTData {
 		return this;
 	}
 	
+	// 字幕描述信息
 	@JsonProperty("caption")
 	String caption = "";
 	
+	// 作者信息
 	@JsonProperty("author")
 	String author = "";
 	
+	// 数据，比如ipfs地址等
 	@JsonProperty("data")
 	String data;
 }

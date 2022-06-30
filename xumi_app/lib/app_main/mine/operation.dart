@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/gallery/card.dart';
+import 'package:xumi_app/app_main/gallery/gcard.dart';
+import 'package:xumi_app/app_main/mine/ticketcart.dart';
 import '../../bean/gnftcard.dart';
 import '../../bean/gnftdata.dart';
 import '../../data/global.dart';
@@ -9,14 +10,21 @@ import '../../utils/browser.dart';
 import '../../utils/xqrgen.dart';
 import '../../utils/xqrscan.dart';
 import '../../utils/xtoast.dart';
+import '../../login/logintip.dart';
 import '../gallery/main.dart';
 import '../mode/item.dart';
 import '../mode/list_view.dart';
 import 'settings.dart';
 import 'head.dart';
 
-class MineContent extends StatelessWidget {
-   MineContent({Key? key}) : super(key: key);
+class MineContent extends StatefulWidget {
+  MineContent({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _MineContentState();
+}
+
+class _MineContentState extends State<MineContent>{
 
    final _models = [
     ClickItem('', '', 'divide', false),
@@ -39,9 +47,18 @@ class MineContent extends StatelessWidget {
 
 _tap(BuildContext context, String type){
   if (! Global.user.info.online()) {
-    XToast.error('请点击登录');
+    XToast.error('请点击头像登录');
+   //  Navigator.of(context)
+   //      .push(
+   //    MaterialPageRoute(builder: (_) => const LoginTipPage(tip: '点击登录')),
+   //  ).then((value) => {
+   //    setState(() {
+   //
+   //    }),
+   //  });
     return;
   }
+
   switch (type) {
     case 'setting':
       Navigator.push(context,
@@ -96,7 +113,7 @@ _onData(context, type, data){
         var list = GNFTData.listfromJson(data);
         Navigator.of(context)
             .push( MaterialPageRoute(builder: (_) {
-          return CardsView(data: list);
+          return TicketCardsView(data: list);
         }));
         break;
       default:

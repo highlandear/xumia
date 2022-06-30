@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'full.dart';
 
-class CardsView extends StatelessWidget {
-  const CardsView({Key? key, required this.data}) : super(key: key);
+class GalleryCardsView extends StatelessWidget {
+  const GalleryCardsView({Key? key, required this.data}) : super(key: key);
   final List data;
 
   @override
@@ -48,7 +48,9 @@ class CardsView extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return FullScreenImagePage(imageURL: item.data,);
+              return FullScreenImagePage(
+                imageURL: item.data,
+              );
             },
           ),
         );
@@ -65,7 +67,7 @@ class CardsView extends StatelessWidget {
               ),
               margin: const EdgeInsets.all(10),
             ),
-             ListTile(
+            ListTile(
               leading: const CircleAvatar(
                   //  backgroundImage: NetworkImage(
                   //     item.desc),

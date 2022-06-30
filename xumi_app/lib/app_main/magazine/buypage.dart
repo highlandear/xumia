@@ -167,7 +167,7 @@ class _PurchaseState extends State<PurchasePage>
         child: Column(
           children: <Widget>[
             const Text('\n'),
-           // Text('@${_item.owner}'),
+            // Text('@${_item.owner}'),
             ListTile(
               title: Text(_item.desc),
             )
@@ -279,23 +279,23 @@ class _PurchaseState extends State<PurchasePage>
   _buildBuyButton(BuildContext context) {
     return Expanded(
       flex: 3,
-      child: Container(
-        margin: const EdgeInsets.all(8),
-        decoration: ShapeDecoration(
-          gradient: LinearGradient(colors: [
-            Color(int.parse("ffFF5252", radix: 16)),
-            Color(int.parse("ffFF0000", radix: 16)),
-          ]),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20.0),
+      child: GestureDetector(
+        onTap: () {
+          _onBuyItem(context);
+        },
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: ShapeDecoration(
+            gradient: LinearGradient(colors: [
+              Color(int.parse("ffFF5252", radix: 16)),
+              Color(int.parse("ffFF0000", radix: 16)),
+            ]),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
             ),
           ),
-        ),
-        child: GestureDetector(
-          onTap: () {
-            _onBuyItem(context);
-          },
           child: const Center(
               child: Text(
             "购买",
@@ -331,16 +331,15 @@ class _PurchaseState extends State<PurchasePage>
     );
   }
 
-  _getMe(){
-    setState(() {
-    });
+  _getMe() {
+    setState(() {});
   }
 
-  _login()  {
+  _login() {
     Navigator.of(context)
         .push(
-      MaterialPageRoute(builder: (_) => const SignPage()),
-    )
+          MaterialPageRoute(builder: (_) => const SignPage()),
+        )
         .then((val) => val != null ? _getMe() : null);
   }
 

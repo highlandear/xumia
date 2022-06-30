@@ -1,11 +1,15 @@
 package com.xumi.provider.model.user;
 
-import com.xumi.provider.model.DeliverData;
 import com.xumi.provider.model.json.DataBean;
 import com.xumi.provider.model.magz.CertiPass;
 import com.xumi.provider.model.magz.Magazine;
 import com.xumi.provider.model.nft.NFTData;
 
+/**
+ * 用户数据的模拟管理
+ * @author
+ *
+ */
 public class UserManager {
 
 	public UserData careatUser(String key, String pw) {
@@ -43,7 +47,7 @@ public class UserManager {
 
 		ret.add(Magazine.getInstance().getPassesList());
 
-		System.out.println("==========" + ret.toJson());
+	//	System.out.println("==========" + ret.toJson());
 		return ret.toJson();
 	}
 
