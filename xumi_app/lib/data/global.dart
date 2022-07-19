@@ -4,7 +4,7 @@ import '../bean/gnftdata.dart';
 import '../bean/certipass.dart';
 import '../bean/userinfo.dart';
 import '../utils/xhttp.dart';
-import '../utils/xlocalstorage.dart';
+import '../utils/xstorage.dart';
 import 'config.dart';
 
 class Global {

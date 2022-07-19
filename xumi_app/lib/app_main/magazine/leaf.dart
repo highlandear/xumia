@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/login/smslogin.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
 import '../../login/newaddress.dart';
@@ -132,7 +133,7 @@ class MagLeafView extends StatelessWidget {
     // 没有登录，先登录
     if (!Global.user.info.online()) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (const SignPage());
+        return (const SmsLogin());
       }));
       return;
     }

@@ -6,14 +6,14 @@ import 'loading.dart';
 /**
  * 快速登录
  */
-class SignPage extends StatefulWidget {
-  const SignPage({Key? key}) : super(key: key);
+class XSignPage extends StatefulWidget {
+  const XSignPage({Key? key}) : super(key: key);
 
   @override
   _SignPageState createState() => _SignPageState();
 }
 
-class _SignPageState extends State<SignPage> {
+class _SignPageState extends State<XSignPage> {
   FocusNode blankNode = FocusNode();
   final TextEditingController _telController = TextEditingController();
   final GlobalKey _formKey = GlobalKey<FormState>();

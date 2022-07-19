@@ -5,6 +5,7 @@ import '../../data/global.dart';
 import '../../login/newaddress.dart';
 import '../../login/selectaddress.dart';
 import '../../login/sign.dart';
+import '../../login/smslogin.dart';
 import '../../utils/xtoast.dart';
 
 /// 详细展示和购买页面
@@ -338,7 +339,7 @@ class _PurchaseState extends State<PurchasePage>
   _login() {
     Navigator.of(context)
         .push(
-          MaterialPageRoute(builder: (_) => const SignPage()),
+          MaterialPageRoute(builder: (_) => const SmsLogin()),
         )
         .then((val) => val != null ? _getMe() : null);
   }

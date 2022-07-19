@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/global.dart';
-import 'sign.dart';
 import '../app_main/gallery/main.dart';
+import 'smslogin.dart';
 
 class LoginTipPage extends StatefulWidget {
   const LoginTipPage({Key? key, required this.tip}) : super(key: key);
@@ -19,7 +19,7 @@ class _LoginTipPageState extends State<LoginTipPage> {
   _login() {
     Navigator.of(context)
         .push(
-          MaterialPageRoute(builder: (_) => const SignPage()),
+          MaterialPageRoute(builder: (_) => const SmsLogin()),
         )
         .then((val) => val != null ? _getMe() : null);
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/login/sign.dart';
+import 'package:xumi_app/login/smslogin.dart';
 import '../../../../bean/userinfo.dart';
 import '../../../../data/global.dart';
 import 'detail.dart';
@@ -34,7 +35,8 @@ class _MyInfoHeadState extends State<MyInfoHead> {
         if (!me.online()) {
           Navigator.of(context)
               .push(
-                MaterialPageRoute(builder: (_) => const SignPage()),
+              //  MaterialPageRoute(builder: (_) => const SignPage()),
+                MaterialPageRoute(builder: (_) => const SmsLogin()),
               )
               .then((val) => val != null ? _getMe() : null);
         } else {

@@ -1,6 +1,7 @@
 class Config {
 
   static const String baseURL = "https://cognitivelab.net/";
+  //static const String baseURL = "10.66.7.97";
   //static const String baseURL = "http://10.66.24.140:8080/";
 
   static const String magzine = "magazine.do";
