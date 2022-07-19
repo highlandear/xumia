@@ -52,6 +52,7 @@ class _GalleryState extends State<Gallery> {
             {
               if (async.hasError) return _buildError('请检查网络');
               if (async.hasData) {
+
               return GalleryCardsView(data: async.data);
                 //return StaggerView(data: async.data);
               }

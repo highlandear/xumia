@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/app_main/gallery/stagger.dart';
 import 'full.dart';
 
 class GalleryCardsView extends StatelessWidget {
@@ -7,6 +8,10 @@ class GalleryCardsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(data.length > 2){
+      return StaggerView(data: data);
+    }
+
     List<Widget> cards = [];
 
     for (var element in data) {

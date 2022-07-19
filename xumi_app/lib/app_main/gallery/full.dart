@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
 
 class FullScreenImagePage extends StatefulWidget {
 
@@ -28,6 +29,10 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
       body:Container(
         margin: const EdgeInsets.all(20.0),
         child: Image.network(widget.imageURL, fit: BoxFit.fitWidth,),
+      //  child: CachedNetworkImage(
+      //     imageUrl: widget.imageURL,
+      //    fit: BoxFit.fitWidth,
+      //   ),
       ),
     );
   }

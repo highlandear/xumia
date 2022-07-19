@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:xumi_app/app_main/gallery/singlecard.dart';
 import 'full.dart';
 
 class StaggerView extends StatelessWidget {
@@ -9,9 +10,10 @@ class StaggerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('widget.title'),
-      // ),
+      appBar: AppBar(
+        title: const Text('我的画廊'),
+        backgroundColor: Colors.orangeAccent,
+      ),
       body: StaggeredGridView.countBuilder(
         padding: const EdgeInsets.all(8.0),
         crossAxisCount: 4,
@@ -28,21 +30,22 @@ class StaggerView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return FullScreenImagePage(imageURL: data[i].path,);
+                      return FullScreenImagePage(imageURL: data[i].data,);
                     },
                   ),
                 );
               },
-              child: Hero(
-                tag: data[i].path,
-                //child: CachedNetworkImage(
-                child: Image.network(data[i].path),
-              ),
+           // child:Image.network(data[i].data),
+              child: SinglecardView(nft: data[i],),
+
+            // child: CachedNetworkImage(
+            //         imageUrl: data[i].data,
+            //   ),
             ),
           );
         },
         staggeredTileBuilder: (int index) =>
-            StaggeredTile.count(2, index == 0 ? 2.5 : 3), //
+            StaggeredTile.count(2, index == 0 ? 5: 6), //
         mainAxisSpacing: 8.0,
         crossAxisSpacing: 8.0,
       ),
