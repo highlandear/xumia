@@ -5,9 +5,9 @@ import '../data/global.dart';
 import 'loading.dart';
 
 class AddressSelectionPage extends StatefulWidget {
-  AddressSelectionPage({Key? key, this.data = ''}) : super(key: key);
+  AddressSelectionPage({Key? key, required this.data}) : super(key: key);
 
-  String data;
+  int data;
 
   @override
   _AddressSelectionPageState createState() => _AddressSelectionPageState();

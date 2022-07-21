@@ -8,7 +8,7 @@ class XHttp {
     baseUrl: Config.baseURL,
     connectTimeout: 5000,
     receiveTimeout: 5000,
-    headers: {"token": ""},
+    headers: {'Authorization': 'Basic Y2xpZW50Og=='},
     contentType: Headers.jsonContentType,
     responseType: ResponseType.json,
   ));
@@ -56,6 +56,7 @@ class XHttp {
 
   _onResponse(Response response) {
     if (response.statusCode == 200) {
+   //   print(response.data);
       return response.data;
     }
 

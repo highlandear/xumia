@@ -15,10 +15,10 @@ class Global {
   DeliverData house = DeliverData();
 
   loadMe() {
-    AStorage.getv('me').then((value) => {
-          info =
-              null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
-        });
+    // AStorage.getv('me').then((value) => {
+    //       info =
+    //           null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
+    //     });
   }
 
   logout() {
@@ -28,17 +28,39 @@ class Global {
 
   Future loadMagData() async {
     return CertiPass.listfromJson(await XHttp.instance
-        .get(Config.magzine, params: {'username': info.did}));
+        .post(Config.magazine, params: {'username': info.phoneid}));
+  }
+
+  /**
+   * 请求登录
+   * 返回token
+   */
+  reqLogin(username, password, {success, fail}) {
+    XHttp.instance.post(Config.postlogin, params: {
+      'phone_number': username,
+      'password': password,
+      'userType':0,
+      'grant_type': 'sms_captcha',
+    }).then((val) {
+      var erode = val['code'];
+      if (erode == 200) {
+        info.token = val['data']['token'];
+        info.phoneid = username;
+        success();
+      } else {
+        fail(erode);
+      }
+    });
   }
 
   Future loadGalleryData() async {
     return GNFTData.listfromJson(await XHttp.instance.get(Config.getMyData,
-        params: {'username': info.mainID, 'datatype': 'art'}));
+        params: {'username': info.phoneid, 'datatype': 'art'}));
   }
 
   reqMyAddress({success, fail}) {
     XHttp.instance
-        .get(Config.myAddress, params: {'username': info.mainID}).then((val) {
+        .get(Config.myAddress, params: {'username': info.phoneid}).then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
         house = DeliverData.fromJson(jsonDecode(val)['data']);
@@ -52,7 +74,7 @@ class Global {
   reqSendMeItem2NewAddress(where, itemid, {success, fail}) {
     XHttp.instance
         .postData(Config.buyItem2NewAddress,
-            params: {'username': info.mainID, 'itemid': itemid}, data: where)
+            params: {'username': info.phoneid, 'itemid': itemid}, data: where)
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
@@ -66,7 +88,7 @@ class Global {
 
   reqBuyItem(itemid, {success, fail}) {
     XHttp.instance.postData(Config.buyItem,
-        params: {'username': info.mainID, 'itemid': itemid}).then((val) {
+        params: {'username': info.phoneid, 'itemid': itemid}).then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
         success();
@@ -79,7 +101,7 @@ class Global {
   reqAddNewAddress(where, {success, fail}) {
     XHttp.instance
         .postData(Config.addNewAddress,
-            params: {'username': info.mainID}, data: where)
+            params: {'username': info.phoneid}, data: where)
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
@@ -91,24 +113,11 @@ class Global {
     });
   }
 
-  reqLogin(username, password, {success, fail}) {
-    XHttp.instance.post(Config.login, params: {
-      'username': username,
-      'password': password,
-    }).then((val) {
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        info = UserInfo.fromJson(jsonDecode(val)['data']);
-        success();
-      } else {
-        fail(erode);
-      }
-    });
-  }
+
 
   reqMyData(datatype, {success, fail}) {
     XHttp.instance.get(Config.getMyData,
-        params: {'username': info.mainID, 'datatype': datatype}).then((val) {
+        params: {'username': info.phoneid, 'datatype': datatype}).then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
         success(val);

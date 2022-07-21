@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/login/sign.dart';
-import 'package:xumi_app/login/smslogin.dart';
 import '../../../../bean/userinfo.dart';
 import '../../../../data/global.dart';
+import '../../login/smslogin.dart';
 import 'detail.dart';
 import 'colors.dart';
 
@@ -89,7 +88,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                me.online() ? me.mainID : '点击登录',
+                me.online() ? me.phoneid : '点击登录',
                 style: const TextStyle(
                   color: MineColors.xumi_black,
                   fontSize: 16,
@@ -97,7 +96,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
                 ),
               ),
               Text(
-                me.online() ? me.did : '点击登录',
+                me.online() ? me.phoneid : '点击登录',
                 style: const TextStyle(
                   color: MineColors.xumi_black,
                   fontSize: 15,

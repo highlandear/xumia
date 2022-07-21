@@ -7,11 +7,11 @@ import '../data/global.dart';
 import 'loading.dart';
 
 class AddAddressPage extends StatefulWidget {
-    const AddAddressPage({Key? key, required this.title, this.data='' })
+     AddAddressPage({Key? key, required this.title, required this.data})
       : super(key: key);
 
   final String title;
-  final String data;
+  int data;
 
   @override
   _AddAddressPageState createState() => _AddAddressPageState();
@@ -29,7 +29,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
 
   @override
   Widget build(BuildContext context) {
-    _telController.text = _me.online() ? _me.mainID : '';
+    _telController.text = _me.online() ? _me.phoneid : '';
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: GestureDetector(
@@ -167,7 +167,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
           );
         });
 
-    if (widget.data.isEmpty) {
+    if (widget.data == 0) {
       //仅添加地址
       Global.user.reqAddNewAddress(getAddressInfo(), success: () {
         XToast.success("添加成功");

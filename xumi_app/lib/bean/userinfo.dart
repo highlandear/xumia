@@ -1,28 +1,31 @@
 class UserInfo {
   UserInfo({
-    this.did = '',
-    this.mainID = '',
+    this.phoneid = '',
+    this.token = '',
   });
 
-  String did;
-  String mainID; // tel
+  String phoneid;
+  String token; // tel
 
+  /*
   toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['did'] = did;
-    data['mainID'] = mainID;
+    data['phoneid'] = phoneid;
+    data['token'] = token;
 
     return data;
   }
 
+
+
   static UserInfo fromJson(Map<String, dynamic> json) {
     return UserInfo(
-      did: json['did'],
-      mainID: json['mainID'],
+    //  phoneid: json['did'],
+      token: json['token'],
     );
   }
-
+  */
   bool online() {
-    return did.isNotEmpty;
+    return token.isNotEmpty;
   }
 }

@@ -138,7 +138,7 @@ class MagLeafView extends StatelessWidget {
       return;
     }
 
-    if (item.productid == 'ad') {
+    if (item.hasProduct()) {
       // 本地有地址
       if (Global.user.house.hasAddress()) {
         // XToast.toast('已有地址');
@@ -158,14 +158,14 @@ class MagLeafView extends StatelessWidget {
           return (AddAddressPage(title: '收件人信息', data: item.id));
         }));
       });
-    } else if (item.productid.isEmpty) {
+    } else if (! item.hasProduct()) {
       Global.user.reqBuyItem(item.id, success: () {
         XToast.success('已经直接购入，请查看');
       }, fail: () {});
     } else {
       Navigator.of(context).push(MaterialPageRoute(builder: (_) {
         return Browser(
-          url: item.productid,
+          url: '',
           title: "请完成小任务",
         );
       }));

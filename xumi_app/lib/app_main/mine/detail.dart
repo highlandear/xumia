@@ -51,7 +51,7 @@ class MyDetailView extends StatelessWidget {
       }));
     }, fail: () {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (const AddAddressPage(title: '填写收件人信息'));
+        return (AddAddressPage(title: '填写收件人信息', data: 0,));
       }));
     });
   }

@@ -12,13 +12,13 @@ import com.xumi.provider.model.nft.Ticket;
 public class Magazine {
 
 	static String[] paths = { 
-			"https://cognitivelab.net/imgs/a.jpg", // 烟斗
-			"https://cognitivelab.net/imgs/d.jpg", //兔子 
+			"http://cognitivelab.net/imgs/a.jpg", // 烟斗
+			"http://cognitivelab.net/imgs/d.jpg", //兔子 
 			
-			"https://cognitivelab.net/imgs/b.jpg", // 以下几个是边顶产品的信息图
-			"https://cognitivelab.net/imgs/c.jpg", //
-			"https://cognitivelab.net/imgs/e.jpg",
-			"https://cognitivelab.net/imgs/f.jpg", 
+			"http://cognitivelab.net/imgs/b.jpg", // 以下几个是边顶产品的信息图
+			"http://cognitivelab.net/imgs/c.jpg", //
+			"http://cognitivelab.net/imgs/e.jpg",
+			"http://cognitivelab.net/imgs/f.jpg", 
 			
 			"https://img.alicdn.com/imgextra/i3/2209380674403/O1CN01CxRGs01iOcX7EnYlv_!!2209380674403.jpg", //喜马拉雅
 			};

@@ -86,10 +86,8 @@ class _PurchaseState extends State<PurchasePage>
             controller: _scrollController,
             child: Column(
               children: [
-                // _buildListView(context),
-                // Image.network(widget.item.cover),
-                if (_item.desc.isNotEmpty) _buildDescCard(context),
-                Image.network(_item.detail),
+                if (_item.desc.isNotEmpty) _buildDescCard(_item.desc),
+                if(_item.detail.isNotEmpty) _buildDetailInfo(_item.detail),
               ],
             ),
           ),
@@ -159,7 +157,10 @@ class _PurchaseState extends State<PurchasePage>
     );
   }
 
-  Widget _buildDescCard(BuildContext context) {
+  Widget _buildDetailInfo(detail){
+    return Image.network(detail);
+  }
+  Widget _buildDescCard(desc) {
     return GestureDetector(
       onTap: () {},
       child: Card(
@@ -170,7 +171,7 @@ class _PurchaseState extends State<PurchasePage>
             const Text('\n'),
             // Text('@${_item.owner}'),
             ListTile(
-              title: Text(_item.desc),
+              title: Text(desc),
             )
           ],
         ),

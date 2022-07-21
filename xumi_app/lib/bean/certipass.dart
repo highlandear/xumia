@@ -2,37 +2,40 @@ import 'dart:convert';
 
 class CertiPass {
   CertiPass(
-      {this.id = '',
+      {this.id = 0,
       this.cover = '',
-      this.detail = '',
       this.desc = '',
-  //    this.owner = '',
-      this.productid = '',
-      this.price = ''});
+      this.detail = '',
+      this.freight = false,
+      this.price = '￥50'});
 
-  String id;
-  String cover;
-  String detail;
+  int id;
+  String cover; // imageUrl
   String desc;
-//  String owner;
-  String productid;
+  String detail;
+  bool freight;
   String price;
 
-  hasProduct() => productid.isNotEmpty;
+  hasProduct() => freight;
 
   static CertiPass fromJson(Map<String, dynamic> json) {
+    print(json['id']);
+    print(json['imageUrl']);
+
     return CertiPass(
         id: json['id'],
-        cover: json['cover'],
-        detail: json['detail'],
+        cover: json['imageUrl'],
         desc: json['desc'],
-        productid: json['productid'],
-    //    owner: json['owner'],
-        price: json['price']);
+        freight: json['freight'],
+        detail: json['imageUrl'],
+      //  price: json['price']
+    );
   }
 
   static List<CertiPass> listfromJson(dynamic json) {
-    return (jsonDecode(json)['data'] as List<dynamic>)
+    // print('-------------------------');
+    print(json['data']['list']);
+    return (json['data']['list'] as List<dynamic>)
         .map((e) => CertiPass.fromJson((e as Map<String, dynamic>)))
         .toList();
   }
