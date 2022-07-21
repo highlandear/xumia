@@ -9,19 +9,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class Ticket extends NFTData {
 	
-	public static Ticket create(String d) {
+	public static Ticket create(int d) {
 		return new Ticket(d);
 	}
 
-	private Ticket(String data) {super(data);}
+	private Ticket(int data) {super(data);}
 
 	@Override
-	public String getType() {		
-		return "ticket";
+	public int getType() {		
+		return 3;
 	}
-	
-	// 可附加的NFT道具等，根据业务情景使用
-	@JsonIgnore
-	NFTData others;
 
 }

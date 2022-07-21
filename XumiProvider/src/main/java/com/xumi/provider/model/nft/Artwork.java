@@ -7,15 +7,15 @@ package com.xumi.provider.model.nft;
  */
 public class Artwork extends NFTData{
 	
-	public static Artwork create(String d) {
+	public static Artwork create(int d) {
 		return new Artwork(d);
 	}
 
-	private Artwork(String data) {super(data);}
+	private Artwork(int id) {super(id);}
 
 	@Override
-	public String getType() {		
-		return "art";
+	public int getType() {		
+		return 1;
 	}
 	
 }

@@ -5,24 +5,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DeliverData {
 	DeliverData(){}
 	
-	public String getTel() {return this.tel;}
+	public String getID() {return this.id;}
 	
 	public String getName() {return this.name;}
 	
-	public String getAddress() {return this.address;}
+//	public String getAddress() {return this.address;}
 	
 	public String getDetail() {return this.detail;}
 	
-	@JsonProperty("tel")
-	String tel;
-	
-	@JsonProperty("name")
-	String name;
-	
-	@JsonProperty("address")
-	String address;
-	
-	@JsonProperty("detail")
-	String detail;
+	@JsonProperty("id")
+	String id;
+	@JsonProperty("id")
+	  String desc;
+	  String phone;
+	  String name;
+	  String prov;
+	  String city;
+	  String dist;
+	  String detail;
+	  boolean isDefault;
 	
 }

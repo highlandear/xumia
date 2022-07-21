@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../data/global.dart';
 import '../../login/newaddress.dart';
-import '../../login/addrsel.dart';
+import '../../login/addresslist.dart';
 import '../../utils/xqrgen.dart';
 import '../mode/item.dart';
 import '../mode/list_view.dart';
@@ -40,7 +40,7 @@ class MyDetailView extends StatelessWidget {
   _showAddressInfo(BuildContext context) {
     if (Global.user.hasAddress()) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (const MyAddressPage());
+        return (const MyAddressListPage());
       }));
       return;
     }
@@ -48,7 +48,7 @@ class MyDetailView extends StatelessWidget {
     Global.user.reqMyAddress(success:(){
       if(Global.user.hasAddress()) { // 如果请求到地址列表
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (const MyAddressPage());
+          return (const MyAddressListPage());
         }));
       }
       else{ // 请求到的列表为空

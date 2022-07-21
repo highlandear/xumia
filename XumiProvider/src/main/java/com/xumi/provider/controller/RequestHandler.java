@@ -21,15 +21,20 @@ import com.xumi.provider.model.user.UserManager;
 @EnableAutoConfiguration
 public class RequestHandler {
 	
-	  static final String magzine = "magazine.do";	// 杂志主页请示
-	  static final String login = "login.do";		// 登录请示
-	  static final String addNewAddress = "addNewAddress.do";	// 添加地址请求
-	  static final String myAddress = "myAddress.do";	//请求保存的地址
-	  static final String buyItem2NewAddress = "buyItem2NewAddress.do"; // 买物品寄到新添加的地址
-	  static final String buyItem ="buyItem.do";	//	买物品
-	  static final String getMyData="getMyData.do";	//	获取个人的画廊、门票等数据
+	  static final String rootUrl = "https://www.cognitivelab.net/";
+	  //static final String baseURL = "https://cognitivelab.net/";
+	  //static final String baseURL = "http://10.0.0.6:8080/";
+	  static final String baseURL = "http://10.66.7.97/";
 
-	@RequestMapping(value = magzine, method = RequestMethod.GET)
+	  static final String magazine = "market/certipass/home";
+	  static final String postlogin = "oauth/token";
+	  static final String buyItem = "market/certipass/buy";
+	  static final String getMyData= "market/certipass/pos";
+	  static final String getallmyAddress = "market/consumer/address";
+	  static final String updateAddress = "market/consumer/address/update";
+	  static final String removeAddress = "market/consumer/address/remove";
+
+	@RequestMapping(value = magazine, method = RequestMethod.POST)
 	public String magazine(HttpServletRequest request) {
 
 		String username = request.getParameter("username");
@@ -42,7 +47,7 @@ public class RequestHandler {
 	 * @param datatype : gallery,tickets,homeitem,
 	 * @return
 	 */
-	@RequestMapping(value = getMyData, method = RequestMethod.GET)
+	@RequestMapping(value = getMyData, method = RequestMethod.POST)
 	public String getMyData(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		String datatype = request.getParameter("datatype");
@@ -52,7 +57,7 @@ public class RequestHandler {
 	}
 	
 
-	@RequestMapping(value = login, method = RequestMethod.POST)
+	@RequestMapping(value = postlogin, method = RequestMethod.POST)
 	public String register(@RequestParam("username") String username, @RequestParam("password") String password) {
 	//	System.out.println("username is:" + username);
 	//	System.out.println("password is:" + password);
@@ -77,18 +82,18 @@ public class RequestHandler {
 		DataBean<?> res = new DataBean<>(ok? "0":"1");
 		return res.toJson();
 	}
-	
+/*	
 	@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
 	public String sendItem2NewAddress(@RequestParam("username") String username, @RequestParam("itemid") String itemid,
 			@RequestBody DeliverData houseInfo) {
-/*
+
 		System.out.println(username);
 		System.out.println(itemid);
 		System.out.println(houseInfo.getTel());
 		System.out.println(houseInfo.getName());
 		System.out.println(houseInfo.getAddress());
 		System.out.println(houseInfo.getDetail());
-*/		
+		
 		UserManager.getInstance().addAddr(username, houseInfo);
 		UserData user = UserManager.getInstance().get(username);
 		if(user == null)
@@ -105,17 +110,18 @@ public class RequestHandler {
 
 		return res.toJson();
 	}
-	
+	*/
+	/*
 	@RequestMapping(value = addNewAddress, method = RequestMethod.POST)
 	public String addNewAddress(@RequestParam("username") String username, @RequestBody DeliverData house) {
 
-		/*
+		
 		System.out.println(username);
 		System.out.println(house.getTel());
 		System.out.println(house.getName());
 		System.out.println(house.getAddress());
 		System.out.println(house.getDetail());
-		*/
+		
 		UserManager.getInstance().addAddr(username, house);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
@@ -124,7 +130,8 @@ public class RequestHandler {
 
 		return res.toJson();
 	}
-
+	 */
+	/*
 	@RequestMapping(value = myAddress, method = RequestMethod.GET)
 	public String reqAddr(@RequestParam("username") String username) {
 
@@ -136,5 +143,6 @@ public class RequestHandler {
 
 		return res.toJson();
 	}
+	*/
 }
 

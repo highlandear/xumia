@@ -10,14 +10,58 @@ class Global {
   static final Global _instance = Global();
   static Global get user => _instance;
 
-  UserInfo info = UserInfo();
-  List<UserAddress> _myaddres = [];
+ // UserInfo info = UserInfo();
+ // List<UserAddress> _addressList = [];
 
-  hasAddress() => _myaddres.isNotEmpty;
+  UserInfo info = UserInfo(phoneid: '123748484', token: 'abcdeflsla');
+  List<UserAddress> _addressList = [
+    UserAddress(
+        name:'HZS',
+        desc:'公司',
+        phone: '1378288282',
+        prov: '北京',
+        city: '北京',
+        dist: '海淀区',
+        detail: '学清路18号',
+        isDefault: true
+    ),
+    UserAddress(
+      name:'黄作胜',
+      desc:'我家',
+      phone: '1378288282',
+      prov: '北京',
+      city: '北京',
+      dist: '海淀区',
+      detail: '学清路18号',
+      isDefault: false
+    ),
+    UserAddress(
+        name:'toal',
+        desc:'我家',
+        phone: '1378288282',
+        prov: '北京',
+        city: '北京',
+        dist: '海淀区',
+        detail: '学清路18号',
+        isDefault: false
+    ),
+  ];
+
+  getDefaultAddress(){
+    for (var element in _addressList) {
+      if(element.isDefault)
+        return element;
+    }
+    return null;
+  }
+
+  hasAddress() => _addressList.isNotEmpty;
+
+  getAddressList() => _addressList;
 
   logout() {
     info = UserInfo();
-    _myaddres = [];
+    _addressList = [];
   }
 
   Future loadMagData() async {

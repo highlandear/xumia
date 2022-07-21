@@ -15,9 +15,6 @@ class UserInfo {
 
     return data;
   }
-
-
-
   static UserInfo fromJson(Map<String, dynamic> json) {
     return UserInfo(
     //  phoneid: json['did'],

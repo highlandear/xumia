@@ -6,22 +6,23 @@ import com.xumi.provider.model.nft.NFTData;
 
 /**
  * 通证基本信息
+ * 
  * @author
  *
  */
 public final class CertiPass {
-	public static CertiPass create(String id,  String cover, String desc, String detail, String owner, String price) {
+	public static CertiPass create(String id, String cover, String desc, String detail, String owner, String price) {
 		return new CertiPass(id, cover, desc, detail, owner, price);
 	}
-	
-	CertiPass(){}
-	
-	private CertiPass(String id, String cover, String desc, String detail, String owner, String price){
+
+	CertiPass() {
+	}
+
+	private CertiPass(String id, String cover, String desc, String detail, String owner, String price) {
 		this.id = id;
 		this.cover = cover;
 		this.desc = desc;
 		this.detail = detail;
-	//	this.owner = owner;
 		this.price = price;
 	}
 
@@ -29,38 +30,31 @@ public final class CertiPass {
 		nft = data;
 		return this;
 	}
-	
+
 	CertiPass with(String prodid) {
 		productid = prodid;
 		return this;
 	}
-	
+
 	public NFTData getNft() {
 		return this.nft;
 	}
-	
-	@JsonProperty("id")
-	String id;
-	
-	// 封面
-	@JsonProperty("cover")
-	String cover;		
-	
-	@JsonProperty("detail")
-	String detail;
 
-	// 描述信息
+	@JsonProperty("id")
+	int id;
+	
+	@JsonProperty("type")
+	int type;
+	
 	@JsonProperty("desc")
 	String desc;
 	
-	// 附带可邮寄物品的ID
-	@JsonProperty("productid")
-	String productid = "";
+	@JsonProperty("ipfsHash")
+	String nftpath;
 	
-	@JsonProperty("price")
-	String price;
+	@JsonProperty("url")
+	String url;
 	
-	// 通证附带的NFT
-	@JsonIgnore
-	NFTData nft;
+	@JsonProperty("extra")
+	String extra;
 }

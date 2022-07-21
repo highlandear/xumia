@@ -7,13 +7,13 @@ package com.xumi.provider.model.nft;
  */
 public class Membership extends NFTData {
 
-	Membership(String data) {
+	Membership(int data) {
 		super(data);
 	}
 
 	@Override
-	public String getType() {
-		return "member";
+	public int getType() {
+		return 2;
 	}
 
 }
