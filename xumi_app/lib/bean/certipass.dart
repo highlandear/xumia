@@ -19,9 +19,6 @@ class CertiPass {
   hasProduct() => freight;
 
   static CertiPass fromJson(Map<String, dynamic> json) {
-    print(json['id']);
-    print(json['imageUrl']);
-
     return CertiPass(
         id: json['id'],
         cover: json['imageUrl'],
@@ -33,8 +30,6 @@ class CertiPass {
   }
 
   static List<CertiPass> listfromJson(dynamic json) {
-    // print('-------------------------');
-    print(json['data']['list']);
     return (json['data']['list'] as List<dynamic>)
         .map((e) => CertiPass.fromJson((e as Map<String, dynamic>)))
         .toList();

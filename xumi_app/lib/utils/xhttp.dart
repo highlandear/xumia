@@ -13,6 +13,7 @@ class XHttp {
     responseType: ResponseType.json,
   ));
 
+
   static get instance => _http;
 
   XHttp() {
@@ -28,6 +29,10 @@ class XHttp {
       _handleError(e);
       return handler.next(e);
     }));
+  }
+
+  setHeaders(key, value){
+    _dio.options.headers[key] = value;
   }
 
   _handleError(DioError e) {

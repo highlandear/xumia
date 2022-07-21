@@ -20,7 +20,7 @@ class SinglecardView extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) {
               return FullScreenImagePage(
-                imageURL: nft.data,
+                imageURL: nft.nftpath,
               );
             },
           ),
@@ -30,14 +30,14 @@ class SinglecardView extends StatelessWidget {
           children: <Widget>[
             Container(
               child: Image.network(
-                nft.data,
+                nft.nftpath,
                 fit: BoxFit.cover,
               ),
               margin: const EdgeInsets.all(0),
             ),
           //  Text(nft.caption),
 
-            Text('${nft.caption}ttttttttttttttt'),
+            Text('${nft.desc}ttttttttttttttt'),
             const CircleAvatar(
               radius: 10,
               //  backgroundImage: NetworkImage(

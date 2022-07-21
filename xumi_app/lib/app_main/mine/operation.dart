@@ -1,17 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/gallery/gcard.dart';
 import 'package:xumi_app/app_main/mine/ticketcart.dart';
-import '../../bean/gnftcard.dart';
 import '../../bean/gnftdata.dart';
 import '../../data/global.dart';
 import '../../utils/browser.dart';
-import '../../utils/xqrgen.dart';
 import '../../utils/xqrscan.dart';
 import '../../utils/xtoast.dart';
-import '../../login/logintip.dart';
-import '../gallery/main.dart';
 import '../mode/item.dart';
 import '../mode/list_view.dart';
 import 'settings.dart';
@@ -30,9 +25,9 @@ class _MineContentState extends State<MineContent>{
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/find/find_scan.png', '扫码', 'scan', false),
     ClickItem('', '', 'divide', false),
-    ClickItem('assets/images/mine/mine_collection.png', '门票', 'ticket', true),
-    ClickItem('assets/images/mine/mine_wallet.png', '卡包', 'cards', true),
-    ClickItem('assets/images/mine/mine_collection.png', '家园', 'home', true),
+    ClickItem('assets/images/mine/mine_collection.png', '门票', '3', true),
+    ClickItem('assets/images/mine/mine_wallet.png', '会员', '2', true),
+    ClickItem('assets/images/mine/mine_collection.png', '家园', '4', true),
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false)
   ];
@@ -97,7 +92,7 @@ _tap(BuildContext context, String type){
       break;
 
     default:
-      Global.user.reqMyData(type, success: (data){
+      Global.user.reqMyData(int.parse(type), success: (data){
         _onData(context, type, data);
       }, fail: (){
 
@@ -109,11 +104,11 @@ _tap(BuildContext context, String type){
 _onData(context, type, data){
 
     switch(type){
-      case 'ticket':
+      case '3':
         var list = GNFTData.listfromJson(data);
         Navigator.of(context)
             .push( MaterialPageRoute(builder: (_) {
-          return TicketCardsView(data: list);
+          return TicketListView(data: list);
         }));
         break;
       default:

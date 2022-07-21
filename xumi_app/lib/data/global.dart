@@ -39,13 +39,15 @@ class Global {
     XHttp.instance.post(Config.postlogin, params: {
       'phone_number': username,
       'password': password,
-      'userType':0,
+      'userType': 0,
       'grant_type': 'sms_captcha',
     }).then((val) {
       var erode = val['code'];
       if (erode == 200) {
         info.token = val['data']['token'];
         info.phoneid = username;
+
+        XHttp.instance.setHeaders('XUMI-TOKEN', 'Bearer ${info.token}');
         success();
       } else {
         fail(erode);
@@ -53,9 +55,38 @@ class Global {
     });
   }
 
+  /**
+   * 购买通证,无物品
+   */
+  reqBuyItem(itemid, {success, fail}) {
+    XHttp.instance.postData(Config.buyItem, params: {'id': itemid}).then((val) {
+      var erode = val['code'];
+      if (erode == 200) {
+        success();
+      } else {
+        fail();
+      }
+    });
+  }
+
+  /**
+   * 加载画廊信息
+   */
   Future loadGalleryData() async {
-    return GNFTData.listfromJson(await XHttp.instance.get(Config.getMyData,
-        params: {'username': info.phoneid, 'datatype': 'art'}));
+    return GNFTData.listfromJson(
+        await XHttp.instance.post(Config.getMyData, params: {'type': 1}));
+  }
+
+  reqMyData(datatype, {success, fail}) {
+    XHttp.instance
+        .post(Config.getMyData, params: {'type': datatype}).then((val) {
+      var erode =val['code'];
+      if (erode == 200) {
+        success(val);
+      } else {
+        fail(erode);
+      }
+    });
   }
 
   reqMyAddress({success, fail}) {
@@ -86,18 +117,6 @@ class Global {
     });
   }
 
-  reqBuyItem(itemid, {success, fail}) {
-    XHttp.instance.postData(Config.buyItem,
-        params: {'username': info.phoneid, 'itemid': itemid}).then((val) {
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        success();
-      } else {
-        fail();
-      }
-    });
-  }
-
   reqAddNewAddress(where, {success, fail}) {
     XHttp.instance
         .postData(Config.addNewAddress,
@@ -109,20 +128,6 @@ class Global {
         success();
       } else {
         fail();
-      }
-    });
-  }
-
-
-
-  reqMyData(datatype, {success, fail}) {
-    XHttp.instance.get(Config.getMyData,
-        params: {'username': info.phoneid, 'datatype': datatype}).then((val) {
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        success(val);
-      } else {
-        fail(erode);
       }
     });
   }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/bean/gnftdata.dart';
 import 'ticketshow.dart';
 
-class TicketCardsView extends StatelessWidget {
-  const TicketCardsView({Key? key, required this.data}) : super(key: key);
+/**
+ * 门票列表
+ */
+class TicketListView extends StatelessWidget {
+  const TicketListView({Key? key, required this.data}) : super(key: key);
   final List data;
 
   @override
@@ -41,7 +45,7 @@ class TicketCardsView extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context, item) {
+  Widget _buildCard(BuildContext context, GNFTData item) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -49,7 +53,7 @@ class TicketCardsView extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) {
               return TicketShowPage(
-                info: item.data,
+                ticket: item,
               );
             },
           ),
@@ -62,7 +66,7 @@ class TicketCardsView extends StatelessWidget {
           children: <Widget>[
             Container(
               child: Image.network(
-                item.data,
+                item.nftpath,
                 fit: BoxFit.cover,
               ),
               margin: const EdgeInsets.all(10),
@@ -72,9 +76,9 @@ class TicketCardsView extends StatelessWidget {
                 //  backgroundImage: NetworkImage(
                 //     item.desc),
               ),
-              title: Text(item.author),
+              title: Text(item.desc),
               subtitle: Text(
-                item.caption,
+                item.extra,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),

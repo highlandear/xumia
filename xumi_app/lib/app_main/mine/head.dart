@@ -88,7 +88,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                me.online() ? me.phoneid : '点击登录',
+                me.online() ? '用户[${me.phoneid}]' : '点击登录',
                 style: const TextStyle(
                   color: MineColors.xumi_black,
                   fontSize: 16,

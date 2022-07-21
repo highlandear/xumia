@@ -4,7 +4,7 @@ import '../../bean/certipass.dart';
 import '../../data/global.dart';
 import '../../login/newaddress.dart';
 import '../../login/selectaddress.dart';
-import '../../login/sign.dart';
+import '../../xref/sign.dart';
 import '../../login/smslogin.dart';
 import '../../utils/xtoast.dart';
 

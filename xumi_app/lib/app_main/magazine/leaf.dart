@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/login/smslogin.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
 import '../../login/newaddress.dart';
 import '../../login/selectaddress.dart';
-import '../../login/sign.dart';
+import '../../login/smslogin.dart';
 import '../../utils/browser.dart';
 import '../../utils/xtoast.dart';
 import 'buypage.dart';

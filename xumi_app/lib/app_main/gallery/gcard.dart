@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/app_main/gallery/stagger.dart';
+import '../../bean/gnftdata.dart';
 import 'full.dart';
 
 class GalleryCardsView extends StatelessWidget {
   const GalleryCardsView({Key? key, required this.data}) : super(key: key);
-  final List data;
+  final List<GNFTData> data;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class GalleryCardsView extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context, item) {
+  Widget _buildCard(BuildContext context, GNFTData item) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -54,7 +55,7 @@ class GalleryCardsView extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) {
               return FullScreenImagePage(
-                imageURL: item.data,
+                imageURL: item.nftpath,
               );
             },
           ),
@@ -67,7 +68,7 @@ class GalleryCardsView extends StatelessWidget {
           children: <Widget>[
             Container(
               child: Image.network(
-                item.data,
+                item.nftpath,
                 fit: BoxFit.cover,
               ),
               margin: const EdgeInsets.all(10),
@@ -77,9 +78,9 @@ class GalleryCardsView extends StatelessWidget {
                   //  backgroundImage: NetworkImage(
                   //     item.desc),
                   ),
-              title: Text(item.author),
+              title: Text(item.desc),
               subtitle: Text(
-                item.caption,
+                item.extra,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),

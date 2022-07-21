@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
       var erode = jsonDecode(val)['errorCode'];
       if (erode == 0) {
         XToast.toast('顺利登录');
-        Global.user.info = UserInfo.fromJson(jsonDecode(val)['data']);
+       // Global.user.info = UserInfo.fromJson(jsonDecode(val)['data']);
         Navigator.pop(context);
         Navigator.pop(context, true);
       } else if(erode == 1){
