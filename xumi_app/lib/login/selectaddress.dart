@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/utils/xtoast.dart';
-import '../bean/deliverdata.dart';
+import '../bean/useraddr.dart';
 import '../data/global.dart';
 import 'loading.dart';
 
@@ -15,15 +15,15 @@ class AddressSelectionPage extends StatefulWidget {
 
 class _AddressSelectionPageState extends State<AddressSelectionPage> {
 
-  Widget _buildDefaultView(DeliverData d) {
+  Widget _buildDefaultView(UserAddress d) {
     return ListTile(
       leading: const Icon(Icons.check, color: Colors.red),
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('${d.name}(${d.tel})'),
+          //  Text('${d.name}(${d.tel})'),
             const SizedBox(height: 10),
-            Text(d.address),
+         //   Text(d.address),
             Text(d.detail),
             const Divider(height: 20),
 
@@ -36,15 +36,15 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
     );
   }
 
-  Widget _buildOtherView(DeliverData d) {
+  Widget _buildOtherView(UserAddress d) {
     return ListTile(
       // leading: const Icon(Icons.check, color: Colors.red),
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('${d.name}(${d.tel})'),
+         //   Text('${d.name}(${d.tel})'),
             const SizedBox(height: 10),
-            Text(d.address),
+          // Text(d.address),
           ]),
     //  trailing: Icon(Icons.edit, color: Colors.blue),
     );
@@ -61,9 +61,8 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
             ListView(
               children: <Widget>[
                 const SizedBox(height: 20),
-                _buildDefaultView(Global.user.house),
-               // Divider(height: 20),
-              // _buildOtherView(Global.user.house),
+              //  _buildDefaultView(Global.user.house),
+
                 ElevatedButton(onPressed: (){
                   _buyThisItem(context);
                 }, child: const Text('确认')),

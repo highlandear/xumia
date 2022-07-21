@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:city_pickers/city_pickers.dart';
 import '../../utils/xtoast.dart';
-import '../bean/deliverdata.dart';
+import '../bean/useraddr.dart';
 import '../bean/userinfo.dart';
 import '../data/global.dart';
 import 'loading.dart';
@@ -22,9 +22,14 @@ class _AddAddressPageState extends State<AddAddressPage> {
   final TextEditingController _telController = TextEditingController();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _detailController = TextEditingController();
+  String _area ='';
+  String _prov ='';
+  String _city ='';
+  String _dist = '';
+
 
   final GlobalKey _formKey = GlobalKey<FormState>();
-  late String area = '';
+
   final UserInfo _me = Global.user.info;
 
   @override
@@ -80,8 +85,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
               child: Row(
                 children: <Widget>[
                   const Icon(Icons.place),
-                  area.isNotEmpty
-                      ? Text(area,
+                  _area.isNotEmpty
+                      ? Text(_area,
                           style: const TextStyle(color: Colors.black54))
                       : const Text('省/市/区',
                           style: TextStyle(color: Colors.black54))
@@ -95,10 +100,13 @@ class _AddAddressPageState extends State<AddAddressPage> {
                     confirmWidget:
                         const Text("确定", style: TextStyle(color: Colors.blue)));
 
-                print(result);
+               // print(result);
                 setState(() {
-                  area =
+                  _area =
                       "${result?.provinceName}/${result?.cityName}/${result?.areaName}";
+                  _prov = '${result?.provinceName}';
+                  _city = '${result?.cityName}';
+                  _dist = '${result?.areaName}';
                 });
               },
             ),
@@ -140,12 +148,18 @@ class _AddAddressPageState extends State<AddAddressPage> {
     );
   }
 
-  getAddressInfo() {
-    DeliverData ud = DeliverData(
-        tel: _telController.text,
+  _getAddressInfo() {
+    UserAddress ud = UserAddress(
+        phone:_telController.text,
         name: _unameController.text,
-        address: area,
-        detail: _detailController.text);
+        detail: _detailController.text,
+        prov: _prov,
+        city: _city,
+        dist: _dist,
+
+    );
+
+
     return ud.toJson();
   }
 
@@ -169,7 +183,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
 
     if (widget.data == 0) {
       //仅添加地址
-      Global.user.reqAddNewAddress(getAddressInfo(), success: () {
+      Global.user.reqUpdateAddress(_getAddressInfo(), success: () {
         XToast.success("添加成功");
         Navigator.pop(context);
         Navigator.pop(context);
@@ -178,7 +192,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
       });
     } else {
       // 请求购买，发货到新地址
-      Global.user.reqSendMeItem2NewAddress(getAddressInfo(), widget.data,
+      Global.user.reqSendMeItem2NewAddress(_getAddressInfo(), widget.data,
           success: () {
         XToast.success("获取成功，请等待发货");
         Navigator.pop(context);

@@ -9,9 +9,11 @@ class Config {
   static const String postlogin = 'oauth/token';
   static const String buyItem = 'market/certipass/buy';
   static const String getMyData= 'market/certipass/pos';
+  static const String getallmyAddress = 'market/consumer/address';
+  static const String updateAddress = 'market/consumer/address/update';
+  static const String removeAddress = 'market/consumer/address/remove';
 
   static const String addNewAddress = "addNewAddress.do";
-  static const String myAddress = "myAddress.do";
   static const String buyItem2NewAddress = "buyItem2NewAddress.do";
 
 

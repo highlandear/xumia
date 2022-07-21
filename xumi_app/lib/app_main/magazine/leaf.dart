@@ -139,7 +139,7 @@ class MagLeafView extends StatelessWidget {
 
     if (item.hasProduct()) {
       // 本地有地址
-      if (Global.user.house.hasAddress()) {
+      if (Global.user.hasAddress()) {
         // XToast.toast('已有地址');
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return (AddressSelectionPage(data: item.id));

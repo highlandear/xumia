@@ -9,8 +9,8 @@ import '../mode/list_view.dart';
 class MyDetailView extends StatelessWidget {
   final _models = [
     ClickItem('', '', 'divide', false),
-    ClickItem('assets/images/mine/mine_scan.png', '我的二维码', 'myqr', false),
-    ClickItem('assets/images/find/find_scan.png', '地址管理', 'addr', false),
+    ClickItem('assets/images/mine/mine_scan.png', '我的二维码', 'barcode', false),
+    ClickItem('assets/images/find/find_scan.png', '地址管理', 'address', false),
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_collection.png', '退出登录', 'exit', true)
   ];
@@ -19,13 +19,13 @@ class MyDetailView extends StatelessWidget {
 
   _tap(BuildContext context, String type) {
     switch (type) {
-      case 'myqr':
+      case 'barcode':
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           //return (QRPage('二维码信息', Global.mydata.me.did));
-          return (QRPage('二维码信息', 'http://cognitivelab.net/app-release.apk'));
+          return (const QRPage('二维码信息', 'http://cognitivelab.net/app-release.apk'));
         }));
         break;
-      case 'addr':
+      case 'address':
          _showAddressInfo(context);
         break;
       case 'exit':
@@ -38,7 +38,7 @@ class MyDetailView extends StatelessWidget {
   }
 
   _showAddressInfo(BuildContext context) {
-    if (Global.user.house.hasAddress()) {
+    if (Global.user.hasAddress()) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return (const MyAddressPage());
       }));
@@ -46,13 +46,18 @@ class MyDetailView extends StatelessWidget {
     }
 
     Global.user.reqMyAddress(success:(){
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (const MyAddressPage());
-      }));
+      if(Global.user.hasAddress()) { // 如果请求到地址列表
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return (const MyAddressPage());
+        }));
+      }
+      else{ // 请求到的列表为空
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return (AddAddressPage(title: '填写收件人信息', data: 0,));
+        }));
+      }
     }, fail: () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddAddressPage(title: '填写收件人信息', data: 0,));
-      }));
+
     });
   }
 

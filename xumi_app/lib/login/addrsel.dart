@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../bean/deliverdata.dart';
+import '../bean/useraddr.dart';
 import '../data/global.dart';
 
 class MyAddressPage extends StatefulWidget {
@@ -11,15 +11,15 @@ class MyAddressPage extends StatefulWidget {
 
 class _MyAddressPageState extends State<MyAddressPage> {
 
-  Widget _buildDefaultView(DeliverData d) {
+  Widget _buildDefaultView(UserAddress d) {
     return ListTile(
       leading: const Icon(Icons.check, color: Colors.red),
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('${d.name}(${d.tel})'),
+           // Text('${d.name}(${d.tel})'),
             const SizedBox(height: 10),
-            Text(d.address),
+           // Text(d.address),
             Text(d.detail),
             const Divider(height: 20),
 
@@ -32,15 +32,15 @@ class _MyAddressPageState extends State<MyAddressPage> {
     );
   }
 
-  Widget _buildOtherView(DeliverData d) {
+  Widget _buildOtherAddrView(UserAddress d) {
     return ListTile(
      // leading: const Icon(Icons.check, color: Colors.red),
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('${d.name}(${d.tel})'),
+         //   Text('${d.name}(${d.tel})'),
             const SizedBox(height: 10),
-            Text(d.address),
+         //   Text(d.address),
           ]),
       trailing: const Icon(Icons.edit, color: Colors.blue),
     );
@@ -57,9 +57,9 @@ class _MyAddressPageState extends State<MyAddressPage> {
             ListView(
               children: <Widget>[
                 const SizedBox(height: 20),
-                _buildDefaultView(Global.user.house),
+               // _buildDefaultView(Global.user.myaddres),
                 const Divider(height: 20),
-                _buildOtherView(Global.user.house),
+               // _buildOtherAddrView(Global.user.myaddres),
               ],
             ),
           ],

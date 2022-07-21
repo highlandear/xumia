@@ -361,7 +361,7 @@ class _PurchaseState extends State<PurchasePage>
     }
 
     // 附带线下产品，本地有地址，要求用户选择已有地址
-    if (Global.user.house.hasAddress()) {
+    if (Global.user.hasAddress()) {
       // XToast.toast('已有地址');
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return (AddressSelectionPage(data: _item.id));

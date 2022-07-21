@@ -1,10 +1,9 @@
 import 'dart:convert';
-import '../bean/deliverdata.dart';
+import '../bean/useraddr.dart';
 import '../bean/gnftdata.dart';
 import '../bean/certipass.dart';
 import '../bean/userinfo.dart';
 import '../utils/xhttp.dart';
-import '../utils/xstorage.dart';
 import 'config.dart';
 
 class Global {
@@ -12,18 +11,13 @@ class Global {
   static Global get user => _instance;
 
   UserInfo info = UserInfo();
-  DeliverData house = DeliverData();
+  List<UserAddress> _myaddres = [];
 
-  loadMe() {
-    // AStorage.getv('me').then((value) => {
-    //       info =
-    //           null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
-    //     });
-  }
+  hasAddress() => _myaddres.isNotEmpty;
 
   logout() {
     info = UserInfo();
-    house = DeliverData();
+    _myaddres = [];
   }
 
   Future loadMagData() async {
@@ -77,10 +71,13 @@ class Global {
         await XHttp.instance.post(Config.getMyData, params: {'type': 1}));
   }
 
+  /**
+   * 请求某类NFT
+   */
   reqMyData(datatype, {success, fail}) {
     XHttp.instance
         .post(Config.getMyData, params: {'type': datatype}).then((val) {
-      var erode =val['code'];
+      var erode = val['code'];
       if (erode == 200) {
         success(val);
       } else {
@@ -89,12 +86,15 @@ class Global {
     });
   }
 
+  /**
+   * 请求所有的邮寄地址信息
+   */
   reqMyAddress({success, fail}) {
-    XHttp.instance
-        .get(Config.myAddress, params: {'username': info.phoneid}).then((val) {
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        house = DeliverData.fromJson(jsonDecode(val)['data']);
+    XHttp.instance.post(Config.getallmyAddress).then((val) {
+      print(val);
+      var erode = val['code'];
+      if (erode == 200) {
+        //  house = UserAddress.fromJson(val['data']);
         success();
       } else {
         fail();
@@ -109,7 +109,7 @@ class Global {
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
-        house = DeliverData.fromJson(jsonDecode(val)['data']);
+        //   house = UserAddress.fromJson(jsonDecode(val)['data']);
         success();
       } else {
         fail();
@@ -117,18 +117,30 @@ class Global {
     });
   }
 
-  reqAddNewAddress(where, {success, fail}) {
-    XHttp.instance
-        .postData(Config.addNewAddress,
-            params: {'username': info.phoneid}, data: where)
-        .then((val) {
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        house = DeliverData.fromJson(jsonDecode(val)['data']);
+  /**
+   * 创建或更新地址
+   */
+  reqUpdateAddress(where, {success, fail}) {
+    XHttp.instance.postData(Config.updateAddress, data: where).then((val) {
+      print(val);
+      var erode = val['code'];
+      if (erode == 200) {
+        print(val['data']);
+        UserAddress ua = UserAddress.fromJson(val['data']);
+        print(ua.desc);
+        print(ua.id);
+
         success();
       } else {
         fail();
       }
     });
+  }
+
+  loadMe() {
+    // AStorage.getv('me').then((value) => {
+    //       info =
+    //           null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
+    //     });
   }
 }
