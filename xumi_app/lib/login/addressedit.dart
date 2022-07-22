@@ -158,6 +158,9 @@ class _AddressEditPageState extends State<AddressEditPage> {
         if (value?.provinceName != null) {
           _area =
               '${value?.provinceName}/${value?.cityName}/${value?.areaName}';
+          address.prov = '${value?.provinceName}';
+          address.city = '${value?.cityName}';
+          address.dist = '${value?.areaName}';
         }
       });
     });

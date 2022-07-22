@@ -335,12 +335,10 @@ class _PurchaseState extends State<PurchasePage>
   }
 
   _getMyAddressList() {
-    if(! Global.user.hasAddress()){
-      Global.user.reqMyAddress(success:(){});
+    if (!Global.user.hasAddress()) {
+      Global.user.reqMyAddress(success: () {});
     }
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   _login() {
@@ -348,18 +346,7 @@ class _PurchaseState extends State<PurchasePage>
         .push(
           MaterialPageRoute(builder: (_) => const SmsLogin()),
         )
-        .then((val) => val != null ? _getMyAddressList() : null)
-      ;
-  }
-
-  _selectAddressID() {
-    XToast.toast('there');
-    Navigator.of(context)
-        .push(
-          MaterialPageRoute(builder: (_) => const MyAddressListPage()),
-        )
-       // .then((val) => {});
-    ;
+        .then((val) => val != null ? _getMyAddressList() : null);
   }
 
   _onBuyItem(BuildContext context) {
@@ -368,10 +355,8 @@ class _PurchaseState extends State<PurchasePage>
       return;
     }
 
-    // 无附带线下产品
-    //TODO: 调试中，后面需要修改回来
-    //if (! _item.hasProduct()) {
-    if (_item.hasProduct()) {
+    if (! _item.hasProduct()) {
+   // if (_item.hasProduct()) {
       Global.user.reqBuyItem(_item.id, success: () {
         XToast.success('已经直接购入，请查看');
       }, fail: () {});
@@ -381,5 +366,14 @@ class _PurchaseState extends State<PurchasePage>
 
     // 附带线下产品，本地有地址，要求用户选择已有地址
     _selectAddressID();
+  }
+
+  _selectAddressID() {
+    XToast.toast('there');
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const MyAddressListPage(sel: true)))
+        .then((val) {
+      XToast.toast('邮寄到地址$val');
+    });
   }
 }

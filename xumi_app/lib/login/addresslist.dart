@@ -7,8 +7,10 @@ import 'addressedit.dart';
 // 显示地址列表信息
 // 优先显示 ** 默认地址
 // 其他地址中，不再显示默认地址
+// sel：true，选择后返回，false，只查看
 class MyAddressListPage extends StatefulWidget {
-   const MyAddressListPage({Key? key}) : super(key: key);
+   const MyAddressListPage({Key? key, this.sel=false}) : super(key: key);
+   final bool sel;
 
   @override
   _MyAddressPageState createState() => _MyAddressPageState();
@@ -50,12 +52,13 @@ class _MyAddressPageState extends State<MyAddressListPage> {
   }
 
   _onSelectAddress(AddressInfo address) {
+    if(widget.sel){
+      Navigator.pop(context, address.id);
+    }
     XToast.toast('select ${address.id.toString()}');
   }
 
   Widget _buildDefaultAddress() {
-    XToast.toast('here');
-
     return _buildAddressItem(Global.user.getDefaultAddress());
   }
 

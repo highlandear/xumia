@@ -42,7 +42,7 @@ class MyDetailView extends StatelessWidget {
     // 本地已经存储了邮寄地址
     if (Global.user.hasAddress()) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (const MyAddressListPage());
+        return (MyAddressListPage());
       }));
       return;
     }
@@ -51,7 +51,7 @@ class MyDetailView extends StatelessWidget {
     Global.user.reqMyAddress(success:(){
       if(Global.user.hasAddress()) { // 如果请求到地址列表
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (const MyAddressListPage());
+          return (MyAddressListPage());
         }));
       }
       else{   // 请求到的列表为空
