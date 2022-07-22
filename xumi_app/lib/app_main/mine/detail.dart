@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../../data/global.dart';
-import '../../login/newaddress.dart';
+import '../../login/addressedit.dart';
 import '../../login/addresslist.dart';
 import '../../utils/xqrgen.dart';
 import '../mode/item.dart';
 import '../mode/list_view.dart';
 
 class MyDetailView extends StatelessWidget {
+  MyDetailView({Key? key}) : super(key: key);
+
   final _models = [
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_scan.png', '我的二维码', 'barcode', false),
@@ -14,8 +16,6 @@ class MyDetailView extends StatelessWidget {
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_collection.png', '退出登录', 'exit', true)
   ];
-
-  MyDetailView({Key? key}) : super(key: key);
 
   _tap(BuildContext context, String type) {
     switch (type) {
@@ -26,7 +26,7 @@ class MyDetailView extends StatelessWidget {
         }));
         break;
       case 'address':
-         _showAddressInfo(context);
+        _showMyAddressList(context);
         break;
       case 'exit':
         Global.user.logout();
@@ -37,7 +37,9 @@ class MyDetailView extends StatelessWidget {
     }
   }
 
-  _showAddressInfo(BuildContext context) {
+  _showMyAddressList(BuildContext context) {
+
+    // 本地已经存储了邮寄地址
     if (Global.user.hasAddress()) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return (const MyAddressListPage());
@@ -45,19 +47,19 @@ class MyDetailView extends StatelessWidget {
       return;
     }
 
+    // 本地没有地址信息，向服务器请求数据
     Global.user.reqMyAddress(success:(){
       if(Global.user.hasAddress()) { // 如果请求到地址列表
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return (const MyAddressListPage());
         }));
       }
-      else{ // 请求到的列表为空
+      else{   // 请求到的列表为空
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (AddAddressPage(title: '填写收件人信息', data: 0,));
+          return (AddressEditPage());
         }));
       }
     }, fail: () {
-
     });
   }
 

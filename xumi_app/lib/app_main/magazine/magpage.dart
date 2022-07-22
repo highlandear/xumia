@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
-import '../../login/newaddress.dart';
-import '../../login/selectaddress.dart';
 import '../../login/smslogin.dart';
-import '../../utils/browser.dart';
-import '../../utils/xtoast.dart';
 import 'buypage.dart';
 
 
-class MagLeafView extends StatelessWidget {
-  const MagLeafView({Key? key, required this.item}) : super(key: key);
+class MagazinePageView extends StatelessWidget {
+  const MagazinePageView({Key? key, required this.item}) : super(key: key);
   final CertiPass item;
 
   @override
@@ -130,7 +126,7 @@ class MagLeafView extends StatelessWidget {
 
   _buyItem(BuildContext context) {
     // 没有登录，先登录
-    if (!Global.user.info.online()) {
+    if (!Global.user.online()) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return (const SmsLogin());
       }));
@@ -138,41 +134,42 @@ class MagLeafView extends StatelessWidget {
     }
 
     if (item.hasProduct()) {
-      // 本地有地址
-      if (Global.user.hasAddress()) {
-        // XToast.toast('已有地址');
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (AddressSelectionPage(data: item.id));
-        }));
-        return;
-      }
-
-      // 本地无地址，向服务器请求
-      Global.user.reqMyAddress(success: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (AddressSelectionPage(data: item.id));
-        }));
-      }, fail: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (AddAddressPage(title: '收件人信息', data: item.id));
-        }));
-      });
-    } else if (! item.hasProduct()) {
-      Global.user.reqBuyItem(item.id, success: () {
-        XToast.success('已经直接购入，请查看');
-      }, fail: () {});
-    } else {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-        return Browser(
-          url: '',
-          title: "请完成小任务",
-        );
-      }));
-
-      /* Global.user.reqBuyItem(item.id, success: (){
-        XToast.success('已经直接购入，请查看');
-
-      }, fail:(){});*/
+      // TODO: 弹出地址选择界面
     }
+
+
+      // TODO： 删除以下功能
+      // 本地有地址
+    //   if (Global.user.hasAddress()) {
+    //     // XToast.toast('已有地址');
+    //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //       return (AddressSelectionPage(data: item.id));
+    //     }));
+    //     return;
+    //   }
+    //
+    //   // 本地无地址，向服务器请求
+    //   Global.user.reqMyAddress(success: () {
+    //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //       return (AddressSelectionPage(data: item.id));
+    //     }));
+    //   }, fail: () {
+    //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //       return (AddAddressPage(title: '收件人信息', data: item.id));
+    //     }));
+    //   });
+    // } else if (! item.hasProduct()) {
+    //   Global.user.reqBuyItem(item.id, success: () {
+    //     XToast.success('已经直接购入，请查看');
+    //   }, fail: () {});
+    // } else {
+    //   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+    //     return Browser(
+    //       url: '',
+    //       title: "请完成小任务",
+    //     );
+    //   }));
+    //
+    // }
   }
 }

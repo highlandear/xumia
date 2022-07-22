@@ -1,9 +1,10 @@
-class UserAddress {
-  UserAddress({
+class AddressInfo {
+  AddressInfo({
     this.id,
     this.desc = '居住地址',
     this.phone = '',
     this.name = '',
+    this.account='',
     this.prov = '',
     this.city = '',
     this.dist = '',
@@ -15,6 +16,7 @@ class UserAddress {
   String desc;
   String phone;
   String name;
+  String account;
   String prov;
   String city;
   String dist;
@@ -31,32 +33,35 @@ class UserAddress {
     data['desc'] = desc;
     data['phone'] = phone;
     data['name'] = name;
+    data['account'] = account;
     data['province'] = prov;
     data['city'] = city;
     data['district'] = dist;
     data['detailedAddress'] = detail;
-    data['isDefault'] = isDefault;
+    data['default'] = isDefault;
     return data;
   }
 
-  static UserAddress fromJson(Map<String, dynamic> json) {
-  //  print(json);
-    return UserAddress(
+  static AddressInfo fromJson(Map<String, dynamic> json) {
+   print(json);
+
+    return AddressInfo(
         id : json['id'],
         desc:json['desc'],
         phone: json['phone'],
         name: json['name'],
+        account: json['account'],
         prov: json['province'],
         city: json['city'],
         dist: json['district'],
         detail: json['detailedAddress'],
-        isDefault: json['isDefault']);
+        isDefault: json['default']);
   }
 
-  static List<UserAddress> listfromJson(dynamic json) {
-    print(json);
-    return (json['data'] as List<dynamic>)
-        .map((e) => UserAddress.fromJson((e as Map<String, dynamic>)))
+  static List<AddressInfo> listfromJson(dynamic json) {
+  //  print(json);
+    return (json as List<dynamic>)
+        .map((e) => AddressInfo.fromJson((e as Map<String, dynamic>)))
         .toList();
   }
 }

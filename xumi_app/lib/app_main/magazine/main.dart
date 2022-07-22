@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../data/global.dart';
-import 'leaf.dart';
+import 'magpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       itemCount: _nlist.length,
       physics: const PageScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
-        return MagLeafView(item: _nlist[index]);
+        return MagazinePageView(item: _nlist[index]);
       },
       scrollDirection: Axis.vertical,
     );

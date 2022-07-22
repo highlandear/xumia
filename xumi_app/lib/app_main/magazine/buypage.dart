@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
-import '../../login/newaddress.dart';
+import '../../login/addressedit.dart';
+import '../../login/addresslist.dart';
 import '../../login/selectaddress.dart';
-import '../../xref/sign.dart';
 import '../../login/smslogin.dart';
 import '../../utils/xtoast.dart';
 
@@ -87,7 +87,7 @@ class _PurchaseState extends State<PurchasePage>
             child: Column(
               children: [
                 if (_item.desc.isNotEmpty) _buildDescCard(_item.desc),
-                if(_item.detail.isNotEmpty) _buildDetailInfo(_item.detail),
+                if (_item.detail.isNotEmpty) _buildDetailInfo(_item.detail),
               ],
             ),
           ),
@@ -157,9 +157,10 @@ class _PurchaseState extends State<PurchasePage>
     );
   }
 
-  Widget _buildDetailInfo(detail){
+  Widget _buildDetailInfo(detail) {
     return Image.network(detail);
   }
+
   Widget _buildDescCard(desc) {
     return GestureDetector(
       onTap: () {},
@@ -333,8 +334,13 @@ class _PurchaseState extends State<PurchasePage>
     );
   }
 
-  _getMe() {
-    setState(() {});
+  _getMyAddressList() {
+    if(! Global.user.hasAddress()){
+      Global.user.reqMyAddress(success:(){});
+    }
+    setState(() {
+
+    });
   }
 
   _login() {
@@ -342,17 +348,30 @@ class _PurchaseState extends State<PurchasePage>
         .push(
           MaterialPageRoute(builder: (_) => const SmsLogin()),
         )
-        .then((val) => val != null ? _getMe() : null);
+        .then((val) => val != null ? _getMyAddressList() : null)
+      ;
+  }
+
+  _selectAddressID() {
+    XToast.toast('there');
+    Navigator.of(context)
+        .push(
+          MaterialPageRoute(builder: (_) => const MyAddressListPage()),
+        )
+       // .then((val) => {});
+    ;
   }
 
   _onBuyItem(BuildContext context) {
-    if (!Global.user.info.online()) {
+    if (!Global.user.online()) {
       _login();
       return;
     }
 
     // 无附带线下产品
-    if (!_item.hasProduct()) {
+    //TODO: 调试中，后面需要修改回来
+    //if (! _item.hasProduct()) {
+    if (_item.hasProduct()) {
       Global.user.reqBuyItem(_item.id, success: () {
         XToast.success('已经直接购入，请查看');
       }, fail: () {});
@@ -361,24 +380,6 @@ class _PurchaseState extends State<PurchasePage>
     }
 
     // 附带线下产品，本地有地址，要求用户选择已有地址
-    if (Global.user.hasAddress()) {
-      // XToast.toast('已有地址');
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddressSelectionPage(data: _item.id));
-      }));
-
-      return;
-    }
-
-    // 本地无地址，向服务器请求地址列表
-    Global.user.reqMyAddress(success: () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddressSelectionPage(data: _item.id));
-      }));
-    }, fail: () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return (AddAddressPage(title: '收件人信息', data: _item.id));
-      }));
-    });
+    _selectAddressID();
   }
 }

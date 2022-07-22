@@ -5,6 +5,9 @@ import '../data/global.dart';
 import '../utils/xtoast.dart';
 import 'loading.dart';
 
+/**
+ * 手机号快速登录，短信验证
+ */
 class SmsLogin extends StatefulWidget {
   const SmsLogin({Key? key}) : super(key: key);
 
@@ -214,7 +217,7 @@ class _SmsLoginState extends State<SmsLogin> {
       Navigator.pop(context);
       Navigator.pop(context, true);
     }, fail: (value) {
-      XToast.error('登录失败 $value');
+      XToast.error('登录失败，网络异常($value)');
       Navigator.pop(context);
     });
   }

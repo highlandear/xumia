@@ -4,69 +4,87 @@ import '../bean/gnftdata.dart';
 import '../bean/certipass.dart';
 import '../bean/userinfo.dart';
 import '../utils/xhttp.dart';
+import '../utils/xtoast.dart';
 import 'config.dart';
 
 class Global {
   static final Global _instance = Global();
   static Global get user => _instance;
 
- // UserInfo info = UserInfo();
- // List<UserAddress> _addressList = [];
+  UserInfo _info = UserInfo();
+  List<AddressInfo> _addressList = [];
 
-  UserInfo info = UserInfo(phoneid: '123748484', token: 'abcdeflsla');
-  List<UserAddress> _addressList = [
-    UserAddress(
-        name:'HZS',
-        desc:'公司',
-        phone: '1378288282',
-        prov: '北京',
-        city: '北京',
-        dist: '海淀区',
-        detail: '学清路18号',
-        isDefault: true
-    ),
-    UserAddress(
-      name:'黄作胜',
-      desc:'我家',
-      phone: '1378288282',
-      prov: '北京',
-      city: '北京',
-      dist: '海淀区',
-      detail: '学清路18号',
-      isDefault: false
-    ),
-    UserAddress(
-        name:'toal',
-        desc:'我家',
-        phone: '1378288282',
-        prov: '北京',
-        city: '北京',
-        dist: '海淀区',
-        detail: '学清路18号',
-        isDefault: false
-    ),
-  ];
+  //UserInfo _info = UserInfo(phoneID: '123748484', token: 'abcdeflsla');
+  // List<UserAddress> _addressList = [
+  //   UserAddress(
+  //       id: 1,
+  //       name: 'HZS',
+  //       desc: '公司',
+  //       phone: '1378288282',
+  //       prov: '北京',
+  //       city: '北京',
+  //       dist: '海淀区',
+  //       detail: '学清路18号',
+  //       isDefault: true),
+  //   UserAddress(
+  //       id: 2,
+  //       name: '黄作胜',
+  //       desc: '我家',
+  //       phone: '1378288282',
+  //       prov: '北京',
+  //       city: '北京',
+  //       dist: '海淀区',
+  //       detail: '学清路18号',
+  //       isDefault: false),
+  //   UserAddress(
+  //       id: 3,
+  //       name: 'toal',
+  //       desc: '我家',
+  //       phone: '1378288282',
+  //       prov: '北京',
+  //       city: '北京',
+  //       dist: '海淀区',
+  //       detail: '学清路18号',
+  //       isDefault: false),
+  // ];
 
-  getDefaultAddress(){
+  getAddressByID(int id){
     for (var element in _addressList) {
-      if(element.isDefault)
+      if(element.id == id) {
         return element;
+      }
     }
+
     return null;
   }
+
+  getDefaultAddress() {
+
+    for (var element in _addressList) {
+      if (element.isDefault) {
+        return element;
+      }
+    }
+    _addressList.first.isDefault=true;
+    return _addressList.first;
+  }
+
+  getPhone() => _info.phoneID;
+
+  online() => _info.token.isNotEmpty;
 
   hasAddress() => _addressList.isNotEmpty;
 
   getAddressList() => _addressList;
 
   logout() {
-    info = UserInfo();
+    _info = UserInfo();
     _addressList = [];
   }
 
   Future loadMagData() async {
     return CertiPass.listfromJson(await XHttp.instance
-        .post(Config.magazine, params: {'username': info.phoneid}));
+        .post(Config.magazine, params: {'username': _info.phoneID}));
   }
 
   /**
@@ -80,12 +98,14 @@ class Global {
       'userType': 0,
       'grant_type': 'sms_captcha',
     }).then((val) {
+      print(val);
       var erode = val['code'];
+      print(erode);
       if (erode == 200) {
-        info.token = val['data']['token'];
-        info.phoneid = username;
+        _info.token = val['data']['token'];
+        _info.phoneID = username;
 
-        XHttp.instance.setHeaders('XUMI-TOKEN', 'Bearer ${info.token}');
+        XHttp.instance.setHeaders('XUMI-TOKEN', 'Bearer ${_info.token}');
         success();
       } else {
         fail(erode);
@@ -135,10 +155,11 @@ class Global {
    */
   reqMyAddress({success, fail}) {
     XHttp.instance.post(Config.getallmyAddress).then((val) {
-      print(val);
+    //  print(val);
       var erode = val['code'];
       if (erode == 200) {
         //  house = UserAddress.fromJson(val['data']);
+        _addressList = AddressInfo.listfromJson(val['data']);
         success();
       } else {
         fail();
@@ -149,7 +170,7 @@ class Global {
   reqSendMeItem2NewAddress(where, itemid, {success, fail}) {
     XHttp.instance
         .postData(Config.buyItem2NewAddress,
-            params: {'username': info.phoneid, 'itemid': itemid}, data: where)
+            params: {'username': _info.phoneID, 'itemid': itemid}, data: where)
         .then((val) {
       var erode = jsonDecode(val)['status'];
       if (erode == '0') {
@@ -166,14 +187,10 @@ class Global {
    */
   reqUpdateAddress(where, {success, fail}) {
     XHttp.instance.postData(Config.updateAddress, data: where).then((val) {
-      print(val);
       var erode = val['code'];
       if (erode == 200) {
-        print(val['data']);
-        UserAddress ua = UserAddress.fromJson(val['data']);
-        print(ua.desc);
-        print(ua.id);
-
+      //  UserAddress ua = UserAddress.fromJson(val['data']);
+      //  _addressList.add(ua);
         success();
       } else {
         fail();

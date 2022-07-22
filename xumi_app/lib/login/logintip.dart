@@ -3,6 +3,9 @@ import '../data/global.dart';
 import '../app_main/gallery/main.dart';
 import 'smslogin.dart';
 
+/**
+ * 提示用户进行登录的页面
+ */
 class LoginTipPage extends StatefulWidget {
   const LoginTipPage({Key? key, required this.tip}) : super(key: key);
   final String tip;
@@ -26,16 +29,10 @@ class _LoginTipPageState extends State<LoginTipPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (!Global.user.info.online()) {
+    if (!Global.user.online()) {
       return Scaffold(
           body: Center(
         child: _buildButton(context),
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     ElevatedButton(onPressed: _login, child: const Text('进入我的画廊'), style: ,),
-        //   ],
-        // ),
       ));
     }
     return const Gallery();

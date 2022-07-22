@@ -1,64 +1,90 @@
 import 'package:flutter/material.dart';
 import '../bean/useraddr.dart';
 import '../data/global.dart';
+import '../utils/xtoast.dart';
+import 'addressedit.dart';
 
+// 显示地址列表信息
+// 优先显示 ** 默认地址
+// 其他地址中，不再显示默认地址
 class MyAddressListPage extends StatefulWidget {
-  const MyAddressListPage({Key? key}) : super(key: key);
+   const MyAddressListPage({Key? key}) : super(key: key);
 
   @override
   _MyAddressPageState createState() => _MyAddressPageState();
 }
 
 class _MyAddressPageState extends State<MyAddressListPage> {
+  // 单一地址信息
+  Widget _buildAddressItem(AddressInfo address) {
 
-  Widget _buildDefaultView(UserAddress addr) {
     return ListTile(
-      leading: const Icon(Icons.check, color: Colors.red),
+      leading:
+          address.isDefault ? const Icon(Icons.check, color: Colors.red) : null,
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('${addr.name}(${addr.phone})'),
+            Text('${address.name}(${address.phone})'),
             const SizedBox(height: 10),
-            Text(addr.detail),
-
+            Text(
+                '${address.prov}/${address.city}/${address.dist}/${address.detail}'),
+            const Divider(height: 20),
           ]),
-      trailing: const Icon(Icons.edit, color: Colors.blue),
-
+      trailing: GestureDetector(
+        onTap: () {
+          _onEditAddress(address);
+        },
+        child: const Icon(Icons.edit, color: Colors.blue),
+      ),
+      selected: address.isDefault ? true : false,
       onTap: () {
+        _onSelectAddress(address);
       },
     );
   }
 
-  Widget _buildOtherAddrView(UserAddress addr) {
-    return ListTile(
-     // leading: const Icon(Icons.check, color: Colors.red),
-      title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Divider(height: 20),
-            Text('${addr.name}(${addr.phone})'),
-            const SizedBox(height: 10),
-            Text(addr.detail),
-          ]),
-      trailing: const Icon(Icons.edit, color: Colors.blue),
+  _onEditAddress(AddressInfo address) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return (AddressEditPage(id: address.id));
+    }));
+  }
+
+  _onSelectAddress(AddressInfo address) {
+    XToast.toast('select ${address.id.toString()}');
+  }
+
+  Widget _buildDefaultAddress() {
+    XToast.toast('here');
+
+    return _buildAddressItem(Global.user.getDefaultAddress());
+  }
+
+  Widget _buildAllAddressWithoutDefault() {
+
+    List<Widget> list = [];
+    Global.user.getAddressList().forEach((element) {
+      if (!element.isDefault) {
+        list.add(_buildAddressItem(element));
+      }
+    });
+    return Column(children: list);
+  }
+
+  Widget _buildButton() {
+    return ElevatedButton(
+      style: TextButton.styleFrom(
+          primary: Theme.of(context).primaryColor,
+          padding: const EdgeInsets.all(15.0)),
+      child: const Text('添加新地址', style: TextStyle(color: Colors.white)),
+      onPressed: () {
+        XToast.toast('添加新地址');
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return (AddressEditPage());
+        }));
+      },
     );
   }
 
-  List<Widget> _buildx(List<UserAddress> all){
-    List<Widget> list = [];
-    all.forEach((element) { 
-      if(! element.isDefault) {
-        list.add(_buildOtherAddrView(element));
-      }
-    });
-    
-    return list;
-  }
-  Widget _buildAllAddresswithoutDefault(List<UserAddress> all){
-    return  Column(
-        children: _buildx(all)
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,9 +96,9 @@ class _MyAddressPageState extends State<MyAddressListPage> {
             ListView(
               children: <Widget>[
                 const SizedBox(height: 20),
-                _buildDefaultView(Global.user.getDefaultAddress()),
-                const Divider(height: 20),
-                _buildAllAddresswithoutDefault(Global.user.getAddressList()),
+                _buildDefaultAddress(),
+                _buildAllAddressWithoutDefault(),
+                _buildButton(),
               ],
             ),
           ],

@@ -41,7 +41,7 @@ class _MineContentState extends State<MineContent>{
   }
 
 _tap(BuildContext context, String type){
-  if (! Global.user.info.online()) {
+  if (! Global.user.online()) {
     XToast.error('请点击头像登录');
    //  Navigator.of(context)
    //      .push(
@@ -79,7 +79,7 @@ _tap(BuildContext context, String type){
       XToast.toast('我的卡包功能');
       break;
 
-     case 'home':
+     case '4':
         Navigator.of(context)
             .push( MaterialPageRoute(builder: (_) {
           return const Browser(
@@ -89,6 +89,9 @@ _tap(BuildContext context, String type){
           );
         }));
 
+      break;
+    case '2':
+      XToast.toast('我的卡包功能');
       break;
 
     default:

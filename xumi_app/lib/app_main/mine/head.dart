@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../bean/userinfo.dart';
 import '../../../../data/global.dart';
 import '../../login/smslogin.dart';
 import 'detail.dart';
@@ -13,7 +12,8 @@ class MyInfoHead extends StatefulWidget {
 }
 
 class _MyInfoHeadState extends State<MyInfoHead> {
-  late UserInfo me ;
+
+  late String _title;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
 
   _getMe() {
     setState(() {
-      me = Global.user.info;
+      _title = Global.user.getPhone();
     });
   }
 
@@ -31,7 +31,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
   Widget build(BuildContext context) {
     return Material(child:InkWell(
       onTap: () {
-        if (!me.online()) {
+        if (!Global.user.online()) {
           Navigator.of(context)
               .push(
               //  MaterialPageRoute(builder: (_) => const SignPage()),
@@ -88,7 +88,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                me.online() ? '用户[${me.phoneid}]' : '点击登录',
+                Global.user.online() ? '用户[${_title}]' : '点击登录',
                 style: const TextStyle(
                   color: MineColors.xumi_black,
                   fontSize: 16,
@@ -96,7 +96,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
                 ),
               ),
               Text(
-                me.online() ? me.phoneid : '点击登录',
+                Global.user.online() ? _title : '点击登录',
                 style: const TextStyle(
                   color: MineColors.xumi_black,
                   fontSize: 15,

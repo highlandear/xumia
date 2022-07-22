@@ -6,37 +6,53 @@ import '../bean/userinfo.dart';
 import '../data/global.dart';
 import 'loading.dart';
 
-class AddAddressPage extends StatefulWidget {
-     AddAddressPage({Key? key, required this.title, required this.data})
-      : super(key: key);
+/**
+ * 对地址进行修改
+ * id == 0 时，表明新增加一个地址
+ * id !=0 时，修改对应id的地址
+ */
+class AddressEditPage extends StatefulWidget {
+  AddressEditPage({Key? key, this.id = 0}) : super(key: key);
 
-  final String title;
-  int data;
+  int id;
 
   @override
-  _AddAddressPageState createState() => _AddAddressPageState();
+  createState() => _AddressEditPageState();
 }
 
-class _AddAddressPageState extends State<AddAddressPage> {
+class _AddressEditPageState extends State<AddressEditPage> {
   FocusNode blankNode = FocusNode();
+  final GlobalKey _formKey = GlobalKey<FormState>();
   final TextEditingController _telController = TextEditingController();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _detailController = TextEditingController();
-  String _area ='';
-  String _prov ='';
-  String _city ='';
-  String _dist = '';
+  String _area = '';
+  late AddressInfo address =
+      widget.id == 0 ? AddressInfo() : Global.user.getAddressByID(widget.id);
 
+  @override
+  void initState() {
+    _unameController.text = address.name;
+    _detailController.text = address.detail;
 
-  final GlobalKey _formKey = GlobalKey<FormState>();
+    if (address.id == null) {
+      _telController.text =
+          Global.user.online() ? Global.user.getPhone() : '';
+    } else {
+      _telController.text = address.phone;
+    }
 
-  final UserInfo _me = Global.user.info;
+    _area = address.prov.isEmpty
+        ? '省/市/区(县)'
+        : '${address.prov}/${address.city}/${address.dist}';
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _telController.text = _me.online() ? _me.phoneid : '';
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(title: const Text('编辑收货地址')),
       body: GestureDetector(
         onTap: () {
           closeKeyboard(context);
@@ -85,29 +101,11 @@ class _AddAddressPageState extends State<AddAddressPage> {
               child: Row(
                 children: <Widget>[
                   const Icon(Icons.place),
-                  _area.isNotEmpty
-                      ? Text(_area,
-                          style: const TextStyle(color: Colors.black54))
-                      : const Text('省/市/区',
-                          style: TextStyle(color: Colors.black54))
+                  Text(_area, style: const TextStyle(color: Colors.black54))
                 ],
               ),
-              onTap: () async {
-                Result? result = await CityPickers.showCityPicker(
-                    context: context,
-                    cancelWidget:
-                        const Text("取消", style: TextStyle(color: Colors.blue)),
-                    confirmWidget:
-                        const Text("确定", style: TextStyle(color: Colors.blue)));
-
-               // print(result);
-                setState(() {
-                  _area =
-                      "${result?.provinceName}/${result?.cityName}/${result?.areaName}";
-                  _prov = '${result?.provinceName}';
-                  _city = '${result?.cityName}';
-                  _dist = '${result?.areaName}';
-                });
+              onTap: () {
+                _citySelect();
               },
             ),
           ),
@@ -148,19 +146,21 @@ class _AddAddressPageState extends State<AddAddressPage> {
     );
   }
 
-  _getAddressInfo() {
-    UserAddress ud = UserAddress(
-        phone:_telController.text,
-        name: _unameController.text,
-        detail: _detailController.text,
-        prov: _prov,
-        city: _city,
-        dist: _dist,
-
-    );
-
-
-    return ud.toJson();
+  _citySelect() {
+    CityPickers.showCityPicker(
+            context: context,
+            cancelWidget:
+                const Text("取消", style: TextStyle(color: Colors.blue)),
+            confirmWidget:
+                const Text("确定", style: TextStyle(color: Colors.blue)))
+        .then((value) {
+      setState(() {
+        if (value?.provinceName != null) {
+          _area =
+              '${value?.provinceName}/${value?.cityName}/${value?.areaName}';
+        }
+      });
+    });
   }
 
   void closeKeyboard(BuildContext context) {
@@ -168,8 +168,11 @@ class _AddAddressPageState extends State<AddAddressPage> {
   }
 
   void _onSubmit(BuildContext context) {
-    closeKeyboard(context);
+    address.detail = _detailController.text;
+    address.phone = _telController.text;
+    address.name = _unameController.text;
 
+    closeKeyboard(context);
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -181,25 +184,12 @@ class _AddAddressPageState extends State<AddAddressPage> {
           );
         });
 
-    if (widget.data == 0) {
-      //仅添加地址
-      Global.user.reqUpdateAddress(_getAddressInfo(), success: () {
-        XToast.success("添加成功");
-        Navigator.pop(context);
-        Navigator.pop(context);
-      }, fail: () {
-        Navigator.pop(context);
-      });
-    } else {
-      // 请求购买，发货到新地址
-      Global.user.reqSendMeItem2NewAddress(_getAddressInfo(), widget.data,
-          success: () {
-        XToast.success("获取成功，请等待发货");
-        Navigator.pop(context);
-        Navigator.pop(context);
-      }, fail: () {
-        Navigator.pop(context);
-      });
-    }
+    Global.user.reqUpdateAddress(address, success: () {
+      XToast.success("添加新地址成功");
+      Navigator.pop(context);
+      Navigator.pop(context);
+    }, fail: () {
+      Navigator.pop(context);
+    });
   }
 }

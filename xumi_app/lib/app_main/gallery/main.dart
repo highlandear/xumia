@@ -17,7 +17,7 @@ class _GalleryState extends State<Gallery> {
   @override
   Widget build(BuildContext context) {
 
-    if(Global.user.info.online()) {
+    if(Global.user.online()) {
       _future = Global.user.loadGalleryData();
       return Scaffold(
         backgroundColor: Colors.white,

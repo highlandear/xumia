@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import '../login/newaddress.dart';
+import '../login/addressedit.dart';
 import '../../bean/userinfo.dart';
 import '../../data/config.dart';
 import '../../data/global.dart';

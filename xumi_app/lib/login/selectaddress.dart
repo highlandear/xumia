@@ -15,7 +15,7 @@ class AddressSelectionPage extends StatefulWidget {
 
 class _AddressSelectionPageState extends State<AddressSelectionPage> {
 
-  Widget _buildDefaultView(UserAddress d) {
+  Widget _buildDefaultView(AddressInfo d) {
     return ListTile(
       leading: const Icon(Icons.check, color: Colors.red),
       title: Column(
@@ -36,7 +36,7 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
     );
   }
 
-  Widget _buildOtherView(UserAddress d) {
+  Widget _buildOtherView(AddressInfo d) {
     return ListTile(
       // leading: const Icon(Icons.check, color: Colors.red),
       title: Column(

@@ -56,7 +56,10 @@ class XHttp {
         print("未知错误");
         break;
     }
-    return '{"status" : "timeout"}';
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = 100;
+
+    return data;
   }
 
   _onResponse(Response response) {
