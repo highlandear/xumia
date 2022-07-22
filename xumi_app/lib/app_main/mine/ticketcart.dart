@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xumi_app/bean/gnftdata.dart';
 import 'ticketshow.dart';
 
-/**
- * 门票列表
- */
+/// 门票列表
 class TicketListView extends StatelessWidget {
   const TicketListView({Key? key, required this.data}) : super(key: key);
   final List data;
@@ -73,8 +71,6 @@ class TicketListView extends StatelessWidget {
             ),
             ListTile(
               leading: const CircleAvatar(
-                //  backgroundImage: NetworkImage(
-                //     item.desc),
               ),
               title: Text(item.desc),
               subtitle: Text(

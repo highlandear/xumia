@@ -4,7 +4,7 @@ class AddressInfo {
     this.desc = '居住地址',
     this.phone = '',
     this.name = '',
-    this.account='',
+    this.account = '',
     this.prov = '',
     this.city = '',
     this.dist = '',
@@ -43,11 +43,9 @@ class AddressInfo {
   }
 
   static AddressInfo fromJson(Map<String, dynamic> json) {
-   print(json);
-
     return AddressInfo(
-        id : json['id'],
-        desc:json['desc'],
+        id: json['id'],
+        desc: json['desc'],
         phone: json['phone'],
         name: json['name'],
         account: json['account'],
@@ -59,7 +57,6 @@ class AddressInfo {
   }
 
   static List<AddressInfo> listfromJson(dynamic json) {
-  //  print(json);
     return (json as List<dynamic>)
         .map((e) => AddressInfo.fromJson((e as Map<String, dynamic>)))
         .toList();

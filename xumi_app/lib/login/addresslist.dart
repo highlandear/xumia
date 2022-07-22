@@ -4,10 +4,10 @@ import '../data/global.dart';
 import '../utils/xtoast.dart';
 import 'addressedit.dart';
 
-// 显示地址列表信息
-// 优先显示 ** 默认地址
-// 其他地址中，不再显示默认地址
-// sel：true，选择后返回，false，只查看
+/// 显示地址列表信息
+/// 优先显示 ** 默认地址
+/// 其他地址中，不再显示默认地址
+/// sel：true，选择后返回，false，只查看
 class MyAddressListPage extends StatefulWidget {
    const MyAddressListPage({Key? key, this.sel=false}) : super(key: key);
    final bool sel;

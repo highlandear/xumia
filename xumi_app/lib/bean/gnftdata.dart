@@ -33,7 +33,6 @@ class GNFTData {
   }
 
   static List<GNFTData> listfromJson(dynamic json) {
-    //print(json);
     return (json['data'] as List<dynamic>)
         .map((e) => GNFTData.fromJson((e as Map<String, dynamic>)))
         .toList();

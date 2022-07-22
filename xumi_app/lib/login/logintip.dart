@@ -3,9 +3,7 @@ import '../data/global.dart';
 import '../app_main/gallery/main.dart';
 import 'smslogin.dart';
 
-/**
- * 提示用户进行登录的页面
- */
+/// 提示用户进行登录的页面
 class LoginTipPage extends StatefulWidget {
   const LoginTipPage({Key? key, required this.tip}) : super(key: key);
   final String tip;
@@ -46,7 +44,6 @@ class _LoginTipPageState extends State<LoginTipPage> {
       child: GestureDetector(
         onTap: () {
           _login();
-          //_onBuyItem(context);
         },
         child: Container(
           //  margin: const EdgeInsets.all(100),

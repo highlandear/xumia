@@ -35,12 +35,7 @@ class StaggerView extends StatelessWidget {
                   ),
                 );
               },
-           // child:Image.network(data[i].data),
               child: SinglecardView(nft: data[i],),
-
-            // child: CachedNetworkImage(
-            //         imageUrl: data[i].data,
-            //   ),
             ),
           );
         },

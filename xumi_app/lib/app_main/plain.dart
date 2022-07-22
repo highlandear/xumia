@@ -7,23 +7,10 @@ import 'mine/main.dart';
 class PlainPage extends StatelessWidget {
   PlainPage({Key? key}) : super(key: key);
 
-//   @override
-//   _PlainPageState createState() => _PlainPageState();
-// }
-
-//class _PlainPageState extends State<PlainPage> {
   final List taBodies=[const MineMainPage(),const HomePage(),const Gallery()];
   int currentIndex=1;
   var currentPage;
-  PageController _pageController = PageController(initialPage: 1, keepPage: false);
-
-
-
-  // @override
-  // void initState() {
-  //   currentPage=taBodies[currentIndex];
-  //   super.initState();
-  // }
+  final PageController _pageController = PageController(initialPage: 1, keepPage: false);
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,9 @@
 class UserInfo {
   UserInfo({
-    this.phoneID = '',
+    this.phoneID = '',    // 手机号
     this.token = '',
   });
 
   String phoneID;
-  String token; // tel
+  String token;
 }

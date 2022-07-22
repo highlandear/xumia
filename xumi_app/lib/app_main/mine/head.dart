@@ -73,7 +73,6 @@ class _MyInfoHeadState extends State<MyInfoHead> {
         const SizedBox(
           width: 80,
           height: 80,
-          //child: Image.network(me.image),
           child: Image(
             image: AssetImage('assets/images/mine/head.jpg'),
           ),

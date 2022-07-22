@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class CertiPass {
   CertiPass(
       {this.id = 0,

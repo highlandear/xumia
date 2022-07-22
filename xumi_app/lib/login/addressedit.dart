@@ -6,11 +6,9 @@ import '../bean/userinfo.dart';
 import '../data/global.dart';
 import 'loading.dart';
 
-/**
- * 对地址进行修改
- * id == 0 时，表明新增加一个地址
- * id !=0 时，修改对应id的地址
- */
+/// 对地址进行修改
+/// id == 0 时，表明新增加一个地址
+/// id !=0 时，修改对应id的地址
 class AddressEditPage extends StatefulWidget {
   AddressEditPage({Key? key, this.id = 0}) : super(key: key);
 
@@ -36,8 +34,7 @@ class _AddressEditPageState extends State<AddressEditPage> {
     _detailController.text = address.detail;
 
     if (address.id == null) {
-      _telController.text =
-          Global.user.online() ? Global.user.getPhone() : '';
+      _telController.text = Global.user.online() ? Global.user.getPhone() : '';
     } else {
       _telController.text = address.phone;
     }

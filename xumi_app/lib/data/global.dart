@@ -1,10 +1,8 @@
-import 'dart:convert';
 import '../bean/useraddr.dart';
 import '../bean/gnftdata.dart';
 import '../bean/certipass.dart';
 import '../bean/userinfo.dart';
 import '../utils/xhttp.dart';
-import '../utils/xtoast.dart';
 import 'config.dart';
 
 class Global {
@@ -48,9 +46,9 @@ class Global {
   //       isDefault: false),
   // ];
 
-  getAddressByID(int id){
+  getAddressByID(int id) {
     for (var element in _addressList) {
-      if(element.id == id) {
+      if (element.id == id) {
         return element;
       }
     }
@@ -59,13 +57,12 @@ class Global {
   }
 
   getDefaultAddress() {
-
     for (var element in _addressList) {
       if (element.isDefault) {
         return element;
       }
     }
-    _addressList.first.isDefault=true;
+    _addressList.first.isDefault = true;
     return _addressList.first;
   }
 
@@ -87,10 +84,8 @@ class Global {
         .post(Config.magazine, params: {'username': _info.phoneID}));
   }
 
-  /**
-   * 请求登录
-   * 返回token
-   */
+  /// 请求登录
+  /// 返回token
   reqLogin(username, password, {success, fail}) {
     XHttp.instance.post(Config.postlogin, params: {
       'phone_number': username,
@@ -113,9 +108,7 @@ class Global {
     });
   }
 
-  /**
-   * 购买通证,无物品
-   */
+  /// 购买通证,无物品
   reqBuyItem(itemid, {success, fail}) {
     XHttp.instance.postData(Config.buyItem, params: {'id': itemid}).then((val) {
       var erode = val['code'];
@@ -127,17 +120,13 @@ class Global {
     });
   }
 
-  /**
-   * 加载画廊信息
-   */
+  /// 加载画廊信息
   Future loadGalleryData() async {
     return GNFTData.listfromJson(
         await XHttp.instance.post(Config.getMyData, params: {'type': 1}));
   }
 
-  /**
-   * 请求某类NFT
-   */
+  /// 请求某类NFT
   reqMyData(datatype, {success, fail}) {
     XHttp.instance
         .post(Config.getMyData, params: {'type': datatype}).then((val) {
@@ -150,12 +139,10 @@ class Global {
     });
   }
 
-  /**
-   * 请求所有的邮寄地址信息
-   */
+  /// 请求所有的邮寄地址信息
   reqMyAddress({success, fail}) {
     XHttp.instance.post(Config.getallmyAddress).then((val) {
-    //  print(val);
+      //  print(val);
       var erode = val['code'];
       if (erode == 200) {
         //  house = UserAddress.fromJson(val['data']);
@@ -167,30 +154,13 @@ class Global {
     });
   }
 
-  reqSendMeItem2NewAddress(where, itemid, {success, fail}) {
-    XHttp.instance
-        .postData(Config.buyItem2NewAddress,
-            params: {'username': _info.phoneID, 'itemid': itemid}, data: where)
-        .then((val) {
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        //   house = UserAddress.fromJson(jsonDecode(val)['data']);
-        success();
-      } else {
-        fail();
-      }
-    });
-  }
-
-  /**
-   * 创建或更新地址
-   */
+  /// 创建或更新地址
   reqUpdateAddress(where, {success, fail}) {
     XHttp.instance.postData(Config.updateAddress, data: where).then((val) {
       var erode = val['code'];
       if (erode == 200) {
-      //  UserAddress ua = UserAddress.fromJson(val['data']);
-      //  _addressList.add(ua);
+        //  UserAddress ua = UserAddress.fromJson(val['data']);
+        //  _addressList.add(ua);
         success();
       } else {
         fail();
@@ -204,4 +174,23 @@ class Global {
     //           null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
     //     });
   }
+
+
+/*
+  reqSendMeItem2NewAddress(where, itemid, {success, fail}) {
+    XHttp.instance
+        .postData(Config.buyItem2NewAddress,
+            params: {'username': _info.phoneID, 'itemid': itemid}, data: where)
+        .then((val) {
+      var erode = jsonDecode(val)['status'];
+      if (erode == '0') {
+        //   house = UserAddress.fromJson(jsonDecode(val)['data']);
+        success();
+      } else {
+        fail();
+      }
+    });
+
+  }
+*/
 }

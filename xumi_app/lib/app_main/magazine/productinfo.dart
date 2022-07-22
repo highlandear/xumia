@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../bean/certipass.dart';
 
 class ProductInfoPage extends StatelessWidget {

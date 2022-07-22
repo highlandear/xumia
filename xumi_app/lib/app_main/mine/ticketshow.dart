@@ -3,9 +3,7 @@ import 'package:xumi_app/bean/gnftdata.dart';
 
 import '../../utils/richqbar.dart';
 
-/**
- * 门票详细
- */
+/// 门票详细
 class TicketShowPage extends StatelessWidget {
   const TicketShowPage({Key? key, required this.ticket}) : super(key: key);
 
@@ -15,7 +13,7 @@ class TicketShowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("门票信息"),
+        title: const Text("门票信息"),
         centerTitle: true,
       ),
       body: Column(

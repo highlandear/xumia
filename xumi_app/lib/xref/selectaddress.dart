@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xumi_app/utils/xtoast.dart';
 import '../bean/useraddr.dart';
 import '../data/global.dart';
-import 'loading.dart';
+import '../login/loading.dart';
 
 class AddressSelectionPage extends StatefulWidget {
   AddressSelectionPage({Key? key, required this.data}) : super(key: key);
@@ -14,25 +14,17 @@ class AddressSelectionPage extends StatefulWidget {
 }
 
 class _AddressSelectionPageState extends State<AddressSelectionPage> {
-
   Widget _buildDefaultView(AddressInfo d) {
     return ListTile(
       leading: const Icon(Icons.check, color: Colors.red),
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-          //  Text('${d.name}(${d.tel})'),
             const SizedBox(height: 10),
-         //   Text(d.address),
             Text(d.detail),
             const Divider(height: 20),
-
           ]),
-    //  trailing: Icon(Icons.edit, color: Colors.blue),
-
-      onTap: () {
-
-      },
+      onTap: () {},
     );
   }
 
@@ -42,11 +34,11 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-         //   Text('${d.name}(${d.tel})'),
+            //   Text('${d.name}(${d.tel})'),
             const SizedBox(height: 10),
-          // Text(d.address),
+            // Text(d.address),
           ]),
-    //  trailing: Icon(Icons.edit, color: Colors.blue),
+      //  trailing: Icon(Icons.edit, color: Colors.blue),
     );
   }
 
@@ -61,18 +53,20 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
             ListView(
               children: <Widget>[
                 const SizedBox(height: 20),
-              //  _buildDefaultView(Global.user.house),
+                //  _buildDefaultView(Global.user.house),
 
-                ElevatedButton(onPressed: (){
-                  _buyThisItem(context);
-                }, child: const Text('确认')),
+                ElevatedButton(
+                    onPressed: () {
+                      _buyThisItem(context);
+                    },
+                    child: const Text('确认')),
               ],
             ),
           ],
         ));
   }
 
-  _buyThisItem(context){
+  _buyThisItem(context) {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -83,12 +77,10 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
             loadingView: CircularProgressIndicator(),
           );
         });
-    Global.user.reqBuyItem(widget.data, success: (){
+    Global.user.reqBuyItem(widget.data, success: () {
       XToast.success('请等待收货');
       Navigator.pop(context);
       Navigator.pop(context);
-    }, fail:(){
-
-    });
+    }, fail: () {});
   }
 }

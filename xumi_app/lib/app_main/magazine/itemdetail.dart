@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/bean/certipass.dart';
+import '../../bean/certipass.dart';
 
 class PassDetailPage extends StatelessWidget {
   const PassDetailPage({Key? key, required this.item}) : super(key: key);
@@ -23,10 +23,7 @@ class PassDetailPage extends StatelessWidget {
         margin: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            Container(
-              child: Text("tem.owner"),
-            //  margin: const EdgeInsets.all(10),
-            ),
+            const Text("item.owner"),
              ListTile(
               title: Text(item.desc),
             )
