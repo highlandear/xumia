@@ -41,14 +41,7 @@ class _MineContentState extends State<MineContent> {
   _tap(BuildContext context, String type) {
     if (!Global.user.online()) {
       XToast.error('请点击头像登录');
-      //  Navigator.of(context)
-      //      .push(
-      //    MaterialPageRoute(builder: (_) => const LoginTipPage(tip: '点击登录')),
-      //  ).then((value) => {
-      //    setState(() {
-      //
-      //    }),
-      //  });
+
       return;
     }
 
@@ -81,7 +74,9 @@ class _MineContentState extends State<MineContent> {
       default:
         Global.user.reqMyData(int.parse(type), success: (data) {
           _onData(context, type, data);
-        }, fail: () {});
+        }, fail: (error) {
+
+        });
         break;
     }
   }

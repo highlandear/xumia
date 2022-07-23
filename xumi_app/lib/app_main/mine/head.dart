@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../data/global.dart';
 import '../../login/smslogin.dart';
 import 'detail.dart';
-import 'colors.dart';
+import '../../data/colors.dart';
 
 class MyInfoHead extends StatefulWidget {
   const MyInfoHead({Key? key}) : super(key: key);
@@ -12,7 +12,6 @@ class MyInfoHead extends StatefulWidget {
 }
 
 class _MyInfoHeadState extends State<MyInfoHead> {
-
   late String _title;
 
   @override
@@ -29,41 +28,41 @@ class _MyInfoHeadState extends State<MyInfoHead> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(child:InkWell(
-      onTap: () {
-        if (!Global.user.online()) {
-          Navigator.of(context)
-              .push(
-              //  MaterialPageRoute(builder: (_) => const SignPage()),
-                MaterialPageRoute(builder: (_) => const SmsLogin()),
-              )
-              .then((val) => val != null ? _getMe() : null);
-        } else {
-          Navigator.of(context)
-              .push(
-                MaterialPageRoute(builder: (_) => MyDetailView()),
-              )
-              .then((val) => val != null ? _getMe() : null);
-        }
-      },
-      child: Stack(
-        children: [
-          Container(
-            color: Colors.white,
-          ),
-          Positioned(
-            left: 20,
-            top: 100,
-            child: _buildMyInfo(),
-          ),
-          Positioned(
-            right: 15,
-            top: 148,
-            child: _buildArrow(),
-          ),
-        ],
+    return Material(
+      child: InkWell(
+        onTap: () {
+          if (!Global.user.online()) {
+            Navigator.of(context)
+                .push(
+                  MaterialPageRoute(builder: (_) => const SmsLoginPage()),
+                )
+                .then((val) => val != null ? _getMe() : null);
+          } else {
+            Navigator.of(context)
+                .push(
+                  MaterialPageRoute(builder: (_) => MyDetailView()),
+                )
+                .then((val) => val != null ? _getMe() : null);
+          }
+        },
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.white,
+            ),
+            Positioned(
+              left: 20,
+              top: 100,
+              child: _buildMyInfo(),
+            ),
+            Positioned(
+              right: 15,
+              top: 148,
+              child: _buildArrow(),
+            ),
+          ],
+        ),
       ),
-    ),
     );
   }
 

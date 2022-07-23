@@ -6,14 +6,15 @@ import '../utils/xtoast.dart';
 import 'loading.dart';
 
 /// 手机号快速登录，短信验证
-class SmsLogin extends StatefulWidget {
-  const SmsLogin({Key? key}) : super(key: key);
+class SmsLoginPage extends StatefulWidget {
+  const SmsLoginPage({Key? key}) : super(key: key);
 
   @override
   createState() => _SmsLoginState();
 }
 
-class _SmsLoginState extends State<SmsLogin> {
+class _SmsLoginState extends State<SmsLoginPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

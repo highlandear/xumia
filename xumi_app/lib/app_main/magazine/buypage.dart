@@ -256,19 +256,10 @@ class _PurchaseState extends State<PurchasePage>
     );
   }
 
-  _getMyAddressList() {
-    if (!Global.user.hasAddress()) {
-      Global.user.reqMyAddress(success: () {});
-    }
-    setState(() {});
-  }
-
   _login() {
-    Navigator.of(context)
-        .push(
-          MaterialPageRoute(builder: (_) => const SmsLogin()),
-        )
-        .then((val) => val != null ? _getMyAddressList() : null);
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const SmsLoginPage()),
+    );
   }
 
   _onBuyItem(BuildContext context) {
@@ -277,8 +268,8 @@ class _PurchaseState extends State<PurchasePage>
       return;
     }
 
-    if (!_item.hasProduct()) {
-      // if (_item.hasProduct()) {
+  //  if (!_item.hasProduct()) {
+       if (_item.hasProduct()) {
       Global.user.reqBuyItem(_item.id, success: () {
         XToast.success('已经直接购入，请查看');
       }, fail: () {});
@@ -286,99 +277,16 @@ class _PurchaseState extends State<PurchasePage>
       return;
     }
 
-    if (!Global.user.hasAddress()) {
-      Global.user.reqMyAddress(success: () {
-        _selectAddressID();
-      });
-    }
-    else{
-      _selectAddressID();
-    }
+    _selectAddressID();
     // 附带线下产品，本地有地址，要求用户选择已有地址
-
   }
 
   _selectAddressID() {
-    XToast.toast('there');
     Navigator.of(context)
         .push(MaterialPageRoute(
             builder: (_) => const MyAddressListPage(sel: true)))
         .then((val) {
-      XToast.toast('邮寄到地址$val');
+      XToast.toast('邮寄到地址${val.detail}');
     });
   }
-// Widget _buildBack(BuildContext context) {
-//   return GestureDetector(
-//     onTap: () {
-//       Navigator.pop(context);
-//     },
-//     child: Container(
-//       width: 100,
-//       height: 100,
-//       padding:
-//           const EdgeInsets.only(left: 12, right: 48, top: 40, bottom: 20),
-//       child: Container(
-//         padding: const EdgeInsets.only(
-//           left: 5,
-//           right: 5,
-//         ),
-//         child: const Icon(Icons.keyboard_arrow_left),
-//         decoration: const BoxDecoration(
-//           color: Colors.transparent,
-//           shape: BoxShape.circle,
-//         ),
-//       ),
-//     ),
-//   );
-// }
-// Widget _buildListView(BuildContext context) {
-//   return Container(
-//     color: Colors.white,
-//     child: Column(
-//       children: [
-//         Stack(
-//           children: <Widget>[
-//             Container(
-//               color: Colors.white,
-//
-//               ///banner广告图
-//               child: Column(
-//                 children: <Widget>[
-//                   Image.network(
-//                     _item.cover,
-//                     // fit: BoxFit.cover,
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             GestureDetector(
-//               onTap: () {
-//                 Navigator.pop(context);
-//               },
-//               child: Container(
-//                 width: 100,
-//                 height: 100,
-//                 padding: const EdgeInsets.only(
-//                     left: 12, right: 48, top: 40, bottom: 20),
-//                 child: Container(
-//                   padding: const EdgeInsets.only(
-//                     left: 5,
-//                     right: 5,
-//                   ),
-//                   child: const Icon(Icons.keyboard_arrow_left),
-//                   decoration: const BoxDecoration(
-//                     color: Colors.transparent,
-//                     shape: BoxShape.circle,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//         //  buildBodyView(context),
-//         // _buildDescCard(context),
-//       ],
-//     ),
-//   );
-// }
 }

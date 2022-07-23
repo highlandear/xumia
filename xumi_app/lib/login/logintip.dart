@@ -20,7 +20,7 @@ class _LoginTipPageState extends State<LoginTipPage> {
   _login() {
     Navigator.of(context)
         .push(
-          MaterialPageRoute(builder: (_) => const SmsLogin()),
+          MaterialPageRoute(builder: (_) => const SmsLoginPage()),
         )
         .then((val) => val != null ? _getMe() : null);
   }

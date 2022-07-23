@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../mine/colors.dart';
+import '../../data/colors.dart';
 import 'item.dart';
 
 class ListClickItem extends StatefulWidget {

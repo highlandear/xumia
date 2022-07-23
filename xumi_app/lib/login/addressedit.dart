@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:city_pickers/city_pickers.dart';
 import '../../utils/xtoast.dart';
 import '../bean/useraddr.dart';
-import '../bean/userinfo.dart';
 import '../data/global.dart';
 import 'loading.dart';
 
@@ -10,9 +9,9 @@ import 'loading.dart';
 /// id == 0 时，表明新增加一个地址
 /// id !=0 时，修改对应id的地址
 class AddressEditPage extends StatefulWidget {
-  AddressEditPage({Key? key, this.id = 0}) : super(key: key);
+  const AddressEditPage({Key? key, this.id = 0}) : super(key: key);
 
-  int id;
+  final int id;
 
   @override
   createState() => _AddressEditPageState();
@@ -185,11 +184,11 @@ class _AddressEditPageState extends State<AddressEditPage> {
         });
 
     Global.user.reqUpdateAddress(address, success: () {
-      XToast.success("添加新地址成功");
       Navigator.pop(context);
-      Navigator.pop(context);
+      Navigator.pop(context, true);
     }, fail: () {
       Navigator.pop(context);
+      XToast.success("更新地址failed");
     });
   }
 }

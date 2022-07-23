@@ -11,11 +11,11 @@ class Global {
   static final Global _instance = Global();
   static Global get user => _instance;
 
- // UserInfo _info = UserInfo();
+  UserInfo _info = UserInfo();
   List<AddressInfo> _addressList = [];
 
-  UserInfo _info = UserInfo(phoneID: '123748484', token: 'abcdeflsla');
-  List<AddressInfo> _addressListx = [
+  //UserInfo _info = UserInfo(phoneID: '123748484', token: 'abcdeflsla');
+  final List<AddressInfo> _addressListx = [
     AddressInfo(
         id: 1,
         name: 'HZS',
@@ -61,10 +61,11 @@ class Global {
   getDefaultAddress() {
     for (var element in _addressList) {
       if (element.isDefault) {
+        element.ismain = true;
         return element;
       }
     }
-    _addressList.first.isDefault = true;
+    _addressList.first.ismain = true;
     return _addressList.first;
   }
 
@@ -81,6 +82,8 @@ class Global {
     _addressList = [];
   }
 
+  /// 加载杂志页面
+  ///
   Future loadMagData() async {
     return CertiPass.listfromJson(await XHttp.instance
         .post(Config.magazine, params: {'username': _info.phoneID}));
@@ -88,6 +91,7 @@ class Global {
 
   /// 请求登录
   /// 返回token
+  /// 登录成功后继续请求收货地址
   reqLogin(username, password, {success, fail}) {
     XHttp.instance.post(Config.postlogin, params: {
       'phone_number': username,
@@ -95,15 +99,32 @@ class Global {
       'userType': 0,
       'grant_type': 'sms_captcha',
     }).then((val) {
-     var erode = val['code'];
+      var erode = val['code'];
       if (erode == 200) {
         _info.token = val['data']['token'];
         _info.phoneID = username;
-
         XHttp.instance.setHeaders('XUMI-TOKEN', 'Bearer ${_info.token}');
+
+        // 登录成功后就请求已经存储的地址信息
+        _reqAddressList(success: (){}, fail: (){});
+
+        // 向调用者回调
         success();
       } else {
         fail(erode);
+      }
+    });
+  }
+
+  /// 请求所有的邮寄地址信息
+  _reqAddressList({success, fail}) {
+    XHttp.instance.post(Config.getallmyAddress).then((val) {
+      var erode = val['code'];
+      if (erode == 200) {
+        _addressList = AddressInfo.listfromJson(val['data']);
+        success();
+      } else {
+        fail();
       }
     });
   }
@@ -134,21 +155,8 @@ class Global {
       if (erode == 200) {
         success(val);
       } else {
+        print('$erode, ${val['msg']}');
         fail(erode);
-      }
-    });
-  }
-
-  /// 请求所有的邮寄地址信息
-  reqMyAddress({success, fail}) {
-    XHttp.instance.post(Config.getallmyAddress).then((val) {
-
-      var erode = val['code'];
-      if (erode == 200) {
-        _addressList = AddressInfo.listfromJson(val['data']);
-        success();
-      } else {
-        fail();
       }
     });
   }
@@ -158,14 +166,25 @@ class Global {
     XHttp.instance.postData(Config.updateAddress, data: where).then((val) {
       var erode = val['code'];
       if (erode == 200) {
-        //  UserAddress ua = UserAddress.fromJson(val['data']);
-        //  _addressList.add(ua);
+        AddressInfo address = AddressInfo.fromJson(val['data']);
+        _updateAddressList(address);
         success();
       } else {
         fail();
       }
     });
   }
+
+  _updateAddressList(AddressInfo address){
+      for (var element in _addressList) {
+          if(element.id == address.id) {
+            element = address;
+            return;
+          }
+      }
+      _addressList.add(address);
+  }
+
 
   loadMe() {
     // AStorage.getv('me').then((value) => {
@@ -173,22 +192,4 @@ class Global {
     //           null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
     //     });
   }
-
-/*
-  reqSendMeItem2NewAddress(where, itemid, {success, fail}) {
-    XHttp.instance
-        .postData(Config.buyItem2NewAddress,
-            params: {'username': _info.phoneID, 'itemid': itemid}, data: where)
-        .then((val) {
-      var erode = jsonDecode(val)['status'];
-      if (erode == '0') {
-        //   house = UserAddress.fromJson(jsonDecode(val)['data']);
-        success();
-      } else {
-        fail();
-      }
-    });
-
-  }
-*/
 }

@@ -10,6 +10,8 @@ class AddressInfo {
     this.dist = '',
     this.detail = '',
     this.isDefault = false,
+    this.ismain = false,
+
   });
 
   var id;
@@ -22,6 +24,7 @@ class AddressInfo {
   String dist;
   String detail;
   bool isDefault;
+  bool ismain;
 
   hasAddress() {
     return phone.isNotEmpty;

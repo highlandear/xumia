@@ -21,7 +21,7 @@ class TicketShowPage extends StatelessWidget {
           RichQBarView(ticket.extra),
           Image.network(
             ticket.nftpath,
-            fit: BoxFit.fitWidth,
+        //    fit: BoxFit.cover,
           ),
         ],
       ),

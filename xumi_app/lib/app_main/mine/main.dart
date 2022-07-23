@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import '../../data/colors.dart';
 import 'operation.dart';
 
 class MineMainPage extends StatefulWidget{
