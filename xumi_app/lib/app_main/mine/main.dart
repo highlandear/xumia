@@ -15,13 +15,12 @@ class _MineMainPageState extends State<MineMainPage> {
     return Stack(
       children: [
         Container(color: MineColors.xumi_gray,),
-        Positioned(
+        const Positioned(
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
           child: MineContent(),
-          // child: MineView(),
         ),
       ],
     );

@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
     ClickItem('assets/images/find/find_scan.png', '地址管理', 'addr', false),
     ClickItem('', '', 'divide', false),
     ClickItem(
-        'assets/images/mine/mine_collection.png', '其他设置', 'settings', true)
+        'assets/images/mine/mine_collection.png', '其他设置', 'settings', true),
   ];
 
   _tap(BuildContext context, String type) {

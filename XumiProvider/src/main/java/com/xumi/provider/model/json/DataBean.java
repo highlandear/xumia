@@ -6,10 +6,10 @@ public class DataBean<T> {
 	
 	public DataBean(){}
 	
-	public DataBean(String s){this.status = s;}
+//	public DataBean(){}
 	
-	@JsonProperty(value = "status")
-	String status;
+	@JsonProperty(value = "code")
+	int code = 200;
 	
 	@JsonProperty(value = "data")
 	T data;
@@ -20,8 +20,6 @@ public class DataBean<T> {
 	}
 	
 	public void add(T d) {
-		
-		status = d == null ? "1":"0";
 		
 		data = d ;
 	}

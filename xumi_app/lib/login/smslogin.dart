@@ -21,7 +21,7 @@ class _SmsLoginState extends State<SmsLogin> {
         automaticallyImplyLeading: true,
         title: const Text('手机号快速登录'),
       ),
-      body: _buildme(context),
+      body: _buildLogin(context),
     );
   }
 
@@ -87,6 +87,7 @@ class _SmsLoginState extends State<SmsLogin> {
           ),
           SizedBox(
             width: 120,
+
             child: FlatButton(
               disabledColor: Colors.grey.withOpacity(0.1), //按钮禁用时的颜色
               disabledTextColor: Colors.white, //按钮禁用时的文本颜色
@@ -120,7 +121,7 @@ class _SmsLoginState extends State<SmsLogin> {
       ),
     );
   }
-
+  
   Widget _buildButton(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -146,7 +147,7 @@ class _SmsLoginState extends State<SmsLogin> {
     );
   }
 
-  Widget _buildme(BuildContext context) {
+  Widget _buildLogin(BuildContext context) {
     return Column(
       children: <Widget>[
         _buildAccountInput(context),

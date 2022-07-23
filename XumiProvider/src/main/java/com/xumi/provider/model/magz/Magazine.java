@@ -30,7 +30,7 @@ public class Magazine {
 
 	// 附加的可购买产品的标识
 	static String [] products = {"bd-16","bd-17"};
-	
+/*	
 	// 几个NFT示例
 	static NFTData [] nfts = {
 			Artwork.create(paths[0]).addAuthor("秋秋").addCaption("这是秋秋在2016年的作品"),
@@ -65,7 +65,10 @@ public class Magazine {
 	}
 	
 	public CertiPass get(String id) {return passes.get(id);}
+*/	
+	public void load() {
 	
+	}
 	public static Magazine getInstance() {return instance;}
 	private static Magazine instance = new Magazine();
 	java.util.Map<String, CertiPass> passes = new java.util.HashMap<String, CertiPass>();

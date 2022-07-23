@@ -87,9 +87,26 @@ class _MyAddressPageState extends State<MyAddressListPage> {
       },
     );
   }
-
+  Widget _buildEmptyList(){
+    return Stack(
+      children: <Widget>[
+        ListView(
+          children: <Widget>[
+            const SizedBox(height: 20),
+          //  _buildDefaultAddress(),
+          //  _buildAllAddressWithoutDefault(),
+            _buildButton(),
+          ],
+        ),
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
+    if(! Global.user.hasAddress()) {
+      return _buildEmptyList();
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("收货地址列表"),

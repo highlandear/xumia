@@ -58,8 +58,8 @@ public class RequestHandler {
 	
 
 	@RequestMapping(value = postlogin, method = RequestMethod.POST)
-	public String register(@RequestParam("username") String username, @RequestParam("password") String password) {
-	//	System.out.println("username is:" + username);
+	public String register(@RequestParam("phone_number") String username, @RequestParam("password") String password) {
+		System.out.println("username is:" + username);
 	//	System.out.println("password is:" + password);
 		UserData u = UserManager.getInstance().careatUser(username, password);
 
@@ -75,12 +75,13 @@ public class RequestHandler {
 		if(user == null)
 			return "error";
 		
-		CertiPass pass = Magazine.getInstance().get(itemid);
+//		CertiPass pass = Magazine.getInstance().get(itemid);
 
-		boolean ok = user.buy(pass);
+	//	boolean ok = user.buy(pass);
+		boolean ok  = true;
 		
-		DataBean<?> res = new DataBean<>(ok? "0":"1");
-		return res.toJson();
+		//DataBean<?> res = new DataBean<>(ok? "0":"1");
+		return "";
 	}
 /*	
 	@RequestMapping(value = buyItem2NewAddress, method = RequestMethod.POST)
@@ -111,28 +112,22 @@ public class RequestHandler {
 		return res.toJson();
 	}
 	*/
-	/*
-	@RequestMapping(value = addNewAddress, method = RequestMethod.POST)
+	
+//	@RequestMapping(value = getallmyAddress, method = RequestMethod.POST)
 	public String addNewAddress(@RequestParam("username") String username, @RequestBody DeliverData house) {
-
-		
-		System.out.println(username);
-		System.out.println(house.getTel());
-		System.out.println(house.getName());
-		System.out.println(house.getAddress());
-		System.out.println(house.getDetail());
 		
 		UserManager.getInstance().addAddr(username, house);
 
 		DataBean<DeliverData> res = new DataBean<DeliverData>();
 		res.add(house);
 	
+		System.out.println(house.getDetail());
 
 		return res.toJson();
 	}
-	 */
-	/*
-	@RequestMapping(value = myAddress, method = RequestMethod.GET)
+	
+	
+	@RequestMapping(value = getallmyAddress, method = RequestMethod.POST)
 	public String reqAddr(@RequestParam("username") String username) {
 
 	//	System.out.println(username);
@@ -143,6 +138,6 @@ public class RequestHandler {
 
 		return res.toJson();
 	}
-	*/
+	
 }
 

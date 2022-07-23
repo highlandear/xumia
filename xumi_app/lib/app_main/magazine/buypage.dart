@@ -286,8 +286,16 @@ class _PurchaseState extends State<PurchasePage>
       return;
     }
 
+    if (!Global.user.hasAddress()) {
+      Global.user.reqMyAddress(success: () {
+        _selectAddressID();
+      });
+    }
+    else{
+      _selectAddressID();
+    }
     // 附带线下产品，本地有地址，要求用户选择已有地址
-    _selectAddressID();
+
   }
 
   _selectAddressID() {

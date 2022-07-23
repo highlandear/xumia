@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../bean/useraddr.dart';
 import '../bean/gnftdata.dart';
 import '../bean/certipass.dart';
@@ -9,42 +11,42 @@ class Global {
   static final Global _instance = Global();
   static Global get user => _instance;
 
-  UserInfo _info = UserInfo();
+ // UserInfo _info = UserInfo();
   List<AddressInfo> _addressList = [];
 
-  //UserInfo _info = UserInfo(phoneID: '123748484', token: 'abcdeflsla');
-  // List<UserAddress> _addressList = [
-  //   UserAddress(
-  //       id: 1,
-  //       name: 'HZS',
-  //       desc: '公司',
-  //       phone: '1378288282',
-  //       prov: '北京',
-  //       city: '北京',
-  //       dist: '海淀区',
-  //       detail: '学清路18号',
-  //       isDefault: true),
-  //   UserAddress(
-  //       id: 2,
-  //       name: '黄作胜',
-  //       desc: '我家',
-  //       phone: '1378288282',
-  //       prov: '北京',
-  //       city: '北京',
-  //       dist: '海淀区',
-  //       detail: '学清路18号',
-  //       isDefault: false),
-  //   UserAddress(
-  //       id: 3,
-  //       name: 'toal',
-  //       desc: '我家',
-  //       phone: '1378288282',
-  //       prov: '北京',
-  //       city: '北京',
-  //       dist: '海淀区',
-  //       detail: '学清路18号',
-  //       isDefault: false),
-  // ];
+  UserInfo _info = UserInfo(phoneID: '123748484', token: 'abcdeflsla');
+  List<AddressInfo> _addressListx = [
+    AddressInfo(
+        id: 1,
+        name: 'HZS',
+        desc: '公司',
+        phone: '1378288282',
+        prov: '北京',
+        city: '北京',
+        dist: '海淀区',
+        detail: '学清路18号',
+        isDefault: true),
+    AddressInfo(
+        id: 2,
+        name: '黄作胜',
+        desc: '我家',
+        phone: '1378288282',
+        prov: '北京',
+        city: '北京',
+        dist: '海淀区',
+        detail: '学清路18号',
+        isDefault: false),
+    AddressInfo(
+        id: 3,
+        name: 'toal',
+        desc: '我家',
+        phone: '1378288282',
+        prov: '北京',
+        city: '北京',
+        dist: '海淀区',
+        detail: '学清路18号',
+        isDefault: false),
+  ];
 
   getAddressByID(int id) {
     for (var element in _addressList) {
@@ -93,9 +95,7 @@ class Global {
       'userType': 0,
       'grant_type': 'sms_captcha',
     }).then((val) {
-      print(val);
-      var erode = val['code'];
-      print(erode);
+     var erode = val['code'];
       if (erode == 200) {
         _info.token = val['data']['token'];
         _info.phoneID = username;
@@ -142,10 +142,9 @@ class Global {
   /// 请求所有的邮寄地址信息
   reqMyAddress({success, fail}) {
     XHttp.instance.post(Config.getallmyAddress).then((val) {
-      //  print(val);
+
       var erode = val['code'];
       if (erode == 200) {
-        //  house = UserAddress.fromJson(val['data']);
         _addressList = AddressInfo.listfromJson(val['data']);
         success();
       } else {
@@ -174,7 +173,6 @@ class Global {
     //           null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
     //     });
   }
-
 
 /*
   reqSendMeItem2NewAddress(where, itemid, {success, fail}) {

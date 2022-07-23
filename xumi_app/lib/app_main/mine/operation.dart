@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/mine/ticketcart.dart';
+import '../mine/ticketcart.dart';
 import '../../bean/gnftdata.dart';
 import '../../data/global.dart';
 import '../../utils/browser.dart';
@@ -63,11 +63,9 @@ class _MineContentState extends State<MineContent> {
           return (const BarcodeScanPage());
         }));
         break;
-
       case 'cards':
         XToast.toast('我的卡包功能');
         break;
-
       case '4':
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const Browser(
@@ -76,12 +74,10 @@ class _MineContentState extends State<MineContent> {
             title: "Flutter 中文社区",
           );
         }));
-
         break;
       case '2':
         XToast.toast('我的卡包功能');
         break;
-
       default:
         Global.user.reqMyData(int.parse(type), success: (data) {
           _onData(context, type, data);

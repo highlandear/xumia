@@ -19,14 +19,19 @@ public abstract class NFTData {
 	// 字幕描述信息
 	@JsonProperty("id")
 	int id;
+	
 	@JsonProperty("type")
 	int type;
+	
 	@JsonProperty("desc")
 	String desc;
+	
 	@JsonProperty("ipfsHash")
 	String nftpath;
+	
 	@JsonProperty("url")
 	String url;
+	
 	@JsonProperty("extra")
 	String extra;
 }

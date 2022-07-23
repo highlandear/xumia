@@ -16,10 +16,10 @@ public class UserManager {
 
 		UserData u = users.get(key);
 		if (u == null)
-			u = new UserData(key, genDID());
+			u = new UserData();
+		u.token = this.genDID();
 
 		this.add(key, u);
-		System.out.println(u.tel);
 
 		return u;
 	}
@@ -45,7 +45,7 @@ public class UserManager {
 
 		DataBean<java.util.List<CertiPass>> ret = new DataBean<>();
 
-		ret.add(Magazine.getInstance().getPassesList());
+	//	ret.add(Magazine.getInstance().getPassesList());
 
 	//	System.out.println("==========" + ret.toJson());
 		return ret.toJson();
