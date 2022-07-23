@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_main/index.dart';
 import 'app_main/plain.dart';
+import 'data/config.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -14,10 +15,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return const Image(
-      image: AssetImage('assets/images/abc.jpg'),
-      fit: BoxFit.fill,
-    );
+    return Image.network(Config.loadingImage, fit: BoxFit.fill);
   }
 
   @override

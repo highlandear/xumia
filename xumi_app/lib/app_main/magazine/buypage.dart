@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:xumi_app/app_main/magazine/orderpage.dart';
 import '../../bean/certipass.dart';
+import '../../bean/useraddr.dart';
 import '../../data/global.dart';
 import '../../login/addresslist.dart';
 import '../../login/smslogin.dart';
@@ -264,29 +266,29 @@ class _PurchaseState extends State<PurchasePage>
 
   _onBuyItem(BuildContext context) {
     if (!Global.user.online()) {
-      _login();
-      return;
+      return _login();
     }
 
-  //  if (!_item.hasProduct()) {
-       if (_item.hasProduct()) {
-      Global.user.reqBuyItem(_item.id, success: () {
-        XToast.success('已经直接购入，请查看');
-      }, fail: () {});
-
-      return;
+    if (! _item.hasProduct()) {
+      return _gotoOrderPage(context, null);
     }
 
-    _selectAddressID();
-    // 附带线下产品，本地有地址，要求用户选择已有地址
-  }
-
-  _selectAddressID() {
     Navigator.of(context)
         .push(MaterialPageRoute(
             builder: (_) => const MyAddressListPage(sel: true)))
         .then((val) {
-      XToast.toast('邮寄到地址${val.detail}');
+      if (val != null) _gotoOrderPage(context, val);
     });
+    // 附带线下产品，本地有地址，要求用户选择已有地址
+  }
+
+  _gotoOrderPage(BuildContext context, address) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (_) => OrderInfoPage(
+                address: address,
+                product: _item,
+              )),
+    );
   }
 }

@@ -23,6 +23,7 @@ class _LoginTipPageState extends State<LoginTipPage> {
           MaterialPageRoute(builder: (_) => const SmsLoginPage()),
         )
         .then((val) => val != null ? _getMe() : null);
+  //  Login.login(context);
   }
 
   @override

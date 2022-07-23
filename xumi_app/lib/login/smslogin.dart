@@ -4,6 +4,15 @@ import 'package:flutter/services.dart';
 import '../data/global.dart';
 import '../utils/xtoast.dart';
 import 'loading.dart';
+//
+// class Login {
+//   static Future login(BuildContext context) async{
+//     if (Global.user.online()) return;
+//
+//    return Navigator.of(context)
+//         .push(MaterialPageRoute(builder: (_) => const _SmsLoginPage()));
+//   }
+// }
 
 /// 手机号快速登录，短信验证
 class SmsLoginPage extends StatefulWidget {
@@ -14,7 +23,6 @@ class SmsLoginPage extends StatefulWidget {
 }
 
 class _SmsLoginState extends State<SmsLoginPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +96,6 @@ class _SmsLoginState extends State<SmsLoginPage> {
           ),
           SizedBox(
             width: 120,
-
             child: FlatButton(
               disabledColor: Colors.grey.withOpacity(0.1), //按钮禁用时的颜色
               disabledTextColor: Colors.white, //按钮禁用时的文本颜色
@@ -122,7 +129,7 @@ class _SmsLoginState extends State<SmsLoginPage> {
       ),
     );
   }
-  
+
   Widget _buildButton(BuildContext context) {
     return Container(
       width: double.infinity,
