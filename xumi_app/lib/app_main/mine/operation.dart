@@ -62,8 +62,8 @@ class _MineContentState extends State<MineContent> {
       case '4':
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const Browser(
-            url: 'https://www.sohu.com/a/377307706_293887',
-            // url:'https://www.wenjuan.com/lib_detail_full/57d8fbd8a320fc086b497ff2',
+           // url: 'http://cognitivelab.net/me.html',
+             url:'https://www.wenjuan.com/lib_detail_full/57d8fbd8a320fc086b497ff2',
             title: "Flutter 中文社区",
           );
         }));

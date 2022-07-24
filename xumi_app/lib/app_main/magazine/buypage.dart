@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/magazine/orderpage.dart';
 import '../../bean/certipass.dart';
-import '../../bean/useraddr.dart';
 import '../../data/global.dart';
 import '../../login/addresslist.dart';
 import '../../login/smslogin.dart';
-import '../../utils/xtoast.dart';
+import 'orderpage.dart';
 
 /// 详细展示和购买页面
 class PurchasePage extends StatefulWidget {
@@ -86,6 +84,7 @@ class _PurchaseState extends State<PurchasePage>
             controller: _scrollController,
             child: Column(
               children: [
+
                 if (_item.desc.isNotEmpty) _buildDescCard(_item.desc),
                 if (_item.detail.isNotEmpty) _buildDetailInfo(_item.detail),
               ],
@@ -109,8 +108,19 @@ class _PurchaseState extends State<PurchasePage>
   Widget _buildDetailInfo(detail) {
     return Image.network(detail);
   }
-
   Widget _buildDescCard(desc) {
+    return  Column(
+          children: <Widget>[
+           // const Text('\n'),
+
+            // Text('@${_item.owner}'),
+            ListTile(
+              title: Text(desc),
+            )
+          ],
+    );
+  }
+  Widget _buildDescCardx(desc) {
     return GestureDetector(
       onTap: () {},
       child: Card(
@@ -119,7 +129,6 @@ class _PurchaseState extends State<PurchasePage>
         child: Column(
           children: <Widget>[
             const Text('\n'),
-            // Text('@${_item.owner}'),
             ListTile(
               title: Text(desc),
             )

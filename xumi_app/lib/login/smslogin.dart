@@ -5,14 +5,14 @@ import '../data/global.dart';
 import '../utils/xtoast.dart';
 import 'loading.dart';
 //
-// class Login {
-//   static Future login(BuildContext context) async{
-//     if (Global.user.online()) return;
-//
-//    return Navigator.of(context)
-//         .push(MaterialPageRoute(builder: (_) => const _SmsLoginPage()));
-//   }
-// }
+class Login {
+  static Future login(BuildContext context) async{
+    if (Global.user.online()) return;
+
+   return Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const SmsLoginPage()));
+  }
+}
 
 /// 手机号快速登录，短信验证
 class SmsLoginPage extends StatefulWidget {

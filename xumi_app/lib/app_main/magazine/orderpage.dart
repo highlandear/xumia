@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/bean/certipass.dart';
-
+import '../../bean/certipass.dart';
 import '../../bean/useraddr.dart';
+import '../../data/global.dart';
 
 class OrderInfoPage extends StatelessWidget {
-  OrderInfoPage({Key? key, required this.product, this.address}) : super(key: key);
-
-  var address;
+  OrderInfoPage({Key? key, required this.product, this.address})
+      : super(key: key);
 
   final CertiPass product;
+
+  var address;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class OrderInfoPage extends StatelessWidget {
             ListView(
               children: <Widget>[
                 const SizedBox(height: 20),
-                if(address != null) _buildAddressItem(address),
+                if (address != null) _buildAddressItem(address),
                 _buildProductInfo(context),
                 _buildButton(context),
               ],
@@ -32,7 +33,10 @@ class OrderInfoPage extends StatelessWidget {
 
   Widget _buildAddressItem(AddressInfo address) {
     return ListTile(
-      leading: const Icon(Icons.house_outlined, color: Colors.red,),
+      leading: const Icon(
+        Icons.house_outlined,
+        color: Colors.red,
+      ),
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -44,6 +48,7 @@ class OrderInfoPage extends StatelessWidget {
           ]),
     );
   }
+
   Widget _buildProductInfo(BuildContext context) {
     return ListTile(
       leading: const Icon(Icons.shopping_bag),
@@ -62,7 +67,38 @@ class OrderInfoPage extends StatelessWidget {
           primary: Theme.of(context).primaryColor,
           padding: const EdgeInsets.all(15.0)),
       child: const Text('确认购买', style: TextStyle(color: Colors.white)),
-      onPressed: () {},
+      onPressed: () {
+        _buyThisItem(context);
+      },
+    );
+  }
+
+  _buyThisItem(BuildContext context) {
+    Global.user.reqBuyItem(product.id, address == null ? 0 : address.id,
+        success: () {
+      _buyTips(context);
+    }, fail: () {});
+  }
+
+  _buyTips(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, //设置为false，点击空白处弹窗不关闭
+      builder: (context) {
+        return AlertDialog(
+          content: const Text('已经成功购入'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('确定'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

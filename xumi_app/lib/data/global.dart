@@ -54,7 +54,6 @@ class Global {
         return element;
       }
     }
-
     return null;
   }
 
@@ -129,9 +128,11 @@ class Global {
     });
   }
 
-  /// 购买通证,无物品
-  reqBuyItem(itemid, {success, fail}) {
-    XHttp.instance.postData(Config.buyItem, params: {'id': itemid}).then((val) {
+  /// 购买通证,
+  /// itemid, 通证id
+  /// aid,地址id
+  reqBuyItem(itemid, aid, {success, fail}) {
+    XHttp.instance.post(Config.buyItem, params: {'id': itemid, 'addressId': aid}).then((val) {
       var erode = val['code'];
       if (erode == 200) {
         success();

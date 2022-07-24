@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../bean/certipass.dart';
+import '../bean/certipass.dart';
 
-class ProductInfoPage extends StatelessWidget {
-  const ProductInfoPage({Key? key, required this.item}) : super(key: key);
+class ProductInfoPageX extends StatelessWidget {
+  const ProductInfoPageX({Key? key, required this.item}) : super(key: key);
   final CertiPass item;
 
   @override
