@@ -5,6 +5,7 @@ import '../bean/gnftdata.dart';
 import '../bean/certipass.dart';
 import '../bean/userinfo.dart';
 import '../utils/xhttp.dart';
+import '../utils/xstorage.dart';
 import 'config.dart';
 
 class Global {
@@ -103,9 +104,9 @@ class Global {
         _info.token = val['data']['token'];
         _info.phoneID = username;
         XHttp.instance.setHeaders('XUMI-TOKEN', 'Bearer ${_info.token}');
-
+        localSave(_info);
         // 登录成功后就请求已经存储的地址信息
-        _reqAddressList(success: (){}, fail: (){});
+        _reqAddressList(success: () {}, fail: () {});
 
         // 向调用者回调
         success();
@@ -132,7 +133,8 @@ class Global {
   /// itemid, 通证id
   /// aid,地址id
   reqBuyItem(itemid, aid, {success, fail}) {
-    XHttp.instance.post(Config.buyItem, params: {'id': itemid, 'addressId': aid}).then((val) {
+    XHttp.instance.post(Config.buyItem,
+        params: {'id': itemid, 'addressId': aid}).then((val) {
       var erode = val['code'];
       if (erode == 200) {
         success();
@@ -176,21 +178,30 @@ class Global {
     });
   }
 
-  _updateAddressList(AddressInfo address){
-      for (var element in _addressList) {
-          if(element.id == address.id) {
-            element = address;
-            return;
-          }
+  _updateAddressList(AddressInfo address) {
+    for (var element in _addressList) {
+      if (element.id == address.id) {
+        element = address;
+        return;
       }
-      _addressList.add(address);
+    }
+    _addressList.add(address);
   }
 
+  localSave(UserInfo user) {
+    XStorage.save('userinfo', jsonEncode(user.toJson()));
+  }
 
-  loadMe() {
-    // AStorage.getv('me').then((value) => {
-    //       info =
-    //           null == value ? UserInfo() : UserInfo.fromJson(jsonDecode(value))
-    //     });
+  loadLocalUserInfo({ok, no}) {
+    XStorage.get('userinfo').then((value) {
+      if (value == null) {
+      //  return no();
+      }
+
+      Map<String, dynamic> map = jsonDecode(value);
+      UserInfo user = UserInfo.fromJson(map);
+      print(user.token);
+      //return ok(user);
+    });
   }
 }

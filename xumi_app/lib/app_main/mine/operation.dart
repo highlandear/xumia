@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../bean/userinfo.dart';
 import '../mine/ticketcart.dart';
 import '../../bean/gnftdata.dart';
 import '../../data/global.dart';
@@ -26,7 +27,9 @@ class _MineContentState extends State<MineContent> {
     ClickItem('assets/images/mine/mine_wallet.png', '会员', '2', true),
     ClickItem('assets/images/mine/mine_collection.png', '家园', '4', true),
     ClickItem('', '', 'divide', false),
-    ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false)
+    ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false),
+    ClickItem('assets/images/mine/mine_setting.png', '测试写入', 'save', false),
+    ClickItem('assets/images/mine/mine_setting.png', '测试读取', 'load', false),
   ];
 
   @override
@@ -42,7 +45,8 @@ class _MineContentState extends State<MineContent> {
     if (!Global.user.online()) {
       XToast.error('请点击头像登录');
 
-      return;
+      //TODO
+     // return;
     }
 
     switch (type) {
@@ -70,7 +74,17 @@ class _MineContentState extends State<MineContent> {
         break;
       case '2':
         XToast.toast('我的卡包功能');
+
         break;
+      case 'save':
+        Global.user.localSave(UserInfo(phoneID: '123456', token: 'abcdefg'));
+        XToast.toast(type);
+        break;
+      case 'load':
+        Global.user.loadLocalUserInfo();
+        XToast.toast(type);
+        break;
+
       default:
         Global.user.reqMyData(int.parse(type), success: (data) {
           _onData(context, type, data);

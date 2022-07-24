@@ -13,5 +13,4 @@ class Config {
   static const String getallmyAddress = 'market/consumer/address';
   static const String updateAddress = 'market/consumer/address/update';
   static const String removeAddress = 'market/consumer/address/remove';
-
 }
