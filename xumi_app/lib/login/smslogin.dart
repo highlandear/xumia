@@ -232,7 +232,7 @@ class _SmsLoginState extends State<SmsLoginPage> {
       Navigator.pop(context);
       Navigator.pop(context, true);
     }, fail: (value) {
-    //  XToast.error('登录失败，网络异常($value)');
+      XToast.error('登录失败，网络异常($value)');
       Navigator.pop(context);
     });
   }
