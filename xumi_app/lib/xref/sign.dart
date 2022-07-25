@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../utils/xtoast.dart';
 import '../data/global.dart';
-import '../login/loading.dart';
-import '../login/loading.dart';
+import '../utils/loading.dart';
+import '../utils/loading.dart';
 
 /**
  * 快速登录

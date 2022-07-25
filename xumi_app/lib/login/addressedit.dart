@@ -3,7 +3,7 @@ import 'package:city_pickers/city_pickers.dart';
 import '../../utils/xtoast.dart';
 import '../bean/useraddr.dart';
 import '../data/global.dart';
-import 'loading.dart';
+import '../utils/loading.dart';
 
 /// 对地址进行修改
 /// id == 0 时，表明新增加一个地址

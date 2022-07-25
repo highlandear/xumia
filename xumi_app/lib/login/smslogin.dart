@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../data/global.dart';
 import '../utils/xtoast.dart';
-import 'loading.dart';
+import '../utils/loading.dart';
 //
 class Login {
   static Future login(BuildContext context) async{

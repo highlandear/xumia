@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../data/global.dart';
-import 'magpage.dart';
+import '../data/global.dart';
+import '../app_main/magazine/magpage.dart';
 
 class HomePageX extends StatefulWidget {
   const HomePageX({Key? key}) : super(key: key);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/utils/tip.dart';
 import '../../data/global.dart';
+import '../../login/smslogin.dart';
 import 'gcard.dart';
-import '../../login/logintip.dart';
 
 class Gallery extends StatefulWidget {
   const Gallery({Key? key}) : super(key: key);
@@ -11,22 +12,34 @@ class Gallery extends StatefulWidget {
 }
 
 class _GalleryState extends State<Gallery> {
+  Future _future = Global.user.loadGalleryData(); // = Global.user.loadGalleryData();
 
-  late Future _future;// = Global.user.loadGalleryData();
+  _fresh() {
+    setState(() {});
+  }
+
+  _login() {
+    Navigator.of(context)
+        .push(
+          MaterialPageRoute(builder: (_) => const SmsLoginPage()),
+        )
+        .then((val) => val != null ? _fresh() : null);
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    if(Global.user.online()) {
-      _future = Global.user.loadGalleryData();
+    if (Global.user.online()) {
       return Scaffold(
         backgroundColor: Colors.white,
         body: _futureBuilder(),
       );
     }
-    else {
-      return const LoginTipPage(tip: '登录进入我的画廊');
-    }
+
+    return TipView(
+        msg: '登录进入我的画廊',
+        ontap: () {
+          _login();
+        });
   }
 
   _buildWaiting() {
@@ -40,6 +53,13 @@ class _GalleryState extends State<Gallery> {
       child: Text(e),
     );
   }
+  _reload(){
+    return TipView(msg: '网络出小差了，点击刷新', ontap: () {
+      setState(() {
+        _future = Global.user.loadGalleryData();
+      });
+    });
+  }
 
   FutureBuilder _futureBuilder() {
     return FutureBuilder(
@@ -50,10 +70,11 @@ class _GalleryState extends State<Gallery> {
             return _buildWaiting();
           case ConnectionState.done:
             {
-              if (async.hasError) return _buildError('请检查网络');
+              if (async.hasError) {
+                return _reload();
+              } // return _buildError('请检查网络');
               if (async.hasData) {
-
-              return GalleryCardsView(data: async.data);
+                return GalleryCardsView(data: async.data);
                 //return StaggerView(data: async.data);
               }
               return _buildError('e2');

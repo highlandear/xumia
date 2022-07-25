@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xumi_app/app_main/magazine/maglist.dart';
-import 'gallery/main.dart';
-import 'magazine/mainx.dart';
+import 'gallery/galleryview.dart';
+import '../xref/mainx.dart';
 import 'mine/main.dart';
 
 class PlainPage extends StatelessWidget {

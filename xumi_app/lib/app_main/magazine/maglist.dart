@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/utils/tip.dart';
 import 'package:xumi_app/utils/xtoast.dart';
 import '../../data/global.dart';
 import 'magpage.dart';
@@ -40,10 +41,20 @@ class _MagLisViewState extends State<MagLisView> {
     );
   }
 
-  buildError(String e) {
-    return _buildFreshButton(context);
+  /// 重新加载本页面
+  _reload() {
+    return TipView(msg: '网络出小差了，点击刷新', ontap: () {
+      setState(() {
+        _future = Global.user.loadMagData();
+      });
+    });
   }
 
+  _loadError(String e){
+    XToast.error(e);
+  }
+
+  /// 下拦刷新的响应
   Future _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1), () {
       _future = Global.user.loadMagData();
@@ -51,54 +62,24 @@ class _MagLisViewState extends State<MagLisView> {
     });
   }
 
-
-
   Widget _buildPageView(nlist) {
-
     return RefreshIndicator(
       //下拉刷新触发方法
       onRefresh: _onRefresh,
       //设置listView
-      child: Container(
-        child: _buildMagList(nlist)
-      ),
+      child: Container(child: _buildMagList(nlist)),
     );
   }
 
-
-  _buildMagList(nlist) {
+  _buildMagList(list) {
     return PageView.builder(
       controller: pageController,
-      itemCount: nlist.length,
+      itemCount: list.length,
       physics: const PageScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
-        return MagazinePageView(item: nlist[index]);
+        return MagazinePageView(item: list[index]);
       },
       scrollDirection: Axis.vertical,
-    );
-  }
-
-  Widget _buildFreshButton(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 45,
-      margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
-      child: ElevatedButton(
-        onPressed: () {
-            setState(() {
-              _future = Global.user.loadMagData();
-            });
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(const Color(0xff44c5fe)),
-          shape: MaterialStateProperty.all(
-              const StadiumBorder(side: BorderSide.none)), //圆角弧度
-        ),
-        child: const Text(
-          '刷新',
-          style: TextStyle(color: Colors.white, fontSize: 15),
-        ),
-      ),
     );
   }
 
@@ -111,17 +92,16 @@ class _MagLisViewState extends State<MagLisView> {
             return buildWaiting();
           case ConnectionState.done:
             {
-              if (async.hasError){
-                return buildError('请检查网络');}
+              if (async.hasError) {
+                return _reload();
+              }
               if (async.hasData) {
-
-             //   return _buildMagList(async.data);
                 return _buildPageView(async.data);
               }
-              return buildError('e2');
+              return _loadError('e2');
             }
           default:
-            return buildError('e3');
+            return _loadError('e3');
         }
       },
       future: _future,

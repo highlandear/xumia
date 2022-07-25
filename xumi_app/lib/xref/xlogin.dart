@@ -7,7 +7,7 @@ import '../../data/config.dart';
 import '../../data/global.dart';
 import '../../utils/xhttp.dart';
 import '../../utils/xtoast.dart';
-import '../login/loading.dart';
+import '../utils/loading.dart';
 import 'xsignup.dart';
 
 class LoginPage extends StatefulWidget {

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import '../data/global.dart';
-import '../app_main/gallery/main.dart';
-import 'smslogin.dart';
+import '../app_main/gallery/galleryview.dart';
+import '../login/smslogin.dart';
 
 /// 提示用户进行登录的页面
-class LoginTipPage extends StatefulWidget {
-  const LoginTipPage({Key? key, required this.tip}) : super(key: key);
+class LoginTipPageX extends StatefulWidget {
+  const LoginTipPageX({Key? key, required this.tip}) : super(key: key);
   final String tip;
 
   @override
   _LoginTipPageState createState() => _LoginTipPageState();
 }
 
-class _LoginTipPageState extends State<LoginTipPage> {
+class _LoginTipPageState extends State<LoginTipPageX> {
   _getMe() {
     setState(() {});
   }
