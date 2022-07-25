@@ -16,38 +16,6 @@ class Global {
   List<AddressInfo> _addressList = [];
 
   //UserInfo _info = UserInfo(phoneID: '123748484', token: 'abcdeflsla');
-  final List<AddressInfo> _addressListx = [
-    AddressInfo(
-        id: 1,
-        name: 'HZS',
-        desc: '公司',
-        phone: '1378288282',
-        prov: '北京',
-        city: '北京',
-        dist: '海淀区',
-        detail: '学清路18号',
-        isDefault: true),
-    AddressInfo(
-        id: 2,
-        name: '黄作胜',
-        desc: '我家',
-        phone: '1378288282',
-        prov: '北京',
-        city: '北京',
-        dist: '海淀区',
-        detail: '学清路18号',
-        isDefault: false),
-    AddressInfo(
-        id: 3,
-        name: 'toal',
-        desc: '我家',
-        phone: '1378288282',
-        prov: '北京',
-        city: '北京',
-        dist: '海淀区',
-        detail: '学清路18号',
-        isDefault: false),
-  ];
 
   getAddressByID(int id) {
     for (var element in _addressList) {
@@ -83,10 +51,15 @@ class Global {
   }
 
   /// 加载杂志页面
-  ///
   Future loadMagData() async {
     return CertiPass.listfromJson(await XHttp.instance
         .post(Config.magazine, params: {'username': _info.phoneID}));
+  }
+
+  /// 加载画廊信息
+  Future loadGalleryData() async {
+    return GNFTData.listfromJson(
+        await XHttp.instance.post(Config.getMyData, params: {'type': 1}));
   }
 
   /// 请求登录
@@ -144,12 +117,6 @@ class Global {
     });
   }
 
-  /// 加载画廊信息
-  Future loadGalleryData() async {
-    return GNFTData.listfromJson(
-        await XHttp.instance.post(Config.getMyData, params: {'type': 1}));
-  }
-
   /// 请求某类NFT
   reqMyData(datatype, {success, fail}) {
     XHttp.instance
@@ -195,7 +162,7 @@ class Global {
   loadLocalUserInfo({ok, no}) {
     XStorage.get('userinfo').then((value) {
       if (value == null) {
-      //  return no();
+        //  return no();
       }
 
       Map<String, dynamic> map = jsonDecode(value);

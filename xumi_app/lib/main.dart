@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_main/magazine/main.dart';
+import 'app_main/magazine/mainx.dart';
 import 'splash.dart';
 import 'utils/xtoast.dart';
 

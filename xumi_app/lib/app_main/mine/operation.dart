@@ -28,8 +28,8 @@ class _MineContentState extends State<MineContent> {
     ClickItem('assets/images/mine/mine_collection.png', '家园', '4', true),
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false),
-    ClickItem('assets/images/mine/mine_setting.png', '测试写入', 'save', false),
-    ClickItem('assets/images/mine/mine_setting.png', '测试读取', 'load', false),
+    // ClickItem('assets/images/mine/mine_setting.png', '测试写入', 'save', false),
+    // ClickItem('assets/images/mine/mine_setting.png', '测试读取', 'load', false),
   ];
 
   @override

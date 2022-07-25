@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import '../../data/global.dart';
 import 'magpage.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePageX extends StatefulWidget {
+  const HomePageX({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePageX> {
   PageController pageController = PageController(keepPage: false);
 
   final Future _future = Global.user.loadMagData();
