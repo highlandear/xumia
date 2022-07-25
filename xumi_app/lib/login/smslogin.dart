@@ -23,6 +23,22 @@ class SmsLoginPage extends StatefulWidget {
 }
 
 class _SmsLoginState extends State<SmsLoginPage> {
+
+  bool isButtonEnable = true; //按钮初始状态  是否可点击
+  String buttonText = '发送验证码'; //初始文本
+  int count = 60; //初始倒计时时间
+  Timer? timer; //倒计时的计时器
+  FocusNode blankNode = FocusNode();
+  final TextEditingController _veriController = TextEditingController();
+  final TextEditingController _telController = TextEditingController();
+
+  @override
+  void initState() {
+
+    _telController.text = Global.user.getPhone();
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +50,6 @@ class _SmsLoginState extends State<SmsLoginPage> {
     );
   }
 
-  bool isButtonEnable = true; //按钮初始状态  是否可点击
-  String buttonText = '发送验证码'; //初始文本
-  int count = 60; //初始倒计时时间
-  Timer? timer; //倒计时的计时器
-  FocusNode blankNode = FocusNode();
-  final TextEditingController? _veriController = TextEditingController();
-  final TextEditingController? _telController = TextEditingController();
 
   Widget _buildAccountInput(BuildContext context) {
     return TextFormField(
@@ -137,8 +146,8 @@ class _SmsLoginState extends State<SmsLoginPage> {
       margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
       child: ElevatedButton(
         onPressed: () {
-          debugPrint('${_veriController?.text}');
-          debugPrint('${_telController?.text}');
+          debugPrint(_veriController.text);
+          debugPrint(_telController.text);
 
           _onSubmit(context);
         },
@@ -195,8 +204,8 @@ class _SmsLoginState extends State<SmsLoginPage> {
   void dispose() {
     timer?.cancel(); //销毁计时器
     timer = null;
-    _veriController?.dispose();
-    _telController?.dispose();
+    _veriController.dispose();
+    _telController.dispose();
     super.dispose();
   }
 
@@ -218,12 +227,12 @@ class _SmsLoginState extends State<SmsLoginPage> {
           );
         });
 
-    Global.user.reqLogin(_telController?.text, '', success: () {
-      XToast.toast('登录成功');
+    Global.user.reqLogin(_telController.text, '', success: () {
+    //  XToast.toast('登录成功');
       Navigator.pop(context);
       Navigator.pop(context, true);
     }, fail: (value) {
-      XToast.error('登录失败，网络异常($value)');
+    //  XToast.error('登录失败，网络异常($value)');
       Navigator.pop(context);
     });
   }

@@ -184,12 +184,12 @@ class _RegisterPageState extends State<RegisterPage> {
       var erode = jsonDecode(val)['errorCode'];
       if(erode == 0)
       {
-        XToast.toast('注册成功');
+      //  XToast.toast('注册成功');
         Navigator.pop(context);
         Navigator.pop(context);
       }
       else{
-        XToast.error("该用户名已注册");
+      //  XToast.error("该用户名已注册");
         Navigator.pop(context);
       }
     });

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TipView extends StatelessWidget {
-  const TipView({Key? key, required this.msg, required this.ontap}) : super(key: key);
+  const TipView({Key? key, required this.msg, required this.ontap})
+      : super(key: key);
   final String msg;
   final Function ontap;
 
@@ -18,9 +19,7 @@ class TipView extends StatelessWidget {
       height: 60,
       width: 200,
       child: GestureDetector(
-        onTap: () {
-          ontap();
-        },
+        onTap: () => ontap(),
         child: Container(
           //  margin: const EdgeInsets.all(100),
           decoration: const ShapeDecoration(

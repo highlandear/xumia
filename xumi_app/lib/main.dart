@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'xref/mainx.dart';
+import 'package:xumi_app/data/global.dart';
 import 'splash.dart';
 import 'utils/xtoast.dart';
 
 void main() {
-  runApp(XToast.wrap(const MyApp()));
+ runApp(XToast.wrap(const MyApp()));
+//   runApp(const MyApp());
+
+  Global.user.autoLogin();
 }
 
 class MyApp extends StatelessWidget {

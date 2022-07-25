@@ -188,7 +188,7 @@ class _AddressEditPageState extends State<AddressEditPage> {
       Navigator.pop(context, true);
     }, fail: () {
       Navigator.pop(context);
-      XToast.success("更新地址failed");
+    //  XToast.success("更新地址failed");
     });
   }
 }

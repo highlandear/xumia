@@ -45,7 +45,7 @@ class _MyAddressPageState extends State<MyAddressListPage> {
   }
 
   _onEditAddress(AddressInfo address) {
-    XToast.toast('edit ${address.id}');
+  //  XToast.toast('edit ${address.id}');
     Navigator.of(context)
         .push(
       MaterialPageRoute(builder: (_) => AddressEditPage(id: address.id)),
@@ -56,7 +56,7 @@ class _MyAddressPageState extends State<MyAddressListPage> {
     if (widget.sel) {
       Navigator.pop(context, address);
     }
-    XToast.toast('select ${address.id.toString()}');
+  //  XToast.toast('select ${address.id.toString()}');
   }
 
   Widget _buildDefaultAddress() {

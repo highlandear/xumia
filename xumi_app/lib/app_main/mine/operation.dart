@@ -43,7 +43,7 @@ class _MineContentState extends State<MineContent> {
 
   _tap(BuildContext context, String type) {
     if (!Global.user.online()) {
-      XToast.error('请点击头像登录');
+    //  XToast.error('请点击头像登录');
 
       //TODO
      // return;
@@ -77,11 +77,11 @@ class _MineContentState extends State<MineContent> {
 
         break;
       case 'save':
-        Global.user.localSave(UserInfo(phoneID: '123456', token: 'abcdefg'));
+      //  Global.user.localSave(UserInfo(phoneID: '123456', token: 'abcdefg'));
         XToast.toast(type);
         break;
       case 'load':
-        Global.user.loadLocalUserInfo();
+      //  Global.user.loadLocalUserInfo();
         XToast.toast(type);
         break;
 

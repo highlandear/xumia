@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/utils/tip.dart';
-import 'package:xumi_app/utils/xtoast.dart';
 import '../../data/global.dart';
 import 'magpage.dart';
 
@@ -51,14 +50,15 @@ class _MagLisViewState extends State<MagLisView> {
   }
 
   _loadError(String e){
-    XToast.error(e);
+  //  XToast.error(e);
   }
 
   /// 下拦刷新的响应
   Future _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1), () {
-      _future = Global.user.loadMagData();
-      setState(() {});
+      setState(() {
+        _future = Global.user.loadMagData();
+      });
     });
   }
 

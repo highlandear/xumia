@@ -171,16 +171,16 @@ class _LoginPageState extends State<LoginPage> {
     }).then((val) {
       var erode = jsonDecode(val)['errorCode'];
       if (erode == 0) {
-        XToast.toast('顺利登录');
+      //  XToast.toast('顺利登录');
        // Global.user.info = UserInfo.fromJson(jsonDecode(val)['data']);
         Navigator.pop(context);
         Navigator.pop(context, true);
       } else if(erode == 1){
-        XToast.error("请先注册");
+      //  XToast.error("请先注册");
         Navigator.pop(context);
       }
       else if(erode == 2){
-        XToast.error("用户名密码不匹配");
+      //  XToast.error("用户名密码不匹配");
         Navigator.pop(context);
       }
     });

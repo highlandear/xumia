@@ -30,8 +30,12 @@ class XHttp {
     }));
   }
 
-  setHeaders(key, value){
+  _setHeaders(key, value){
     _dio.options.headers[key] = value;
+  }
+
+  setToken2Headears(String token){
+    _setHeaders('XUMI-TOKEN', 'Bearer $token');
   }
 
   _handleError(DioError e) {

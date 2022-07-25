@@ -96,11 +96,11 @@ class _SignPageState extends State<XSignPage> {
         });
 
     Global.user.reqLogin(_telController.text, '', success: (){
-          XToast.toast('登录成功');
+     //     XToast.toast('登录成功');
           Navigator.pop(context);
           Navigator.pop(context, true);
     }, fail: (value){
-          XToast.error('登录失败 $value');
+    //      XToast.error('登录失败 $value');
           Navigator.pop(context);
     });
   }
