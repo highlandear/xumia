@@ -71,7 +71,6 @@ class Global {
       if (erode == 200) {
         _info.token = val['data']['token'];
         _info.phoneID = username;
-        //  XHttp.instance.setHeaders('XUMI-TOKEN', 'Bearer ${_info.token}');
         XHttp.instance.setToken2Headears(_info.token);
         _localSaveUserInfo();
         // 登录成功后就请求已经存储的地址信息
@@ -152,6 +151,7 @@ class Global {
   }
 
   _localSaveUserInfo() {
+    //  print(_info.token);
     XStorage.save('userinfo', jsonEncode(_info.toJson()));
   }
 
@@ -167,20 +167,16 @@ class Global {
   }
 
   autoLogin() {
-    _loadLocalUserInfo(success: () {
-      if (_info.phoneID.isEmpty) return;
-      if (_info.token.isNotEmpty) {
-        // 登录状态，有token
-        XHttp.instance.setToken2Headears(_info.token);
-      } else {
-        // 没有token,此前是主动登出，那么进行自动 登录
-        reqLogin(_info.phoneID, '', success: () {}, fail: (value) {
-      //    print('登录失败');
-        });
-      }
-    }, fail: () {
-    //  print('本地无用户');
-    });
+    _loadLocalUserInfo(
+        success: () {
+          if (_info.phoneID.isEmpty) return;
+
+          if (_info.token.isEmpty) return;
+
+          // 登录状态，有token（可能已经过期）自动登录
+          reqLogin(_info.phoneID, '', success: () {}, fail: (value) {});
+        },
+        fail: () {});
   }
 
   logout() {
