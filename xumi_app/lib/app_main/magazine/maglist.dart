@@ -67,7 +67,7 @@ class _MagLisViewState extends State<MagLisView> {
       //下拉刷新触发方法
       onRefresh: _onRefresh,
       //设置listView
-      child: Container(child: _buildMagList(nlist)),
+      child: _buildMagList(nlist),
     );
   }
 

@@ -73,7 +73,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
           width: 80,
           height: 80,
           child: Image(
-            image: AssetImage('assets/images/mine/head.jpg'),
+            image: AssetImage('assets/images/mine/mine.png'),
           ),
         ),
         const Padding(

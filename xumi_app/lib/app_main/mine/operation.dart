@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../bean/userinfo.dart';
 import '../mine/ticketcart.dart';
 import '../../bean/gnftdata.dart';
 import '../../data/global.dart';
 import '../../utils/browser.dart';
-import '../../utils/xqrscan.dart';
 import '../../utils/xtoast.dart';
 import '../mode/item.dart';
 import '../mode/list_view.dart';
-import 'settings.dart';
 import 'head.dart';
 
 class MineContent extends StatefulWidget {
@@ -21,15 +18,9 @@ class MineContent extends StatefulWidget {
 class _MineContentState extends State<MineContent> {
   final _models = [
     ClickItem('', '', 'divide', false),
-    ClickItem('assets/images/find/find_scan.png', '扫码', 'scan', false),
-    ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_collection.png', '门票', '3', true),
     ClickItem('assets/images/mine/mine_wallet.png', '会员', '2', true),
     ClickItem('assets/images/mine/mine_collection.png', '家园', '4', true),
-    ClickItem('', '', 'divide', false),
-    ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false),
-    // ClickItem('assets/images/mine/mine_setting.png', '测试写入', 'save', false),
-    // ClickItem('assets/images/mine/mine_setting.png', '测试读取', 'load', false),
   ];
 
   @override
@@ -50,19 +41,8 @@ class _MineContentState extends State<MineContent> {
     }
 
     switch (type) {
-      case 'setting':
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (SettingsPage());
-        }));
-        break;
-      case 'scan':
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return (const BarcodeScanPage());
-        }));
-        break;
-      case 'cards':
-        XToast.toast('我的卡包功能');
-        break;
+
+
       case '4':
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const Browser(
@@ -74,16 +54,8 @@ class _MineContentState extends State<MineContent> {
         break;
       case '2':
         XToast.toast('我的卡包功能');
+        break;
 
-        break;
-      case 'save':
-      //  Global.user.localSave(UserInfo(phoneID: '123456', token: 'abcdefg'));
-        XToast.toast(type);
-        break;
-      case 'load':
-      //  Global.user.loadLocalUserInfo();
-        XToast.toast(type);
-        break;
 
       default:
         Global.user.reqMyData(int.parse(type), success: (data) {

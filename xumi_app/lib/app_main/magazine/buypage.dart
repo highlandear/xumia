@@ -77,6 +77,7 @@ class _PurchaseState extends State<PurchasePage>
   Widget build(BuildContext context) {
     return Scaffold(
       ///底部购买商品、购物车
+      appBar: buildTopBar(),
       bottomNavigationBar: buildBottomBar(),
       body: Stack(
         children: [
@@ -91,15 +92,15 @@ class _PurchaseState extends State<PurchasePage>
             ),
           ),
 
-          ///根据透明度显隐顶部的bar
-          Opacity(
-            opacity: toolbarOpacity,
-            child: Container(
-              height: 78,
-              color: Colors.transparent,
-              child: buildTopBar(),
-            ),
-          )
+          // ///根据透明度显隐顶部的bar
+          // Opacity(
+          //   opacity: toolbarOpacity,
+          //   child: Container(
+          //     height: 78,
+          //     color: Colors.transparent,
+          //     child: buildTopBar(),
+          //   ),
+        //  )
         ],
       ),
     );
@@ -142,6 +143,7 @@ class _PurchaseState extends State<PurchasePage>
   AppBar buildTopBar() {
     double scale = MediaQuery.of(context).devicePixelRatio;
     return AppBar(
+      //backgroundColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       leading: Platform.isIOS
           ? GestureDetector(
@@ -204,7 +206,7 @@ class _PurchaseState extends State<PurchasePage>
             ),
             // const Expanded(flex: 3, child: Text("联系客服")),
             Expanded(flex: 3, child: Text(_item.price)),
-            _buildCartButton(context),
+         //   _buildCartButton(context),
             _buildBuyButton(context),
           ],
         ),
@@ -257,9 +259,9 @@ class _PurchaseState extends State<PurchasePage>
               ),
             ),
           ),
-          child: const Center(
+          child:  const Center(
               child: Text(
-            "购买",
+            "收藏",
             style: TextStyle(color: Colors.white),
           )),
         ),

@@ -15,8 +15,6 @@ class Global {
   UserInfo _info = UserInfo();
   List<AddressInfo> _addressList = [];
 
-  //UserInfo _info = UserInfo(phoneID: '123748484', token: 'abcdeflsla');
-
   getAddressByID(int id) {
     for (var element in _addressList) {
       if (element.id == id) {
