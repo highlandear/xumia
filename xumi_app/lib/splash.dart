@@ -15,6 +15,10 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
+    return const Image(
+      image: AssetImage('assets/images/xumiapp.png'),
+        fit: BoxFit.fill
+    );
     return Image.network(Config.loadingImage, fit: BoxFit.fill);
   }
 

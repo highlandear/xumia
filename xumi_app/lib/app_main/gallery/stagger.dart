@@ -13,6 +13,7 @@ class StaggerView extends StatelessWidget {
         body: StaggeredGridView.countBuilder(
             padding: const EdgeInsets.all(8.0),
             crossAxisCount: 4,
+            crossAxisSpacing: 6,
             itemCount: data.length,
             itemBuilder: (context, i) {
               return Material(
