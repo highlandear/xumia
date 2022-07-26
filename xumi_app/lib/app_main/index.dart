@@ -19,7 +19,7 @@ class _IndexPageState extends State<IndexPage> {
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.bag),label: "画廊"),
   ];
 
- // final List taBodies=[const MineMainPage(),const HomePage(),const Gallery()];
+ // final List taBodies=[const MineMainPage(),const MagLisView(),const Gallery()];
   final List taBodies=[const MineMainPage(),const MagLisView(),const Gallery()];
   int currentIndex=1;
   var currentPage;

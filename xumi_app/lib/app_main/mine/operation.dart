@@ -48,12 +48,15 @@ class _MineContentState extends State<MineContent> {
           return const Browser(
            // url: 'http://cognitivelab.net/me.html',
              url:'https://www.wenjuan.com/lib_detail_full/57d8fbd8a320fc086b497ff2',
-            title: "Flutter 中文社区",
           );
         }));
         break;
       case '2':
         XToast.toast('我的卡包功能');
+        // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+        //   return const PDFScreen (url: 'http://africau.edu/images/default/sample.pdf',);
+        //
+        // }));
         break;
 
 

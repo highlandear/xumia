@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/app_main/gallery/stagger.dart';
 import 'package:xumi_app/utils/tip.dart';
 import '../../data/global.dart';
 import '../../login/smslogin.dart';
@@ -30,6 +31,12 @@ class _GalleryState extends State<Gallery> {
   Widget build(BuildContext context) {
     if (Global.user.online()) {
       return Scaffold(
+        appBar: AppBar(
+          title: const Text("我的画廊"),
+          centerTitle: true,
+          automaticallyImplyLeading: true,
+
+        ),
         backgroundColor: Colors.white,
         body: _futureBuilder(),
       );
@@ -74,8 +81,8 @@ class _GalleryState extends State<Gallery> {
                 return _reload();
               } // return _buildError('请检查网络');
               if (async.hasData) {
-                return GalleryCardsView(data: async.data);
-                //return StaggerView(data: async.data);
+                // return GalleryCardsView(data: async.data);
+                return StaggerView(data: async.data);
               }
               return _buildError('e2');
             }

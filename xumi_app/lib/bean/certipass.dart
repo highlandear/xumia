@@ -22,7 +22,8 @@ class CertiPass {
         cover: json['imageUrl'],
         desc: json['desc'],
         freight: json['freight'],
-        detail: json['imageUrl'],
+       // detail: json['imageUrl'],
+      detail: 'http://cognitivelab.net/static/pb.png'
       //  price: json['price']
     );
   }

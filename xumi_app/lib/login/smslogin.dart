@@ -152,7 +152,7 @@ class _SmsLoginState extends State<SmsLoginPage> {
           _onSubmit(context);
         },
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(const Color(0xff44c5fe)),
+      //    backgroundColor: MaterialStateProperty.all(const Color(0xff44c5fe)),
           shape: MaterialStateProperty.all(
               const StadiumBorder(side: BorderSide.none)), //圆角弧度
         ),
