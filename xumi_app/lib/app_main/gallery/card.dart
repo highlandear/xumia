@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:xumi_app/bean/gnftdata.dart';
 import 'full.dart';
 
-class SinglecardView extends StatelessWidget {
-  const SinglecardView({Key? key, required this.nft}) : super(key: key);
+class CardView extends StatelessWidget {
+  const CardView({Key? key, required this.nft}) : super(key: key);
   final GNFTData nft;
 
   @override
@@ -36,12 +36,12 @@ class SinglecardView extends StatelessWidget {
             ),
           //  Text(nft.caption),
 
-            Text('${nft.desc}ttttttttttttttt'),
-            const CircleAvatar(
-              radius: 10,
-              //  backgroundImage: NetworkImage(
-              //     item.desc),
-            ),
+            Text(nft.desc),
+            // const CircleAvatar(
+            //   radius: 10,
+            //   //  backgroundImage: NetworkImage(
+            //   //     item.desc),
+            // ),
 
           ],
         ),

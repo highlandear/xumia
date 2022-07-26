@@ -45,18 +45,19 @@ class _MyAddressPageState extends State<MyAddressListPage> {
   }
 
   _onEditAddress(AddressInfo address) {
-  //  XToast.toast('edit ${address.id}');
+    //  XToast.toast('edit ${address.id}');
     Navigator.of(context)
         .push(
-      MaterialPageRoute(builder: (_) => AddressEditPage(id: address.id)),
-    ).then((val) => {_fresh()});
+          MaterialPageRoute(builder: (_) => AddressEditPage(id: address.id)),
+        )
+        .then((val) => {_fresh()});
   }
 
   _onSelectAddress(AddressInfo address) {
     if (widget.sel) {
       Navigator.pop(context, address);
     }
-  //  XToast.toast('select ${address.id.toString()}');
+    //  XToast.toast('select ${address.id.toString()}');
   }
 
   Widget _buildDefaultAddress() {
@@ -83,14 +84,12 @@ class _MyAddressPageState extends State<MyAddressListPage> {
           primary: Theme.of(context).primaryColor,
           padding: const EdgeInsets.all(15.0)),
       child: const Text('添加新地址', style: TextStyle(color: Colors.white)),
-
       onPressed: () {
-            Navigator.of(context)
+        Navigator.of(context)
             .push(
-          MaterialPageRoute(builder: (_) => const AddressEditPage()),
-        ).then((val) => {_fresh()});
-
-
+              MaterialPageRoute(builder: (_) => const AddressEditPage()),
+            )
+            .then((val) => {_fresh()});
       },
     );
   }

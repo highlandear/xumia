@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:xumi_app/bean/question.dart';
+import '../magazine/questionnaire.dart';
 import '../mine/ticketcart.dart';
 import '../../bean/gnftdata.dart';
 import '../../data/global.dart';
@@ -46,8 +50,8 @@ class _MineContentState extends State<MineContent> {
       case '4':
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const Browser(
-           // url: 'http://cognitivelab.net/me.html',
-             url:'https://www.wenjuan.com/lib_detail_full/57d8fbd8a320fc086b497ff2',
+           url: 'https://www.html5tricks.com/demo/html5-3d-cube/index.html',
+           //  url:'https://www.wenjuan.com/lib_detail_full/57d8fbd8a320fc086b497ff2',
           );
         }));
         break;
@@ -56,7 +60,20 @@ class _MineContentState extends State<MineContent> {
         // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
         //   return const PDFScreen (url: 'http://africau.edu/images/default/sample.pdf',);
         //
-        // }));
+        // }));s
+
+        var q = Question(id: 10, stem: '你喜欢什么？', radio: true, options: ['fish', 'bear']);
+        String json = jsonEncode(q.toJson());
+        print(json);
+
+        var wq = Question.fromJson(jsonDecode(json));
+        print(wq.options[0]);
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return  QuestionView( question: wq,);
+        }));
+
+
+
         break;
 
 

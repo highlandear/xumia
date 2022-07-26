@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'singlecard.dart';
+import 'card.dart';
 import 'full.dart';
 
 class StaggerView extends StatelessWidget {
@@ -34,8 +34,9 @@ class StaggerView extends StatelessWidget {
                       ),
                     );
                   },
-                  //child: Image.network(data[i].nftpath),
-                  child: SinglecardView(nft: data[i],),
+                  child: CardView(
+                    nft: data[i],
+                  ),
                 ),
               );
             },

@@ -29,6 +29,7 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
       body:Container(
         margin: const EdgeInsets.all(20.0),
         child: Image.network(widget.imageURL, fit: BoxFit.fitWidth,),
+      //  child: CardView()
       //  child: CachedNetworkImage(
       //     imageUrl: widget.imageURL,
       //    fit: BoxFit.fitWidth,

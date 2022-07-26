@@ -3,7 +3,7 @@ import 'package:xumi_app/app_main/gallery/stagger.dart';
 import 'package:xumi_app/utils/tip.dart';
 import '../../data/global.dart';
 import '../../login/smslogin.dart';
-import 'gcard.dart';
+import 'cardlistview.dart';
 
 class Gallery extends StatefulWidget {
   const Gallery({Key? key}) : super(key: key);
