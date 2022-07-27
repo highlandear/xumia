@@ -10,6 +10,8 @@ class Question {
   String stem;
   bool radio;
   List<String> options = [];
+  List<int> answer = [];
+
 
   static Question fromJson(Map<String, dynamic> json) {
     return Question(

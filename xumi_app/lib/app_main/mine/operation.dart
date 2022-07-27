@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:xumi_app/app_main/magazine/questionair.dart';
 import 'package:xumi_app/bean/question.dart';
-import '../magazine/questionnaire.dart';
+import '../magazine/questionview.dart';
 import '../mine/ticketcart.dart';
 import '../../bean/gnftdata.dart';
 import '../../data/global.dart';
@@ -62,14 +61,16 @@ class _MineContentState extends State<MineContent> {
         //
         // }));s
 
+        var p = Question(id: 10, stem: '你喜欢什么？', radio: true, options: ['fish', 'bear']);
         var q = Question(id: 10, stem: '你喜欢什么？', radio: false, options: ['fish', 'bear']);
+        List<Question> qlist = [p,q];
         // String json = jsonEncode(q.toJson());
         // print(json);
         //
         // var wq = Question.fromJson(jsonDecode(json));
         // print(wq.options[0]);
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return  QuestionView( question: q,);
+          return  QuestionListView( data: qlist,);
         }));
 
 

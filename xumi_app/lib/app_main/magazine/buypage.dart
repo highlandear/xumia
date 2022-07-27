@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:xumi_app/utils/xtoast.dart';
 import '../../bean/certipass.dart';
 import '../../data/global.dart';
 import '../../login/addresslist.dart';
@@ -278,6 +279,14 @@ class _PurchaseState extends State<PurchasePage>
   _onBuyItem(BuildContext context) {
     if (!Global.user.online()) {
       return _login();
+    }
+
+    if(_item.qlist.isNotEmpty){
+      XToast.toast('有问卷要答');
+    }
+    else{
+      XToast.toast('无问卷要答');
+
     }
 
     if (! _item.hasProduct()) {
