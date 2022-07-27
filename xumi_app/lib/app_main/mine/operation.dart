@@ -62,14 +62,14 @@ class _MineContentState extends State<MineContent> {
         //
         // }));s
 
-        var q = Question(id: 10, stem: '你喜欢什么？', radio: true, options: ['fish', 'bear']);
-        String json = jsonEncode(q.toJson());
-        print(json);
-
-        var wq = Question.fromJson(jsonDecode(json));
-        print(wq.options[0]);
+        var q = Question(id: 10, stem: '你喜欢什么？', radio: false, options: ['fish', 'bear']);
+        // String json = jsonEncode(q.toJson());
+        // print(json);
+        //
+        // var wq = Question.fromJson(jsonDecode(json));
+        // print(wq.options[0]);
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return  QuestionView( question: wq,);
+          return  QuestionView( question: q,);
         }));
 
 
