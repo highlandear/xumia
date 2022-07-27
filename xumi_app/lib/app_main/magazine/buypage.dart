@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:xumi_app/app_main/magazine/questionair.dart';
 import 'package:xumi_app/utils/xtoast.dart';
 import '../../bean/certipass.dart';
+import '../../bean/question.dart';
 import '../../data/global.dart';
 import '../../login/addresslist.dart';
 import '../../login/smslogin.dart';
@@ -77,8 +79,12 @@ class _PurchaseState extends State<PurchasePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true, //底部NavigationBar透明
+      extendBodyBehindAppBar: true,
+
       ///底部购买商品、购物车
       appBar: buildTopBar(),
+
       bottomNavigationBar: buildBottomBar(),
       body: Stack(
         children: [
@@ -86,22 +92,21 @@ class _PurchaseState extends State<PurchasePage>
             controller: _scrollController,
             child: Column(
               children: [
-
                 if (_item.desc.isNotEmpty) _buildDescCard(_item.desc),
                 if (_item.detail.isNotEmpty) _buildDetailInfo(_item.detail),
               ],
             ),
           ),
 
-          // ///根据透明度显隐顶部的bar
-          // Opacity(
-          //   opacity: toolbarOpacity,
-          //   child: Container(
-          //     height: 78,
-          //     color: Colors.transparent,
-          //     child: buildTopBar(),
-          //   ),
-        //  )
+          ///根据透明度显隐顶部的bar
+          //  Opacity(
+          //    opacity: toolbarOpacity,
+          //    child: Container(
+          //      height: 78,
+          //      color: Colors.transparent,
+          //      child: buildTopBar(),
+          //    ),
+          // )
         ],
       ),
     );
@@ -110,18 +115,18 @@ class _PurchaseState extends State<PurchasePage>
   Widget _buildDetailInfo(detail) {
     return Image.network(detail);
   }
-  Widget _buildDescCard(desc) {
-    return  Column(
-          children: <Widget>[
-           // const Text('\n'),
 
-            // Text('@${_item.owner}'),
-            ListTile(
-              title: Text(desc),
-            )
-          ],
+  Widget _buildDescCard(desc) {
+    return Column(
+      children: <Widget>[
+        const SizedBox(height: 60),
+        ListTile(
+          title: Text(desc),
+        )
+      ],
     );
   }
+
   Widget _buildDescCardx(desc) {
     return GestureDetector(
       onTap: () {},
@@ -145,7 +150,9 @@ class _PurchaseState extends State<PurchasePage>
     double scale = MediaQuery.of(context).devicePixelRatio;
     return AppBar(
       //backgroundColor: Colors.transparent,
-      backgroundColor: Colors.transparent,
+      // backgroundColor: Colors.transparent,
+      elevation: 0,
+      backgroundColor: Color(0x44000000),
       leading: Platform.isIOS
           ? GestureDetector(
               child: Container(
@@ -206,8 +213,8 @@ class _PurchaseState extends State<PurchasePage>
               width: 20,
             ),
             // const Expanded(flex: 3, child: Text("联系客服")),
-            Expanded(flex: 3, child: Text(_item.price)),
-         //   _buildCartButton(context),
+            Expanded(flex: 3, child: Text('￥${_item.price}')),
+            //   _buildCartButton(context),
             _buildBuyButton(context),
           ],
         ),
@@ -260,7 +267,7 @@ class _PurchaseState extends State<PurchasePage>
               ),
             ),
           ),
-          child:  const Center(
+          child: const Center(
               child: Text(
             "收藏",
             style: TextStyle(color: Colors.white),
@@ -281,15 +288,16 @@ class _PurchaseState extends State<PurchasePage>
       return _login();
     }
 
-    if(_item.qlist.isNotEmpty){
-      XToast.toast('有问卷要答');
-    }
-    else{
-      XToast.toast('无问卷要答');
-
+    if (_item.hasQuiz()) {
+      List<Question> list = Question.listfromJson(_item.qalist);
+      return _gotoQuizePage(context, list);
     }
 
-    if (! _item.hasProduct()) {
+    _confirmBuy();
+  }
+
+  _confirmBuy() {
+    if (!_item.hasProduct()) {
       return _gotoOrderPage(context, null);
     }
 
@@ -299,7 +307,22 @@ class _PurchaseState extends State<PurchasePage>
         .then((val) {
       if (val != null) _gotoOrderPage(context, val);
     });
-    // 附带线下产品，本地有地址，要求用户选择已有地址
+  }
+
+  _gotoQuizePage(BuildContext context, quiz) {
+    Navigator.of(context)
+        .push(
+      MaterialPageRoute(
+          builder: (_) => QuestionListView(
+                data: quiz,
+              )),
+    )
+        .then((val) {
+      XToast.toast(val.toString());
+      if (val != null) {
+        _confirmBuy();
+      }
+    });
   }
 
   _gotoOrderPage(BuildContext context, address) {

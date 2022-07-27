@@ -66,7 +66,7 @@ class OrderInfoPage extends StatelessWidget {
       style: TextButton.styleFrom(
           primary: Theme.of(context).primaryColor,
           padding: const EdgeInsets.all(15.0)),
-      child: const Text('确认购买', style: TextStyle(color: Colors.white)),
+      child: const Text('确认收藏', style: TextStyle(color: Colors.white)),
       onPressed: () {
         _buyThisItem(context);
       },

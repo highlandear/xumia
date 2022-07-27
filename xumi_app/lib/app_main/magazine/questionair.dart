@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../bean/question.dart';
 import 'questionview.dart';
 
@@ -12,6 +10,9 @@ class QuestionListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> cards = [];
+    cards.add(
+      const SizedBox(height: 60),
+    );
     data.forEach((element) {
       cards.add(QuestionView(
         question: element,
@@ -29,15 +30,24 @@ class QuestionListView extends StatelessWidget {
 
   Widget _buildButton(BuildContext context) {
     return ElevatedButton(
-      style: TextButton.styleFrom(
-          primary: Theme.of(context).primaryColor,
-          padding: const EdgeInsets.all(15.0)),
-      child: const Text('确认购买', style: TextStyle(color: Colors.white)),
-      onPressed: () {
-        data.forEach((element) {
-          print(element.answer.toString());
+        style: TextButton.styleFrom(
+            primary: Theme.of(context).primaryColor,
+            padding: const EdgeInsets.all(15.0)),
+        child: const Text('提交', style: TextStyle(color: Colors.white)),
+        onPressed: () {
+          _onCollected(context);
         });
-      },
-    );
+  }
+
+  _onCollected(BuildContext context) {
+    bool ok = true;
+    data.forEach((element) {
+      print(element.answer.isEmpty);
+      if (element.answer.isEmpty) {
+        ok = false;
+      }
+    });
+
+    if (ok) Navigator.pop(context, true);
   }
 }

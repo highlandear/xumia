@@ -1,3 +1,5 @@
+import 'package:xumi_app/bean/question.dart';
+
 class CertiPass {
   CertiPass({
     this.id = 0,
@@ -5,8 +7,8 @@ class CertiPass {
     this.desc = '',
     this.detail = '',
     this.freight = false,
-    this.price = '￥50',
-    this.qlist = '',
+    this.price = 0,
+    this.qalist = const [],
   });
 
   int id;
@@ -14,22 +16,24 @@ class CertiPass {
   String desc;
   String detail;
   bool freight;
-  String price;
-  String qlist;
+  int price;
+  var qalist = [];
 
   hasProduct() => freight;
 
+  hasQuiz() => qalist.isNotEmpty;
+
   static CertiPass fromJson(Map<String, dynamic> json) {
+print(json);
     return CertiPass(
       id: json['id'],
       cover: json['imageUrl'],
       desc: json['desc'],
       freight: json['freight'],
-
-      qlist: json['qaList'] ?? '',
-      //  price: json['price'],
-      // detail: json['imageUrl'],
-      detail: 'http://cognitivelab.net/static/pb.png',
+      qalist: json['qaList'],
+    //   price: json['price'],
+      detail: json['descUrl'],
+     // detail: 'http://cognitivelab.net/static/pb.png',
     );
   }
 

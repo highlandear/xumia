@@ -32,7 +32,7 @@ class Question {
   }
 
   static List<Question> listfromJson(dynamic json) {
-    return (json['data']['list'] as List<dynamic>)
+    return (json as List<dynamic>)
         .map((e) => Question.fromJson((e as Map<String, dynamic>)))
         .toList();
   }

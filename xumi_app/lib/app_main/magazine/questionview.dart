@@ -12,12 +12,11 @@ class QuestionView extends StatefulWidget {
 }
 
 class _QuestionViewState extends State<QuestionView> {
-
   late List<int> _chked;
   late Question _question;
 
   Widget _buildQuestionView() {
-     _question = widget.question;
+    _question = widget.question;
     _chked = _question.answer;
 
     int index = 0;
