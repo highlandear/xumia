@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/app_main/gallery/stagger.dart';
-import 'package:xumi_app/utils/tip.dart';
+import 'stagger.dart';
 import '../../data/global.dart';
 import '../../login/smslogin.dart';
-import 'cardlistview.dart';
+import '../../utils/tip.dart';
 
 class Gallery extends StatefulWidget {
   const Gallery({Key? key}) : super(key: key);
@@ -16,7 +15,9 @@ class _GalleryState extends State<Gallery> {
   Future _future = Global.user.loadGalleryData(); // = Global.user.loadGalleryData();
 
   _fresh() {
-    setState(() {});
+    setState(() {
+      _future = Global.user.loadGalleryData();
+    });
   }
 
   _login() {

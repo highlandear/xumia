@@ -10,6 +10,7 @@ import '../../utils/xtoast.dart';
 import '../mode/item.dart';
 import '../mode/list_view.dart';
 import 'head.dart';
+import 'mydetail.dart';
 
 class MineContent extends StatefulWidget {
   const MineContent({Key? key}) : super(key: key);
@@ -57,15 +58,14 @@ class _MineContentState extends State<MineContent> {
 
       case '2':
         XToast.toast('我的卡包功能');
-        // var p = Question(id: 10, stem: '你喜欢什么？', radio: true, options: ['fish', 'bear']);
-        // var q = Question(id: 10, stem: '你喜欢什么？', radio: false, options: ['fish', 'bear']);
-        // List<Question> qlist = [p,q];
-        // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-        //   return  QuestionListView( data: qlist,);
-        // }));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return DetailInfoView();
+        }));
+
         break;
 
       default:
+        print('000000000000000000000');
         Global.user.reqMyData(int.parse(type), success: (data) {
           _onData(context, type, data);
         }, fail: (error) {

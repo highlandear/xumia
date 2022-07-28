@@ -41,12 +41,13 @@ class CardView extends StatelessWidget {
                   //  backgroundImage: NetworkImage(
                   //     item.desc),
                 ),
-                Text(nft.desc),
+
+               Text(nft.desc),
+               // Text(nft.extra),
               ],
-            )
+            ),
            // Text(nft.desc),
-
-
+            Text(nft.extra),
           ],
         ),
     );
