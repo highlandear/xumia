@@ -9,6 +9,8 @@ class TicketListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     List<Widget> cards = [];
 
     for (var element in data) {
@@ -17,9 +19,13 @@ class TicketListView extends StatelessWidget {
     if (cards.isEmpty) {
       cards.add(_buildEmptyCard(context));
     }
-    return ListView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('我的门票'),
+      ),
+    body: ListView(
       children: cards,
-    );
+    ));
   }
 
   Widget _buildEmptyCard(BuildContext context) {

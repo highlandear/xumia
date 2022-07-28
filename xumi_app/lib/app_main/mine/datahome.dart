@@ -49,6 +49,7 @@ class _MineContentState extends State<MineContent> {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const Browser(
            url: 'https://www.html5tricks.com/demo/html5-3d-cube/index.html',
+            //  url: 'http://game.webxinxin.com/timberpig/',
             title: '我的家园',
           );
         }));

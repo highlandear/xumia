@@ -34,14 +34,18 @@ class CardView extends StatelessWidget {
               ),
               margin: const EdgeInsets.all(0),
             ),
-          //  Text(nft.caption),
+            Row(
+              children: [
+                const CircleAvatar(
+                  radius: 10,
+                  //  backgroundImage: NetworkImage(
+                  //     item.desc),
+                ),
+                Text(nft.desc),
+              ],
+            )
+           // Text(nft.desc),
 
-            Text(nft.desc),
-            // const CircleAvatar(
-            //   radius: 10,
-            //   //  backgroundImage: NetworkImage(
-            //   //     item.desc),
-            // ),
 
           ],
         ),

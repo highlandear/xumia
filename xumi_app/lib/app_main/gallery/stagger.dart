@@ -18,9 +18,9 @@ class StaggerView extends StatelessWidget {
             itemBuilder: (context, i) {
               return Material(
                 elevation: 8.0,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(8.0),
-                ),
+                // borderRadius: const BorderRadius.all(
+                //   Radius.circular(8.0),
+                // ),
                 child: InkWell(
                   onTap: () {
                     Navigator.push(
