@@ -7,7 +7,7 @@ class CertiPass {
     this.desc = '',
     this.detail = '',
     this.freight = false,
-    this.price = 0,
+    this.price = '',
     this.qalist = const [],
   });
 
@@ -16,7 +16,7 @@ class CertiPass {
   String desc;
   String detail;
   bool freight;
-  int price;
+  String price;
   var qalist = [];
 
   hasProduct() => freight;
@@ -24,20 +24,20 @@ class CertiPass {
   hasQuiz() => qalist.isNotEmpty;
 
   static CertiPass fromJson(Map<String, dynamic> json) {
-print(json);
+ //   print(json.toString());
     return CertiPass(
       id: json['id'],
       cover: json['imageUrl'],
       desc: json['desc'],
       freight: json['freight'],
       qalist: json['qaList'],
-    //   price: json['price'],
+      price: json['price'] ?? '',
       detail: json['descUrl'],
-     // detail: 'http://cognitivelab.net/static/pb.png',
     );
   }
 
   static List<CertiPass> listfromJson(dynamic json) {
+ //   print(json);
     return (json['data']['list'] as List<dynamic>)
         .map((e) => CertiPass.fromJson((e as Map<String, dynamic>)))
         .toList();

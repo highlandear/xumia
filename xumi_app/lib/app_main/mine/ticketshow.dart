@@ -16,15 +16,28 @@ class TicketShowPage extends StatelessWidget {
         title: const Text("门票信息"),
         centerTitle: true,
       ),
-      body: Column(
+      body:Stack(
         children: [
-          RichQBarView(ticket.extra),
-          Image.network(
-            ticket.nftpath,
-        //    fit: BoxFit.cover,
-          ),
+              Image.network(
+                ticket.nftpath,),
+          Center(child: RichQBarView(ticket.extra),),
+
         ],
-      ),
+
+      )
+      // body: ListView(
+      //   children: [
+      //     Column(
+      //       children: [
+      //         RichQBarView(ticket.extra),
+      //       ],
+      //     ),
+      //
+      //     Image.network(
+      //       ticket.nftpath,),
+      //
+      //   ],
+      // ),
     );
   }
 }

@@ -4,7 +4,7 @@ import '../../bean/question.dart';
 /// 单个问题
 ///
 class QuestionView extends StatefulWidget {
-  QuestionView({Key? key, required this.question}) : super(key: key);
+  const QuestionView({Key? key, required this.question}) : super(key: key);
   final Question question;
 
   @override

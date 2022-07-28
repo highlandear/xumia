@@ -20,9 +20,9 @@ class _QRichQBarViewState extends State<RichQBarView>
   @override
   Widget build(BuildContext context) {
     return QrImage(
+      backgroundColor: Colors.white,
           data: widget.data,
           size: 200.0,
-
     );
   }
 }

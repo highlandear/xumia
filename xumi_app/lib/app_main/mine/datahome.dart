@@ -45,38 +45,24 @@ class _MineContentState extends State<MineContent> {
 
     switch (type) {
 
-
       case '4':
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const Browser(
            url: 'https://www.html5tricks.com/demo/html5-3d-cube/index.html',
-           //  url:'https://www.wenjuan.com/lib_detail_full/57d8fbd8a320fc086b497ff2',
+            title: '我的家园',
           );
         }));
         break;
+
       case '2':
         XToast.toast('我的卡包功能');
+        // var p = Question(id: 10, stem: '你喜欢什么？', radio: true, options: ['fish', 'bear']);
+        // var q = Question(id: 10, stem: '你喜欢什么？', radio: false, options: ['fish', 'bear']);
+        // List<Question> qlist = [p,q];
         // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-        //   return const PDFScreen (url: 'http://africau.edu/images/default/sample.pdf',);
-        //
-        // }));s
-
-        var p = Question(id: 10, stem: '你喜欢什么？', radio: true, options: ['fish', 'bear']);
-        var q = Question(id: 10, stem: '你喜欢什么？', radio: false, options: ['fish', 'bear']);
-        List<Question> qlist = [p,q];
-        // String json = jsonEncode(q.toJson());
-        // print(json);
-        //
-        // var wq = Question.fromJson(jsonDecode(json));
-        // print(wq.options[0]);
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return  QuestionListView( data: qlist,);
-        }));
-
-
-
+        //   return  QuestionListView( data: qlist,);
+        // }));
         break;
-
 
       default:
         Global.user.reqMyData(int.parse(type), success: (data) {
