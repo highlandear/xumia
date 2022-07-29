@@ -22,6 +22,10 @@ class CardModelView extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 2),
+            //    borderRadius: BorderRadius.circular(2)
+          ),
           child: Image.network(img, fit: BoxFit.cover),
           margin: const EdgeInsets.all(0),
         ),

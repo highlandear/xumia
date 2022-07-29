@@ -11,7 +11,6 @@ class ArtifactView extends StatelessWidget {
 
   _buildMe() {
     return ListView(
-
       children: [
         Text(_getHash(), style: const TextStyle(fontSize: 14)),
         const Divider(),
