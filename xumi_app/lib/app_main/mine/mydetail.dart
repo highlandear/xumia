@@ -7,11 +7,15 @@ class DetailInfoView extends StatelessWidget {
   DetailInfoView({Key? key}) : super(key: key);
 
   final _models = [
-    ClickEntryItem('扫码'),
-    ClickEntryItem(''),
-    ClickEntryItem(''),
-    ClickEntryItem(''),
-    ClickEntryItem('设置aa'),
+    ClickEntryItem(cap : '扫码', img: 'assets/images/mine/mine_collection.png'),
+    ClickEntryItem(cap : '扫码', img: 'assets/images/mine/mine_collection.png'),
+    ClickEntryItem(cap : ''),
+    ClickEntryItem(cap : ''),
+    ClickEntryItem(cap : ''),
+    ClickEntryItem(cap : ''),
+    ClickEntryItem(cap : ''),
+    ClickEntryItem(cap : '扫码'),
+
   ];
 
   _onTap(String cap){

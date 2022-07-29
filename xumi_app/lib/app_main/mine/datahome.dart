@@ -25,6 +25,7 @@ class _MineContentState extends State<MineContent> {
     ClickItem('assets/images/mine/mine_collection.png', '门票', '3', true),
     ClickItem('assets/images/mine/mine_wallet.png', '会员', '2', true),
     ClickItem('assets/images/mine/mine_collection.png', '家园', '4', true),
+    ClickItem('assets/images/mine/mine_collection.png', '测试', '0', true),
   ];
 
   @override
@@ -38,19 +39,20 @@ class _MineContentState extends State<MineContent> {
 
   _tap(BuildContext context, String type) {
     if (!Global.user.online()) {
-    //  XToast.error('请点击头像登录');
-
-      //TODO
-     // return;
+      //  XToast.error('请点击头像登录');
+      // return;
     }
 
     switch (type) {
-
+      case '0':
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return DetailInfoView();
+        }));
+        break;
       case '4':
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const Browser(
-           url: 'https://www.html5tricks.com/demo/html5-3d-cube/index.html',
-            //  url: 'http://game.webxinxin.com/timberpig/',
+            url: 'https://www.html5tricks.com/demo/html5-3d-cube/index.html',
             title: '我的家园',
           );
         }));
@@ -58,19 +60,13 @@ class _MineContentState extends State<MineContent> {
 
       case '2':
         XToast.toast('我的卡包功能');
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return DetailInfoView();
-        }));
 
         break;
 
       default:
-        print('000000000000000000000');
         Global.user.reqMyData(int.parse(type), success: (data) {
           _onData(context, type, data);
-        }, fail: (error) {
-
-        });
+        }, fail: (error) {});
         break;
     }
   }

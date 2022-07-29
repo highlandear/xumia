@@ -12,32 +12,19 @@ class TicketShowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("门票信息"),
-        centerTitle: true,
-      ),
-      body:Stack(
-        children: [
-              Image.network(
-                ticket.nftpath,),
-          Center(child: RichQBarView(ticket.extra),),
-
-        ],
-
-      )
-      // body: ListView(
-      //   children: [
-      //     Column(
-      //       children: [
-      //         RichQBarView(ticket.extra),
-      //       ],
-      //     ),
-      //
-      //     Image.network(
-      //       ticket.nftpath,),
-      //
-      //   ],
-      // ),
-    );
+        appBar: AppBar(
+          title: const Text("门票信息"),
+          centerTitle: true,
+        ),
+        body: Stack(
+          children: [
+            Image.network(
+              ticket.nftpath,
+            ),
+            Center(
+              child: RichQBarView(ticket.extra),
+            ),
+          ],
+        ));
   }
 }

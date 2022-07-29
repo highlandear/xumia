@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/app_main/gallery/stagger.dart';
 import '../../bean/gnftdata.dart';
-import 'full.dart';
+import 'artifact.dart';
 
 class GalleryCardsView extends StatelessWidget {
   const GalleryCardsView({Key? key, required this.data}) : super(key: key);
@@ -54,7 +54,7 @@ class GalleryCardsView extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return FullScreenImagePage(
+              return ArtifactView(
                 imageURL: item.nftpath,
               );
             },

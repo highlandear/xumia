@@ -113,7 +113,7 @@ class Global {
   /// 请求某类NFT
   reqMyData(datatype, {success, fail}) {
     XHttp.instance
-        .post(Config.getMyData, params: {'type': datatype}).then((val) {
+        .post(Config.getMyData, params: {'type': datatype}).then((val) {;
       var erode = val['code'];
       if (erode == 200) {
         success(val);

@@ -98,15 +98,15 @@ class _PurchaseState extends State<PurchasePage>
             ),
           ),
 
-          ///根据透明度显隐顶部的bar
-          //  Opacity(
-          //    opacity: toolbarOpacity,
-          //    child: Container(
-          //      height: 78,
-          //      color: Colors.transparent,
-          //      child: buildTopBar(),
-          //    ),
-          // )
+          //根据透明度显隐顶部的bar
+           Opacity(
+             opacity: toolbarOpacity,
+             child: Container(
+               height: 78,
+               color: Colors.transparent,
+               child: buildTopBar(),
+             ),
+          )
         ],
       ),
     );

@@ -1,10 +1,9 @@
 class ClickEntryItem{
 
-//  String img;
+  String img ='';
 
-  String cap;
+  String cap = '';
 
-//  bool div;
+  ClickEntryItem({required this.cap, this.img = ''});
 
-  ClickEntryItem(this.cap);
 }
