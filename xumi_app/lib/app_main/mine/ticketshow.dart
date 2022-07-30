@@ -15,6 +15,8 @@ class TicketShowPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("门票信息"),
           centerTitle: true,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
         ),
         body: Stack(
           children: [

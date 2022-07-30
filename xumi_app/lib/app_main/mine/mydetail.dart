@@ -9,11 +9,10 @@ class DetailInfoView extends StatelessWidget {
   final _models = [
     ClickEntryItem(cap : '扫码', img: 'assets/images/mine/mine_collection.png'),
     ClickEntryItem(cap : '扫码', img: 'assets/images/mine/mine_collection.png'),
-    ClickEntryItem(cap : ''),
-    ClickEntryItem(cap : ''),
-    ClickEntryItem(cap : ''),
-    ClickEntryItem(cap : ''),
-    ClickEntryItem(cap : ''),
+    ClickEntryItem(),
+    ClickEntryItem(),
+    ClickEntryItem(),
+
     ClickEntryItem(cap : '扫码'),
 
   ];
@@ -25,7 +24,13 @@ class DetailInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('详细信息')),
+      appBar: AppBar(title: const Text('详细信息'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+      ),
+
       body: ClickItemListView( clist: _models, tap: _onTap),
     );
   }

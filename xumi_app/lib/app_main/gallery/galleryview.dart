@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'stagger.dart';
+import 'cardlistview.dart';
 import '../../data/global.dart';
 import '../../login/smslogin.dart';
 import '../../utils/tip.dart';
@@ -12,7 +12,8 @@ class Gallery extends StatefulWidget {
 }
 
 class _GalleryState extends State<Gallery> {
-  Future _future = Global.user.loadGalleryData(); // = Global.user.loadGalleryData();
+  Future _future =
+      Global.user.loadGalleryData(); // = Global.user.loadGalleryData();
 
   _fresh() {
     setState(() {
@@ -34,9 +35,10 @@ class _GalleryState extends State<Gallery> {
       return Scaffold(
         appBar: AppBar(
           title: const Text("我的画廊"),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
           centerTitle: true,
           automaticallyImplyLeading: true,
-
         ),
         backgroundColor: Colors.white,
         body: _futureBuilder(),
@@ -61,12 +63,15 @@ class _GalleryState extends State<Gallery> {
       child: Text(e),
     );
   }
-  _reload(){
-    return TipView(msg: '网络出小差了，点击刷新', ontap: () {
-      setState(() {
-        _future = Global.user.loadGalleryData();
-      });
-    });
+
+  _reload() {
+    return TipView(
+        msg: '网络出小差了，点击刷新',
+        ontap: () {
+          setState(() {
+            _future = Global.user.loadGalleryData();
+          });
+        });
   }
 
   FutureBuilder _futureBuilder() {
@@ -82,8 +87,8 @@ class _GalleryState extends State<Gallery> {
                 return _reload();
               } // return _buildError('请检查网络');
               if (async.hasData) {
-                // return GalleryCardsView(data: async.data);
-                return StaggerView(data: async.data);
+                return GalleryCardsView(data: async.data);
+                //return StaggerView(data: async.data);
               }
               return _buildError('e2');
             }

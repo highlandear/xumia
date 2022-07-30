@@ -9,7 +9,7 @@ class GalleryCardsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(data.length > 2){
+    if(data.isNotEmpty){
       return StaggerView(data: data);
     }
 

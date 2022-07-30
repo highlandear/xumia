@@ -15,7 +15,6 @@ class MyDetailView extends StatelessWidget {
     ClickItem('assets/images/find/find_scan.png', '扫码', 'scan', false),
     ClickItem('assets/images/mine/mine_scan.png', '我的二维码', 'code', false),
     ClickItem('assets/images/find/find_scan.png', '地址管理', 'address', false),
-
     ClickItem('', '', 'divide', false),
     ClickItem('assets/images/mine/mine_setting.png', '设置', 'setting', false),
     ClickItem('', '', 'divide', false),
@@ -64,7 +63,12 @@ class MyDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('详细信息')),
+      appBar: AppBar(title: const Text('详细信息'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+      ),
       body: ItemModelView(_models, _tap),
     );
   }

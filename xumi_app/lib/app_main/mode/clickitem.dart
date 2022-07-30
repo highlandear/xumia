@@ -4,6 +4,6 @@ class ClickEntryItem{
 
   String cap = '';
 
-  ClickEntryItem({required this.cap, this.img = ''});
+  ClickEntryItem({this.cap ='', this.img = ''});
 
 }

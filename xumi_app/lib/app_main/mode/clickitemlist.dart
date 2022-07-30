@@ -22,6 +22,13 @@ class ClickItemListView extends StatelessWidget {
   }
 
   _buildText(String text) {
+    if (text.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 10),
+      );
+    }
+    return Text(text, style: const TextStyle(fontSize: 20));
+
     return text.isNotEmpty
         ? Text(text, style: const TextStyle(fontSize: 20))
         : const Padding(

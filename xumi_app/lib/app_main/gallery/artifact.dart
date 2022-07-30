@@ -31,6 +31,8 @@ class ArtifactView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("画作"),
         centerTitle: true,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
       ),
       body: Container(
         margin: const EdgeInsets.all(20.0),

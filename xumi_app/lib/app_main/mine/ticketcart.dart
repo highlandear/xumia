@@ -22,6 +22,8 @@ class TicketListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('我的门票'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
       ),
     body: ListView(
       children: cards,
