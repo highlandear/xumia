@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:xumi_app/data/global.dart';
 
 import '../../data/colors.dart';
+import '../../login/smslogin.dart';
+import '../../utils/tip.dart';
 import 'drawhead.dart';
 
 class HomeLandView extends StatefulWidget {
@@ -16,9 +19,9 @@ class _HomeLandViewState extends State<HomeLandView> {
       children: [
         Container(
           color: MineColors.xumi_black,
-          child: const Image(
-              image: NetworkImage(
-                  'http://pic.netbian.com/uploads/allimg/190510/221228-15574975489aa1.jpg')),
+          // child: const Image(
+          //     image: NetworkImage(
+          //         'http://pic.netbian.com/uploads/allimg/190510/221228-15574975489aa1.jpg')),
         ),
         _buildLand(),
       ],
@@ -35,32 +38,47 @@ class _HomeLandViewState extends State<HomeLandView> {
           //   image: AssetImage('assets/images/mine/mine.png'),
           // ),
         ),
-        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/home.png')),
+        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/home-1.png')),
         Divider(),
-        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/joy.png')),
+        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/home-2.png')),
         Divider(),
-        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/travel.png')),
+        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/home-3.png')),
         //  Image(image: NetworkImage('http://pic.netbian.com/uploads/allimg/190510/221228-15574975489aa1.jpg')),
       ],
     );
   }
+  _fresh() {
+    setState(() {
+    //  _future = Global.user.loadGalleryData();
+    });
+  }
 
+  _login() {
+    Navigator.of(context)
+        .push(
+      MaterialPageRoute(builder: (_) => const SmsLoginPage()),
+    )
+        .then((val) => val != null ? _fresh() : null);
+  }
   @override
   Widget build(BuildContext context) {
+    if(! Global.user.online()) {
+      return TipView(
+          msg: '登录进入我的家园',
+          ontap: () {
+            _login();
+          });
+    }
     return Scaffold(
       extendBodyBehindAppBar: true,
-      //  extendBody: true,
-      backgroundColor: MineColors.xumi_gray,
-      //   extendBodyBehindAppBar: true,
-
+      backgroundColor: MineColors.xumi_black,
       appBar: AppBar(
         backgroundColor: Colors.transparent, // 背景颜色设置为透明
         shadowColor: Colors.transparent, // 阴影也要设置为透明
         elevation: 0,
-        //  title: Text('家园'),
       ),
       body: _buildHead(context),
-      drawer: DrawerHead(),
+      drawer: const DrawerHead(),
     );
   }
 

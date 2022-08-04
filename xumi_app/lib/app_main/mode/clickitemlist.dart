@@ -23,9 +23,11 @@ class ClickItemListView extends StatelessWidget {
 
   _buildText(String text) {
     if (text.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.only(top: 10),
-      );
+      // return const Padding(
+      //   padding: EdgeInsets.only(top: 10),
+      //   child:  Divider(height: 20),
+      // );
+      return const Divider(height: 20);
     }
     return Text(text, style: const TextStyle(fontSize: 20));
   }
@@ -36,13 +38,14 @@ class ClickItemListView extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Padding(padding: EdgeInsets.all(8)),
+              const Padding(padding: EdgeInsets.all(4)),
               _buildIcon(item),
               const Padding(padding: EdgeInsets.all(8)),
-              Text(item.cap, style: const TextStyle(fontSize: 20)),
+            //  Text(item.cap, style: const TextStyle(fontSize: 20)),
+              _buildText(item.cap),
             ],
           ),
-          const Divider(height: 20),
+        //  const Divider(height: 20),
         ],
       ),
       onTap: () {
@@ -58,7 +61,7 @@ class ClickItemListView extends StatelessWidget {
     for (var element in clist) {
       wlist.add(_buidItem(element));
     }
-    return ListView(
+    return Column(
       children: wlist,
     );
   }

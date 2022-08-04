@@ -62,14 +62,15 @@ class MyDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('详细信息'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        centerTitle: true,
-        automaticallyImplyLeading: true,
-      ),
-      body: ItemModelView(_models, _tap),
-    );
+    // return Scaffold(
+    //   appBar: AppBar(title: const Text('详细信息'),
+    //     backgroundColor: Colors.white,
+    //     foregroundColor: Colors.black,
+    //     centerTitle: true,
+    //     automaticallyImplyLeading: true,
+    //   ),
+    //   body: ItemModelView(_models, _tap),
+    // );
+    return ItemModelView(_models, _tap);
   }
 }
