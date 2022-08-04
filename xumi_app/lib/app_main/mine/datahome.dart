@@ -31,6 +31,7 @@ class _MineContentState extends State<MineContent> {
   @override
   Widget build(BuildContext context) {
     return Material(
+     color: Colors.blueGrey,
       child: Column(
         children: _buildItems(context, _tap),
       ),

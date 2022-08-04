@@ -68,6 +68,7 @@ class _MyInfoHeadState extends State<MyInfoHead> {
 
   Row _buildMyInfo() {
     return Row(
+
       children: [
         const SizedBox(
           width: 80,

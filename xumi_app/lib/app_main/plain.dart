@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:xumi_app/app_main/magazine/maglist.dart';
 import 'gallery/galleryview.dart';
 import '../xref/mainx.dart';
+import 'homeland/homeland.dart';
 import 'mine/main.dart';
 
 class PlainPage extends StatelessWidget {
   PlainPage({Key? key}) : super(key: key);
 
-  final List taBodies=[const MineMainPage(),const MagLisView(),const Gallery()];
+ // final List taBodies=[const MineMainPage(),const MagLisView(),const Gallery()];
+  final List taBodies=[const HomeLandView(),const MagLisView(),const Gallery()];
   int currentIndex=1;
   var currentPage;
   final PageController _pageController = PageController(initialPage: 1, keepPage: false);
