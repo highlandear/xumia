@@ -4,13 +4,13 @@ import 'ticketshow.dart';
 
 /// 门票列表
 class TicketListView extends StatelessWidget {
-  const TicketListView({Key? key, required this.data}) : super(key: key);
+  const TicketListView({Key? key, required this.data, required this.title})
+      : super(key: key);
   final List data;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-
-
     List<Widget> cards = [];
 
     for (var element in data) {
@@ -20,14 +20,14 @@ class TicketListView extends StatelessWidget {
       cards.add(_buildEmptyCard(context));
     }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('我的门票'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-      ),
-    body: ListView(
-      children: cards,
-    ));
+        appBar: AppBar(
+          title: const Text('title'),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        body: ListView(
+          children: cards,
+        ));
   }
 
   Widget _buildEmptyCard(BuildContext context) {
@@ -39,11 +39,12 @@ class TicketListView extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              child: const Text('目前没有门票'),
+              child: const Text('目前没有门票/会员卡',
+                  style: TextStyle(fontSize: 20)),
               margin: const EdgeInsets.all(10),
             ),
             const ListTile(
-              title: Text("你可以到杂志页选购相应的门票产品"),
+              title: Text("你可以到杂志页选购相应的产品"),
             )
           ],
         ),
@@ -78,8 +79,7 @@ class TicketListView extends StatelessWidget {
               margin: const EdgeInsets.all(10),
             ),
             ListTile(
-              leading: const CircleAvatar(
-              ),
+              leading: const CircleAvatar(),
               title: Text(item.desc),
               subtitle: Text(
                 item.extra,

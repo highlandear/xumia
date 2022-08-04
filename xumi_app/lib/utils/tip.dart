@@ -6,6 +6,7 @@ class TipView extends StatelessWidget {
   final String msg;
   final Function ontap;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
@@ -17,7 +18,7 @@ class TipView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
       height: 60,
-      width: 200,
+      width: 600,
       child: GestureDetector(
         onTap: () => ontap(),
         child: Container(
@@ -36,7 +37,7 @@ class TipView extends StatelessWidget {
           child: Center(
               child: Text(
             msg,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white,fontSize: 20),
           )),
         ),
       ),

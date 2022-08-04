@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 
 //loading加载框
 class LoadingDialog extends Dialog {
+  static showLoading(BuildContext context){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const LoadingDialog(
+            showContent: false,
+            backgroundColor: Colors.black38,
+            loadingView: CircularProgressIndicator(),
+          );
+        });
+  }
   const LoadingDialog(
       {Key? key,
       required this.loadingView,

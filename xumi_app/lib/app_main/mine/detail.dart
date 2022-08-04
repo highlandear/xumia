@@ -32,7 +32,7 @@ class MyDetailView extends StatelessWidget {
       case 'code':
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           //return (QRPage('二维码信息', Global.mydata.me.did));
-          return (const QRPage('二维码信息', 'http://cognitivelab.net/app-release.apk'));
+          return (const QRPage('二维码信息', 'http://cognitivelab.net/xumi-app.apk'));
         }));
         break;
       case 'address':

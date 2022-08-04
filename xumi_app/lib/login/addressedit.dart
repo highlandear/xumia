@@ -172,16 +172,7 @@ class _AddressEditPageState extends State<AddressEditPage> {
     address.name = _unameController.text;
 
     closeKeyboard(context);
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return const LoadingDialog(
-            showContent: false,
-            backgroundColor: Colors.black38,
-            loadingView: CircularProgressIndicator(),
-          );
-        });
+    LoadingDialog.showLoading(context);
 
     Global.user.reqUpdateAddress(address, success: () {
       Navigator.pop(context);

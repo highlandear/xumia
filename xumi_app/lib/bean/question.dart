@@ -11,9 +11,11 @@ class Question {
   bool radio;
   List<String> options = [];
   List<int> answer = [];
+  int certiID = 0;
 
 
   static Question fromJson(Map<String, dynamic> json) {
+  print(json);
     return Question(
       id: json['id'],
       stem: json['question'],
@@ -22,13 +24,24 @@ class Question {
     );
   }
 
-  toJson() {
+  toAnswerJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['question'] = stem;
-    data['radio'] = radio;
-    data['options'] = options;
+    data['answer'] = answer;
     return data;
+  }
+
+  static toAnswerListJson(int id, List<Question> quelist){
+    var list = [];
+    for (var element in quelist) {
+      list.add(element.toAnswerJson());
+    }
+
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['certiPassId'] = id;
+    data['questionList'] = list;
+    return data;
+
   }
 
   static List<Question> listfromJson(dynamic json) {

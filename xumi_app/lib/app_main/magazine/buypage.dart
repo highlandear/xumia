@@ -99,13 +99,13 @@ class _PurchaseState extends State<PurchasePage>
           ),
 
           //根据透明度显隐顶部的bar
-           Opacity(
-             opacity: toolbarOpacity,
-             child: Container(
-               height: 78,
-               color: Colors.transparent,
-               child: buildTopBar(),
-             ),
+          Opacity(
+            opacity: toolbarOpacity,
+            child: Container(
+              height: 78,
+              color: Colors.transparent,
+              child: buildTopBar(),
+            ),
           )
         ],
       ),
@@ -315,6 +315,7 @@ class _PurchaseState extends State<PurchasePage>
       MaterialPageRoute(
           builder: (_) => QuestionListView(
                 data: quiz,
+                certiID: _item.id,
               )),
     )
         .then((val) {

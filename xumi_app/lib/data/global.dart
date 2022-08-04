@@ -124,6 +124,21 @@ class Global {
     });
   }
 
+  /// 发送问题答案请求
+  ///
+  postMyQuestionAnswer(answer,{success, fail}){
+    XHttp.instance.postData(Config.postAnswer, data: answer).then((val) {
+      print(val);
+      var erode = val['code'];
+      if (erode == 200) {
+        success();
+      } else {
+        fail();
+      }
+    });
+
+  }
+
   /// 创建或更新地址
   reqUpdateAddress(where, {success, fail}) {
     XHttp.instance.postData(Config.updateAddress, data: where).then((val) {

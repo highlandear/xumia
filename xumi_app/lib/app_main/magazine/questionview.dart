@@ -22,7 +22,7 @@ class _QuestionViewState extends State<QuestionView> {
     int index = 0;
     List<Widget> wlist = <Widget>[];
 
-    wlist.add(Text(_question.stem,style: const TextStyle(fontSize: 18)));
+    wlist.add(Text(_question.stem));
     wlist.add(const Divider(height: 20));
 
     for (var element in _question.options) {

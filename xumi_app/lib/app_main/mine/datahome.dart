@@ -39,8 +39,8 @@ class _MineContentState extends State<MineContent> {
 
   _tap(BuildContext context, String type) {
     if (!Global.user.online()) {
-      //  XToast.error('请点击头像登录');
-      // return;
+      XToast.error('请点击头像登录');
+      return;
     }
 
     switch (type) {
@@ -58,10 +58,10 @@ class _MineContentState extends State<MineContent> {
         }));
         break;
 
-      case '2':
-        XToast.toast('我的卡包功能');
-
-        break;
+      // case '2':
+      //   XToast.toast('我的卡包功能');
+      //
+      //   break;
 
       default:
         Global.user.reqMyData(int.parse(type), success: (data) {
@@ -76,7 +76,14 @@ class _MineContentState extends State<MineContent> {
       case '3':
         var list = GNFTData.listfromJson(data);
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return TicketListView(data: list);
+          return TicketListView(data: list, title: '我的门票',);
+        }));
+        break;
+
+      case '2':
+        var list = GNFTData.listfromJson(data);
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return TicketListView(data: list, title: '我的会员卡',);
         }));
         break;
       default:

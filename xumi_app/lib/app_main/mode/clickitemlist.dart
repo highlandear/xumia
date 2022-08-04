@@ -28,16 +28,6 @@ class ClickItemListView extends StatelessWidget {
       );
     }
     return Text(text, style: const TextStyle(fontSize: 20));
-
-    return text.isNotEmpty
-        ? Text(text, style: const TextStyle(fontSize: 20))
-        : const Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: Divider(
-              color: MineColors.xumi_gray,
-              thickness: 10,
-            ),
-          );
   }
 
   Widget _buidItem(ClickEntryItem item) {

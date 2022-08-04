@@ -216,16 +216,17 @@ class _SmsLoginState extends State<SmsLoginPage> {
   void _onSubmit(BuildContext context) {
     closeKeyboard(context);
 
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return const LoadingDialog(
-            showContent: false,
-            backgroundColor: Colors.black38,
-            loadingView: CircularProgressIndicator(),
-          );
-        });
+    // showDialog(
+    //     context: context,
+    //     barrierDismissible: false,
+    //     builder: (BuildContext context) {
+    //       return const LoadingDialog(
+    //         showContent: false,
+    //         backgroundColor: Colors.black38,
+    //         loadingView: CircularProgressIndicator(),
+    //       );
+    //     });
+    LoadingDialog.showLoading(context);
 
     Global.user.reqLogin(_telController.text, '', success: () {
     //  XToast.toast('登录成功');
