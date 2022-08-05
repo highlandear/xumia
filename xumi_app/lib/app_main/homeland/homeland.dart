@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/data/global.dart';
-import 'package:xumi_app/utils/xtoast.dart';
-
 import '../../data/colors.dart';
+import '../../data/global.dart';
 import '../../login/smslogin.dart';
 import '../../utils/tip.dart';
 import '../../utils/xqrscan.dart';
+import '../../utils/xtoast.dart';
 import 'drawerhead.dart';
 
 class HomeLandView extends StatefulWidget {

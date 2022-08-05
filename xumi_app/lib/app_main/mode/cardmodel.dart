@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class CardModelView extends StatelessWidget {
@@ -27,21 +29,37 @@ class CardModelView extends StatelessWidget {
             //    borderRadius: BorderRadius.circular(2)
           ),
           child: Image.network(img, fit: BoxFit.cover),
-          margin: const EdgeInsets.all(0),
+          //  margin: const EdgeInsets.all(0),
         ),
-        Row(
-          children: [
-            const CircleAvatar(
-              radius: 10,
-            ),
-
-            Text(desc),
-            // Text(nft.extra),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     const CircleAvatar(
+        //       radius: 10,
+        //     ),
+        //
+        //     Text(desc),
+        //     // Text(nft.extra),
+        //   ],
+        // ),
+        Text(desc),
         // Text(nft.desc),
-        Text(detail),
+      //  Text(detail),
+        _buildDetail(),
       ],
+    );
+  }
+
+  _buildDetail(){
+    List<Widget> list = [];
+    List attributes = jsonDecode(detail);
+
+   attributes.forEach((element) {
+
+     list.add(Text('${element['key']}: @${element['value']}'));
+   });
+
+    return Column(
+      children: list,
     );
   }
 }

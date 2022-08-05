@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+
+import '../../bean/gnftdata.dart';
 import 'cardlistview.dart';
 import '../../data/global.dart';
 import '../../login/smslogin.dart';
 import '../../utils/tip.dart';
+import 'stagger.dart';
 
 class Gallery extends StatefulWidget {
   const Gallery({Key? key}) : super(key: key);
@@ -29,20 +32,55 @@ class _GalleryState extends State<Gallery> {
         .then((val) => val != null ? _fresh() : null);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    if (Global.user.online()) {
-      return Scaffold(
+  final _tabs = [
+    const Tab(text: "全部"),
+    const Tab(text: "画作"),
+    const Tab(text: "会员卡"),
+    const Tab(text: "门票"),
+    const Tab(text: "数字头像"),
+    const Tab(text: "游戏道具"),
+
+  ];
+
+  int gindex = 0;
+  Widget _buildNormal(BuildContext context) {
+    return DefaultTabController(
+      length: _tabs.length,
+      child: Scaffold(
         appBar: AppBar(
-          title: const Text("我的画廊"),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          centerTitle: true,
-          automaticallyImplyLeading: true,
+          title: Row(
+            children: [
+              Expanded(
+                child: TabBar(
+                  indicatorColor: Colors.black,
+                  isScrollable: true, //多个按钮可以滑动
+                  tabs: _tabs,
+                  onTap: (index) {
+                    if (gindex == index) {
+                      return;
+                    }
+
+                    setState(() {
+                      gindex = index;
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+          //   foregroundColor: Colors.transparent,
         ),
         backgroundColor: Colors.white,
         body: _futureBuilder(),
-      );
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (Global.user.online()) {
+      return _buildNormal(context);
     }
 
     return TipView(
@@ -87,8 +125,8 @@ class _GalleryState extends State<Gallery> {
                 return _reload();
               } // return _buildError('请检查网络');
               if (async.hasData) {
-                return GalleryCardsView(data: async.data);
-                //return StaggerView(data: async.data);
+              //  return GalleryCardsView(data: async.data, type: gindex);
+                return _buildStaggerGridView(async.data);
               }
               return _buildError('e2');
             }
@@ -98,5 +136,20 @@ class _GalleryState extends State<Gallery> {
       },
       future: _future,
     );
+  }
+
+  _buildStaggerGridView(List<GNFTData> data) {
+    List udata = [];
+    if (gindex == 0) {
+      //type==0表示全部
+      udata = data;
+    } else {
+      for (var element in data) {
+        if (element.type == gindex) {
+          udata.add(element);
+        }
+      }
+    }
+    return StaggerView(data: udata);
   }
 }
