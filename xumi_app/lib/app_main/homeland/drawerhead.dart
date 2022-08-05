@@ -4,8 +4,6 @@ import '../../data/global.dart';
 import '../../login/addresslist.dart';
 import '../../login/smslogin.dart';
 import '../../utils/xqrgen.dart';
-import '../../utils/xqrscan.dart';
-import '../gallery/galaxy.dart';
 import 'listtileitem.dart';
 
 class DrawerHeadInfo extends StatefulWidget {
@@ -23,10 +21,6 @@ class _DrawerHeadInfoState extends State<DrawerHeadInfo> {
         Navigator.pop(context, true);
         break;
       case '设置':
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ( Categorypage());
-        }));
-
         break;
       case '地址管理':
         Navigator.push(context, MaterialPageRoute(builder: (context) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../bean/gnftdata.dart';
-import 'cardlistview.dart';
 import '../../data/global.dart';
 import '../../login/smslogin.dart';
 import '../../utils/tip.dart';
@@ -39,7 +38,6 @@ class _GalleryState extends State<Gallery> {
     const Tab(text: "门票"),
     const Tab(text: "数字头像"),
     const Tab(text: "游戏道具"),
-
   ];
 
   int gindex = 0;
@@ -47,7 +45,10 @@ class _GalleryState extends State<Gallery> {
     return DefaultTabController(
       length: _tabs.length,
       child: Scaffold(
+       // extendBodyBehindAppBar: true,
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
           title: Row(
             children: [
               Expanded(
@@ -68,10 +69,9 @@ class _GalleryState extends State<Gallery> {
               ),
             ],
           ),
-          backgroundColor: Colors.transparent,
           //   foregroundColor: Colors.transparent,
         ),
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.transparent,
         body: _futureBuilder(),
       ),
     );
@@ -125,7 +125,7 @@ class _GalleryState extends State<Gallery> {
                 return _reload();
               } // return _buildError('请检查网络');
               if (async.hasData) {
-              //  return GalleryCardsView(data: async.data, type: gindex);
+                //  return GalleryCardsView(data: async.data, type: gindex);
                 return _buildStaggerGridView(async.data);
               }
               return _buildError('e2');
