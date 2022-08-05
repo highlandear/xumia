@@ -52,7 +52,7 @@ class Global {
   /// 加载画廊信息
   Future loadGalleryData() async {
     return GNFTData.listfromJson(
-        await XHttp.instance.post(Config.getMyData, params: {'type': 1}));
+        await XHttp.instance.post(Config.getMyData, params: {'type': 0}));
   }
 
   /// 请求登录

@@ -36,6 +36,7 @@ class GNFTData {
     if(json['code'] != 200) {
       return [];
     }
+    print(json);
     return (json['data'] as List<dynamic>)
         .map((e) => GNFTData.fromJson((e as Map<String, dynamic>)))
         .toList();
