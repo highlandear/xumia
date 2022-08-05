@@ -85,6 +85,9 @@ class _MyAddressPageState extends State<MyAddressListPage> {
           padding: const EdgeInsets.all(15.0)),
       child: const Text('添加新地址', style: TextStyle(color: Colors.white)),
       onPressed: () {
+        if(! Global.user.online()) {
+          return;
+        }
         Navigator.of(context)
             .push(
               MaterialPageRoute(builder: (_) => const AddressEditPage()),

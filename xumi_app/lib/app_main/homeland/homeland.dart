@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/data/global.dart';
+import 'package:xumi_app/utils/xtoast.dart';
 
 import '../../data/colors.dart';
 import '../../login/smslogin.dart';
 import '../../utils/tip.dart';
-import 'drawhead.dart';
+import '../../utils/xqrscan.dart';
+import 'drawerhead.dart';
 
 class HomeLandView extends StatefulWidget {
   const HomeLandView({Key? key}) : super(key: key);
@@ -18,7 +20,8 @@ class _HomeLandViewState extends State<HomeLandView> {
     return Stack(
       children: [
         Container(
-          color: MineColors.xumi_black,
+          color: MineColors.xumi_gray,
+          //  color: Colors.brown,
           // child: const Image(
           //     image: NetworkImage(
           //         'http://pic.netbian.com/uploads/allimg/190510/221228-15574975489aa1.jpg')),
@@ -28,108 +31,91 @@ class _HomeLandViewState extends State<HomeLandView> {
     );
   }
 
+  _buildCLickButton(String name, String background) {
+    return InkWell(
+      child: Stack(
+        children: [
+          ClipRRect(
+              child: Image(image: NetworkImage(background)),
+              borderRadius: BorderRadius.circular(10)),
+          Center(
+            child: Text(name,
+                style: const TextStyle(
+                    fontSize: 40, letterSpacing: 20, color: Colors.grey)),
+          ),
+        ],
+      ),
+      onTap: () {
+        XToast.toast(name);
+      },
+    );
+  }
+
   _buildLand() {
     return ListView(
-      children: const [
-        SizedBox(
+      children: [
+        const SizedBox(
           width: 80,
-          height: 180,
-          // child: Image(
-          //   image: AssetImage('assets/images/mine/mine.png'),
-          // ),
+          height: 60,
         ),
-        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/home-1.png')),
-        Divider(),
-        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/home-2.png')),
-        Divider(),
-        Image(image: NetworkImage('http://www.cognitivelab.net/imgs/home-3.png')),
-        //  Image(image: NetworkImage('http://pic.netbian.com/uploads/allimg/190510/221228-15574975489aa1.jpg')),
+        _buildCLickButton('家园', 'http://www.cognitivelab.net/imgs/home-1.png'),
+        const Divider(),
+        _buildCLickButton('乐园', 'http://www.cognitivelab.net/imgs/home-6.png'),
+        const Divider(),
+        _buildCLickButton('旅途', 'http://www.cognitivelab.net/imgs/home-4.png'),
       ],
     );
   }
+
   _fresh() {
-    setState(() {
-    //  _future = Global.user.loadGalleryData();
-    });
+    setState(() {});
   }
 
   _login() {
     Navigator.of(context)
         .push(
-      MaterialPageRoute(builder: (_) => const SmsLoginPage()),
-    )
+          MaterialPageRoute(builder: (_) => const SmsLoginPage()),
+        )
         .then((val) => val != null ? _fresh() : null);
   }
+
   @override
   Widget build(BuildContext context) {
-    if(! Global.user.online()) {
+    if (!Global.user.online()) {
       return TipView(
           msg: '登录进入我的家园',
           ontap: () {
             _login();
           });
     }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: MineColors.xumi_black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent, // 背景颜色设置为透明
-        shadowColor: Colors.transparent, // 阴影也要设置为透明
-        elevation: 0,
-      ),
-      body: _buildHead(context),
-      drawer: const DrawerHead(),
-    );
-  }
-
-  _buildDrawer() {
-    return Drawer(
       backgroundColor: MineColors.xumi_gray,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          //侧拉菜单头部
-          const DrawerHeader(
-            child: Text('护照信息'),
-            decoration: BoxDecoration(color: Colors.blue),
-          ),
-          ListTile(
-            title: const Text('内容1'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('内容2'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.blue, size: 40),
+        actions: [
+          IconButton(
+            icon: const Image(
+              image: AssetImage('assets/images/find/find_scan.png'),
+            ),
+            iconSize: 18,
+            onPressed: _onTap,
           ),
         ],
       ),
+      body: _buildHead(context),
+      drawer: const DrawerHeadInfo(),
     );
   }
 
-  Widget buildx(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-              'https://img.zcool.cn/community/0372d195ac1cd55a8012062e3b16810.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent, // 背景颜色设置为透明
-          shadowColor: Colors.transparent, // 阴影也要设置为透明
-          elevation: 0,
-          //  title: Text('家园'),
-        ),
-        drawer: _buildDrawer(),
-        body: _buildLand(),
-      ),
-    );
+  _onTap() {
+    print('search....');
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return (const BarcodeScanPage());
+    }));
   }
 }
