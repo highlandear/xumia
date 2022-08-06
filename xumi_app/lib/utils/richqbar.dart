@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class RichQBarView extends StatefulWidget {
-  const RichQBarView(this.data, {Key? key}) : super(key: key);
+  const RichQBarView({Key? key, required this.data, required this.size}) : super(key: key);
 
   final String data;
+  final double size;
 
   @override
   _QRichQBarViewState createState() => _QRichQBarViewState();
@@ -22,7 +23,7 @@ class _QRichQBarViewState extends State<RichQBarView>
     return QrImage(
       backgroundColor: Colors.white,
           data: widget.data,
-          size: 200.0,
+          size: widget.size,
     );
   }
 }

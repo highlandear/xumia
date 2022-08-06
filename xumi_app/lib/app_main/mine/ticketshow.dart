@@ -24,7 +24,7 @@ class TicketShowPage extends StatelessWidget {
               ticket.nftpath,
             ),
             Center(
-              child: RichQBarView(ticket.extra),
+              child: RichQBarView(data: ticket.extra, size:100),
             ),
           ],
         ));
