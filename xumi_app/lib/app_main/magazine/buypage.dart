@@ -319,9 +319,10 @@ class _PurchaseState extends State<PurchasePage>
               )),
     )
         .then((val) {
-      XToast.toast(val.toString());
+
       if (val != null) {
         _confirmBuy();
+        XToast.toast('感谢参与！');
       }
     });
   }

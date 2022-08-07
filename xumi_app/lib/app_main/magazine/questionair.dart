@@ -57,7 +57,7 @@ class QuestionListView extends StatelessWidget {
       return;
     }
 
-    print(Question.toAnswerListJson(certiID, data));
+  //  print(Question.toAnswerListJson(certiID, data));
 
     LoadingDialog.showLoading(context);
     Global.user.postMyQuestionAnswer(Question.toAnswerListJson(certiID, data),
