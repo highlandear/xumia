@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:xumi_app/utils/xtoast.dart';
 import '../../bean/gnftdata.dart';
-import '../mine/ticketshow.dart';
+import 'ticketshow.dart';
 import '../mode/cardmodel.dart';
 import 'artifact.dart';
 
@@ -43,7 +43,35 @@ class StaggerView extends StatelessWidget {
 
   _onTapItem(BuildContext context, GNFTData item){
     switch(item.type){
-      case 1:
+      // case 1:
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) {
+      //         return ArtifactView(
+      //           imageURL: item.nftpath,
+      //         );
+      //       },
+      //     ),
+      //   );
+      //   break;
+      // case 2:
+      //   XToast.success('这是一张会员卡');
+      //   break;
+      // case 3:
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) {
+      //         return TicketShowPageX(
+      //           ticket: item,
+      //         );
+      //       },
+      //     ),
+      //   );
+      //   break;
+
+      default:
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -54,24 +82,6 @@ class StaggerView extends StatelessWidget {
             },
           ),
         );
-        break;
-      case 2:
-        XToast.success('这是一张会员卡');
-        break;
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return TicketShowPage(
-                ticket: item,
-              );
-            },
-          ),
-        );
-        break;
-
-      default:
         break;
     }
 

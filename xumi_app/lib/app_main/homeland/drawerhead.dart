@@ -39,8 +39,6 @@ class _DrawerHeadInfoState extends State<DrawerHeadInfo> {
       children: ListTileItem.toWidgetList(
           context: context,
           list: [
-            // ListTileItem(title: '我的二维码', icon: Icons.qr_code),
-            // ListTileItem(title: '扫码', icon: Icons.qr_code_scanner),
             ListTileItem(title: '护照信息', icon: Icons.language_outlined),
             ListTileItem(title: '地址管理', icon: Icons.house),
             ListTileItem(title: ''),

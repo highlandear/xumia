@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xumi_app/bean/gnftdata.dart';
-import 'ticketshow.dart';
+import '../gallery/ticketshow.dart';
 
 /// 门票列表
 class TicketListView extends StatelessWidget {
@@ -59,7 +59,7 @@ class TicketListView extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return TicketShowPage(
+              return TicketShowPageX(
                 ticket: item,
               );
             },

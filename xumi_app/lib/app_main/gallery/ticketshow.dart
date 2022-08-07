@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:xumi_app/bean/gnftdata.dart';
 
+import '../../bean/gnftdata.dart';
 import '../../utils/richqbar.dart';
 
 /// 门票详细
-class TicketShowPage extends StatelessWidget {
-  const TicketShowPage({Key? key, required this.ticket}) : super(key: key);
+class TicketShowPageX extends StatelessWidget {
+  const TicketShowPageX({Key? key, required this.ticket}) : super(key: key);
 
   final GNFTData ticket;
+
+  _getMyInfo(){
+    return 'test';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class TicketShowPage extends StatelessWidget {
               ticket.nftpath,
             ),
             Center(
-              child: RichQBarView(data: ticket.extra, size:100),
+              child: RichQBarView(data: _getMyInfo(), size:100),
             ),
           ],
         ));
