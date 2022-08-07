@@ -7,8 +7,10 @@ class ArtifactView extends StatelessWidget {
   final String imageURL;
 
   String _getHash() {
-    String ret = imageURL.replaceFirst('https://www.cognitivelab.net/ipfs/', '');
-    return 'HASH: $ret';
+    String ret =
+        imageURL.replaceFirst('https://www.cognitivelab.net/ipfs/', '');
+  //  return 'HASH: $ret';
+    return '$ret';
   }
 
   String _getInfo() {
@@ -18,20 +20,13 @@ class ArtifactView extends StatelessWidget {
   _buildMe() {
     return ListView(
       children: [
+        const Divider(thickness: 2),
         Text(_getHash(), style: const TextStyle(fontSize: 14)),
-
-
-        const Divider(),
-        Image.network(imageURL, fit: BoxFit.fitWidth),
-        // Container(
-        //   child: Image.network(imageURL, fit: BoxFit.fitWidth),
-        //   decoration: BoxDecoration(
-        //       border: Border.all(color: Colors.grey, width: 2),
-        //   //    borderRadius: BorderRadius.circular(2)
-        //   ),
-        // ),
-        RichQBarView(data: _getInfo(), size:100),
-
+        const Divider(thickness: 2),
+        RichQBarView(data: _getInfo(), size: 100),
+        const Divider(thickness: 2),
+        Image.network(imageURL, fit: BoxFit.fill,),
+        const Divider(thickness: 2),
       ],
     );
   }
@@ -40,15 +35,13 @@ class ArtifactView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("画作"),
+        title: const Text("详细"),
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
       ),
-      body: Container(
-        margin: const EdgeInsets.all(20.0),
-        child: _buildMe(),
-      ),
+      body:  _buildMe(),
+    //  ),
     );
   }
 }
